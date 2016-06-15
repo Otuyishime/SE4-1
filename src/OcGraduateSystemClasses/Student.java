@@ -7,76 +7,35 @@ import java.util.*;
  */
 public class Student
 {
-
-	private ArrayList<StudentCourse> courses;
-	private DegreePlan degree;
-	/**
-	 * the identification number. It is used to identify a student.
-	 */
-	private int id;
-	/**
-	 * The name of the student
-	 */
-	private String name;
-
-	/**
-	 * Student object constructor
-	 * @param id the id must be valid
-	 */
-	public Student(int id) {
-		// TODO - implement Student.Student
-		throw new UnsupportedOperationException();
+	private int studentId;
+	private Degree degreeCode;
+	 private Semester semesterName;
+	public int getStudentId() {
+		return studentId;
 	}
-
-	/**
-	 * Student object constructor
-	 * @param id
-	 * @param name
-	 */
-	public Student(int id, String name) {
-		// TODO - implement Student.Student
-		throw new UnsupportedOperationException();
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
-
-	/**
-	 * Student object constructor
-	 * @param student student must be a non-null object
-	 */
-	public Student(Student student) {
-		// TODO - implement Student.Student
-		throw new UnsupportedOperationException();
+	public Degree getDegreeCode() {
+		return degreeCode;
 	}
-
-	/**
-	 * returns a list of all courses the student has to take
-	 */
-	public SemesterForecast getStudentCourses() {
-		// TODO - implement Student.getStudentCourses
-		throw new UnsupportedOperationException();
+	public void setDegreeCode(Degree degreeCode) {
+		this.degreeCode = degreeCode;
 	}
-
-	/**
-	 * gets the student data from a file
-	 */
-	public void fetchStudentData() {
-		// TODO - implement Student.fetchStudentData
-		throw new UnsupportedOperationException();
+	public Semester getSemesterName() {
+		return semesterName;
 	}
-
-	/**
-	 * returns all the courses the student has taken
-	 */
-	public Course getTakenCourses() {
-		// TODO - implement Student.getTakenCourses
-		throw new UnsupportedOperationException();
+	public void setSemesterName(Semester semesterName) {
+		this.semesterName = semesterName;
 	}
-
-	/**
-	 * Returns the student's degree plan
-	 */
-	public DegreePlan getDegreePlan() {
-		// TODO - implement Student.getDegreePlan
-		throw new UnsupportedOperationException();
+	
+	public Student(int studentId, Degree degreeCode, Semester semesterName) {
+		this.studentId = studentId;
+		this.degreeCode = degreeCode;
+		this.semesterName = semesterName;
 	}
+	 
+	
+	
 
 }
