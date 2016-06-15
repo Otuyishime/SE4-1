@@ -114,15 +114,15 @@ public class Faculty
 	 * @param degree
 	 */
 	public Faculty(String firstname, String lastname, String gradschool, String degree, String title, 
-			String teachdays, ArrayList<FacultyLoad> facultyloads) {
+			String teachdays, ArrayList<FacultyLoad> arrayList) {
 		if (!firstname.isEmpty() && !lastname.isEmpty() && !gradschool.isEmpty() && !degree.isEmpty() && 
-				!title.isEmpty() && teachdays != null && facultyloads != null){
+				!title.isEmpty() && !teachdays.isEmpty() && arrayList != null){
 			setFirstName(firstname);
 			setLastName(lastname);
 			setGradSchool(gradschool);
 			setDegree(degree);
 			setTitle(title);
-			setFacultyLoads(facultyloads);
+			setFacultyLoads(arrayList);
 		}
 		else{
 			throw new UnsupportedOperationException();

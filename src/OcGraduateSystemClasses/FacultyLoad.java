@@ -37,9 +37,10 @@ public class FacultyLoad
 		this.hours = hours;
 	}
 
-	public FacultyLoad() {
-		// TODO - implement FacultyLoad.FacultyLoad
-		throw new UnsupportedOperationException();
+	public FacultyLoad(int hours) {
+		if ( hours > 0){
+			setHours(hours);
+		}
 	}
 
 	/**
@@ -48,16 +49,10 @@ public class FacultyLoad
 	 * @param semester
 	 */
 	public FacultyLoad(Faculty faculty, Semester semester, int hours) {
-		throw new UnsupportedOperationException();
+		if ( hours > 0 && faculty != null && semester != null){
+			setFaculty(faculty);
+			setSemester(semester);
+			setHours(hours);
+		}
 	}
-
-	/**
-	 * returns the number of hours the faculty can teach in a semester
-	 * @param semester
-	 */
-	public int getLoad(Semester semester) {
-		// TODO - implement FacultyLoad.getLoad
-		throw new UnsupportedOperationException();
-	}
-
 }

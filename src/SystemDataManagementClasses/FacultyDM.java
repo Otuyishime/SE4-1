@@ -1,6 +1,9 @@
 package SystemDataManagementClasses;
 
 import OcGraduateSystemClasses.Faculty;
+import OcGraduateSystemClasses.FacultyLoad;
+import OcGraduateSystemClasses.Semester;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -10,7 +13,15 @@ import java.util.*;
 public class FacultyDM {
 	
 	// Add a list of faculties
-	ArrayList<Faculty> faculties = new ArrayList<Faculty>();
+	private ArrayList<Faculty> faculties = new ArrayList<Faculty>();
+	
+	public ArrayList<Faculty> getFaculties() {
+		return faculties;
+	}
+
+	public void setFaculties(ArrayList<Faculty> faculties) {
+		this.faculties = faculties;
+	}
 	
 	public void readFile(CsvReader file){
 		try {
@@ -34,9 +45,14 @@ public class FacultyDM {
 					System.out.println(fac_firstName + " : " + fac_LastName + " : " + gradSchl + " : " + degree + " : " + 
 									title + " : " + daysToTeach + " : " + maxLoadFall + " : " + maxLoadSpring + " : " + maxLoadSummer);
 					
+					// create a temp faculty load list
+					ArrayList<FacultyLoad> loads = new ArrayList<FacultyLoad>();
+					loads.add(new FacultyLoad(Integer.parseInt(maxLoadFall)));
+					loads.add(new FacultyLoad(Integer.parseInt(maxLoadSpring)));
+					loads.add(new FacultyLoad(Integer.parseInt(maxLoadSummer)));
+					
 					// Create a temporary faculty
-					/*Faculty faculty = new Faculty(fac_firstName, fac_LastName, gradSchl, degree, title, 
-							Integer.parseInt(maxLoadFall), Integer.parseInt(maxLoadSpring), Integer.parseInt(maxLoadSummer));*/
+					Faculty faculty = new Faculty(fac_firstName, fac_LastName, gradSchl, degree, title, daysToTeach, loads);
 				}
 				// close the file after read completion
 				file.close();
@@ -47,5 +63,15 @@ public class FacultyDM {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Faculty> getFacultiesWhoCanTeachInSemester(Semester sem){
+		ArrayList<Faculty> facultyList;
+		
+		if (sem != null){
+			for ( int i = 0; i < faculties.size(); i++){
+			}
+		}
+		return null;
 	}
 }

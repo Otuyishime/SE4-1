@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import com.csvreader.CsvReader;
 import OcGraduateSystemClasses.Degree;
-import OcGraduateSystemClasses.Semester;
+
 public class DegreeDM {	
 private ArrayList<Degree> degreeData;
 	

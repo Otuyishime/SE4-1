@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import com.csvreader.CsvReader;
 import java.util.*;
 
-public class SemesterDM implements SystemManagement<Semester> {
+public class SemesterDM {
 	
 	private ArrayList<Semester> semesterData;
 	
