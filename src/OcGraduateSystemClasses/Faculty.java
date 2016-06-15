@@ -7,9 +7,6 @@ import java.util.*;
  */
 public class Faculty
 {
-	/**
-	 * name of the faculty
-	 */
 	private String firstName;
 	
 	private String lastName;
@@ -17,22 +14,13 @@ public class Faculty
 	private String gradSchool;
 
 	private String degree;
-	/**
-	 * title of the faculty ( e.g. Dr. or Mr. )
-	 */
+	
 	private String title;
-	/**
-	 * hours the faculty can work per week in a semester
-	 */
-	private ArrayList<FacultyLoad> facultyLoads;
-	/**
-	 * Days in which the teacher member can teach
-	 */
+	
 	private String teachingDays;
-	/**
-	 * semesters in which the faculty can teach
-	 */
-	private ArrayList<Semester> teachingSemesters;
+	
+	// -------------------- Lists -----------------------
+	private ArrayList<FacultyLoad> facultyLoads;
 	
 	private ArrayList<Course> courses;
 	
@@ -40,6 +28,7 @@ public class Faculty
 		return firstName;
 	}
 
+	// -------------------- Accessors -----------------------
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -76,11 +65,11 @@ public class Faculty
 		this.title = title;
 	}
 
-	public ArrayList<FacultyLoad> getFacultyLoads() {
+	private ArrayList<FacultyLoad> getFacultyLoads() {
 		return facultyLoads;
 	}
 
-	public void setFacultyLoads(ArrayList<FacultyLoad> facultyLoads) {
+	private void setFacultyLoads(ArrayList<FacultyLoad> facultyLoads) {
 		this.facultyLoads = facultyLoads;
 	}
 
@@ -90,14 +79,6 @@ public class Faculty
 
 	public void setTeachingDays(String teachingDays) {
 		this.teachingDays = teachingDays;
-	}
-
-	public ArrayList<Semester> getTeachingSemesters() {
-		return teachingSemesters;
-	}
-
-	public void setTeachingSemesters(ArrayList<Semester> teachingSemesters) {
-		this.teachingSemesters = teachingSemesters;
 	}
 	
 	public ArrayList<Course> getCourses() {
@@ -129,36 +110,42 @@ public class Faculty
 		}
 	}
 	
-	public Faculty(String firstname, String lastname, String degree, String title) {
-		// TODO - implement Faculty.Faculty
-		throw new UnsupportedOperationException();
+	public void addCourseCanTeach(Course course) {
+		if ( course != null){
+			getCourses().add(course);
+		}
+		else{
+			throw new UnsupportedOperationException();
+		}
 	}
-
-	/**
-	 * add to the sections the faculty can teach
-	 * @param schedule
-	 */
-	public void canTeachAddSection(Schedule schedule) {
-		// TODO - implement Faculty.canTeachAddSection
-		throw new UnsupportedOperationException();
+	
+	public ArrayList<Course> getCoursesCanTeach() {
+		if ( getCourses() != null){
+			return getCourses();
+		}
+		else{
+			return null;
+		}
 	}
-
-	/**
-	 * Course the faculty can teach and the semester in which the faculty can teach it
-	 * @param course
-	 * @param semester
-	 */
-	public void canTeach(Course course, Semester semester) {
-		// TODO - implement Faculty.canTeach
-		throw new UnsupportedOperationException();
+	
+	public boolean canTeachFall(){
+		if ( getFacultyLoads().get(0).getHours() > 0){
+			return true;
+		}
+		return false;
 	}
-
-	/**
-	 * returns all sections the faculty can teach
-	 */
-	public void getSectionsCanTeach() {
-		// TODO - implement Faculty.getSectionsCanTeach
-		throw new UnsupportedOperationException();
+	
+	public boolean canTeachSpring(){
+		if ( getFacultyLoads().get(1).getHours() > 0){
+			return true;
+		}
+		return false;
 	}
-
+	
+	public boolean canTeachSummer(){
+		if ( getFacultyLoads().get(2).getHours() > 0){
+			return true;
+		}
+		return false;
+	}
 }

@@ -89,7 +89,7 @@ public class DegreePlan
 	public ArrayList<DegreeRequirement> ListCoursesToTake(Student student) {
 		if (student != null){
 			// return the list of degree rquirements if 
-			if (student.getDegreePlan().code == getCode() && !getDegreeReqs().isEmpty()){
+			if (student.getDegreeCode().getDegreeCode() == getCode() && !getDegreeReqs().isEmpty()){
 				return getDegreeReqs();
 			}
 		}else{

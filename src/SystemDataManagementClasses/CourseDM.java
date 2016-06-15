@@ -1,8 +1,5 @@
-
-
-
-
 package SystemDataManagementClasses;
+
 import OcGraduateSystemClasses.Course;
 
 import java.io.FileNotFoundException;
@@ -12,11 +9,12 @@ import com.csvreader.*;
 import java.util.*;
 
 public class CourseDM {
-	private ArrayList<Course> courses = new ArrayList<Course>();
+	
+	private ArrayList<Course> coursesData;
 	
 	public ArrayList<Course> getCourses() {
-		if ( !courses.isEmpty()){
-			return courses;
+		if ( !coursesData.isEmpty()){
+			return coursesData;
 		}
 		return null;
 	}
@@ -24,11 +22,12 @@ public class CourseDM {
 	// Constructor
 	public CourseDM(CsvReader file) {
 		if ( file != null){
+			coursesData = new ArrayList<Course>();
 			readFile(file);
 			
-			for ( int i = 0; i < courses.size(); i++){
-				if ( !courses.get(i).getPrereq().equals("none")){
-					courses.get(i).addPreRequisite(getCourseWithCode(courses.get(i).getPrereq()));
+			for ( int i = 0; i < coursesData.size(); i++){
+				if ( !coursesData.get(i).getPrereq().equals("none")){
+					coursesData.get(i).addPreRequisite(getCourseWithCode(coursesData.get(i).getPrereq()));
 				}
 			}
 		}
@@ -65,7 +64,7 @@ public class CourseDM {
 							offeredfall, offeredspring, offeredsummer, 
 							course_Prereq, new ArrayList<String>( Arrays.asList(teachers.split(","))));
 					// Add course to the list
-					courses.add(tempcourse);	
+					coursesData.add(tempcourse);	
 				}
 			
 				// close the file after read completion
@@ -80,18 +79,18 @@ public class CourseDM {
 	}
 	
 	public Course getCourseWithCode(String code){
-		for ( int i = 0; i < courses.size(); i ++){
-			if ( courses.get(i).getCourseCode().equals(code)){
-				return courses.get(i);
+		for ( int i = 0; i < coursesData.size(); i ++){
+			if ( coursesData.get(i).getCourseCode().equals(code)){
+				return coursesData.get(i);
 			}
 		}
 		return null;
 	}
 	
 	public Course getCourseWithName(String name){
-		for ( int i = 0; i < courses.size(); i ++){
-			if ( courses.get(i).getCourseName().equals(name)){
-				return courses.get(i);
+		for ( int i = 0; i < coursesData.size(); i ++){
+			if ( coursesData.get(i).getCourseName().equals(name)){
+				return coursesData.get(i);
 			}
 		}
 		return null;

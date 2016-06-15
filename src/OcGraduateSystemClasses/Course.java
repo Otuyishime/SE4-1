@@ -7,34 +7,19 @@ import java.util.*;
  */
 public class Course
 {
-
-	private String prereq;
-	
-	private ArrayList<Course> prerequisites;
-	
-	private ArrayList<String> teachers;
-	
 	private Faculty faculty;
 	
-	private ArrayList<Section> sections;
-	/**
-	 * the name of the class
-	 */
 	private String courseName;
 	
 	private String courseCode;
-	/**
-	 * the semester in which the course is offered
-	 */
+	
 	private String description;
-	/**
-	 * number of hours the course is offered in the week
-	 */
+	
 	private int creditHours;
-	/**
-	 * number of students who can take the course
-	 */
+	
 	private int courseCap;
+	
+	private String prereq;
 
 	private boolean isOfferedFall;
 	
@@ -42,7 +27,14 @@ public class Course
 	
 	private boolean isOfferedSummer;
 	
+	// ------------------- Lists -------------------------
+	private ArrayList<Course> prerequisites;
 	
+	private ArrayList<String> teachers;
+	
+	private ArrayList<Section> sections;
+	
+	// -------------------- Accessors ---------------------
 	public ArrayList<String> getTeachers() {
 		return teachers;
 	}
@@ -147,6 +139,7 @@ public class Course
 		this.isOfferedSummer = isOfferedSummer;
 	}
 
+	// ------------------- Methods ----------------------
 	/**
 	 * 
 	 * @param name
@@ -186,6 +179,4 @@ public class Course
 		}
 		return false;
 	}
-	
-
 }
