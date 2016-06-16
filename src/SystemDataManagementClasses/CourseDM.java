@@ -41,8 +41,8 @@ public class CourseDM {
 				String headers[] = file.getHeaders();
 				
 				
-				DegreeDM degreeData =  new DegreeDM(file);
-				SemesterDM semesterData = new SemesterDM(file);
+				/*DegreeDM degreeData =  new DegreeDM(file);
+				SemesterDM semesterData = new SemesterDM(file);*/
 				
 				while (file.readRecord())
 				{
