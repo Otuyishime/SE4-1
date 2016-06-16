@@ -9,10 +9,22 @@ import java.util.*
 ;
 
 public class DegreePlanReqDM {
+	ArrayList<DegreeRequirement> degree_Requirements;
+	
+	public ArrayList<DegreeRequirement> getDegree_Requirements() {
+		return degree_Requirements;
+	}
+
+	public void setDegree_Requirements(ArrayList<DegreeRequirement> degree_Requirements) {
+		this.degree_Requirements = degree_Requirements;
+	}
+
+	public DegreePlanReqDM() {
+		super();
+		degree_Requirements = new ArrayList<DegreeRequirement>();
+	}
+	
 	public void readFile(CsvReader file){
-		// Create the degree plans
-		ArrayList<DegreeRequirement> degree_Requirements = new ArrayList<DegreeRequirement>();
-		
 		try {
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
@@ -59,39 +71,5 @@ public class DegreePlanReqDM {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int findRecord(CsvReader file, String key){
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int deleteRecord(CsvReader file, String Key){
-		
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean updateRecord(CsvReader file, DegreeRequirement record){
-		return false;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean writeRecord(CsvReader file, DegreeRequirement record){
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
