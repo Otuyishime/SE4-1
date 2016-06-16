@@ -76,6 +76,7 @@ public class Main {
 			CourseDM courses = new CourseDM(file);
 			System.out.println(courses.getCourses().get(0).getPrerequisites().get(0).getCourseName());
 			*/
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
