@@ -28,6 +28,12 @@ public class SemesterDM {
 		readFile(fileName);
 	}
 	
+	
+ public int getNumberofSemesterDataImported(){
+		 
+		 return semesterData.size();
+	 }
+	
 	// Return the Semester whenever you have the semester nbame
 	public Semester returnTheSemesterGivenTheSemesterName(String semesterName){
 		Semester DiseredSemester = null;

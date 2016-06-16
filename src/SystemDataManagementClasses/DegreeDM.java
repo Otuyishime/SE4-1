@@ -7,7 +7,7 @@ import com.csvreader.CsvReader;
 import OcGraduateSystemClasses.Degree;
 
 public class DegreeDM {	
-private ArrayList<Degree> degreeData;
+ private ArrayList<Degree> degreeData;
 	
 	public DegreeDM(CsvReader fileName){
 		degreeData =  new ArrayList<Degree>();	
@@ -17,7 +17,7 @@ private ArrayList<Degree> degreeData;
 	
 	// Return the Semester whenever you have the semester Name
 	
-	public Degree returnTheSemesterGivenTheSemesterName(String degreeCode){
+	public Degree returnTheDegreeGivenThedegreeCode(String degreeCode){
 		Degree Disereddegree = null;
 	    for(Degree degree: degreeData){
 	    	if (degree.getDegreeCode().equals(degreeCode)){
@@ -25,9 +25,16 @@ private ArrayList<Degree> degreeData;
 	    	
 	    	} 	
 	    }
+	    
+	   
 		
 		return Disereddegree;
 	}
+	
+ public int getNumberofDegreeImported(){
+		 
+		 return degreeData.size();
+	 }
 	
 	public void readFile(CsvReader file)
 	{
