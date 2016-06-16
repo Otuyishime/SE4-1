@@ -10,8 +10,23 @@ import java.util.*;
 
 public class GradSchoolDM {
 	
-	ArrayList<GradSchool> gradSchools = new ArrayList<GradSchool>();
+	ArrayList<GradSchool> gradSchools;
 	
+	public ArrayList<GradSchool> getGradSchools() {
+		return gradSchools;
+	}
+
+	public void setGradSchools(ArrayList<GradSchool> gradSchools) {
+		this.gradSchools = gradSchools;
+	}
+
+	public GradSchoolDM(CsvReader file) {
+		super();
+		gradSchools = new ArrayList<GradSchool>();
+		readFile(file);
+	}
+
+
 	public void readFile(CsvReader file){
 		try {
 			if (file.readHeaders()){
@@ -24,6 +39,9 @@ public class GradSchoolDM {
 					
 					// perform program logic here
 					System.out.println(gradSchl_Abbr + " : " + gradSchl_Name);
+					// create a temporary grad school
+					GradSchool gradschool = new GradSchool(gradSchl_Name,gradSchl_Abbr);
+					getGradSchools().add(gradschool);
 				}
 				// close the file after read completion
 				file.close();
@@ -34,39 +52,5 @@ public class GradSchoolDM {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int findRecord(CsvReader file, String key){
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int deleteRecord(CsvReader file, String Key){
-		
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean updateRecord(CsvReader file, GradSchool record){
-		return false;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean writeRecord(CsvReader file, GradSchool record){
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

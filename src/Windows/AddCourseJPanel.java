@@ -19,6 +19,8 @@ public class AddCourseJPanel extends JPanel {
 	 */
 	public AddCourseJPanel(JFrame currentFrame) {
 		
+		
+		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
 		

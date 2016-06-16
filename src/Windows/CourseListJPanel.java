@@ -2,6 +2,7 @@ package Windows;
 
 import java.awt.Rectangle;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -11,10 +12,15 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class CourseListJPanel extends JPanel {
 	private JButton btn_coursesListToMain;
 
+	DefaultListModel listModel;
+	//JList list;
+	JList list_courses;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -27,7 +33,16 @@ public class CourseListJPanel extends JPanel {
 		lblListOfAvailable.setBounds(100, 20, 300, 25);
 		add(lblListOfAvailable);
 		
-		JList list_courses = new JList();
+		listModel = new DefaultListModel();
+		ArrayList<String> l = new ArrayList<String>(); 
+		l.add("JP");
+		l.add("Gustave");
+		l.add("Olivier");
+		for (int i = 0; i < 3; i++){
+			listModel.addElement(l.get(i));
+		}
+		list_courses = new JList(listModel);
+		
 		list_courses.setBounds(100, 50, 300, 500);
 		add(list_courses);
 		
@@ -63,6 +78,8 @@ public class CourseListJPanel extends JPanel {
 		JButton btn_deleteCourse = new JButton("Delete");
 		btn_deleteCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				listModel.removeElement(list_courses.getSelectedValue());
 				
 				// TODO
 				// get the selected course and deleted if from the list

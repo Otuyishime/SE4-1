@@ -8,11 +8,6 @@ import java.util.*;
  */
 public class GradSchool
 {
-
-	private University university;
-	private ArrayList<Student> students;
-	private ArrayList<DegreePlan> degrees;
-	private ArrayList<Faculty> faculty;
 	/**
 	 * the name of the graduate school department
 	 */
@@ -22,23 +17,35 @@ public class GradSchool
 	 */
 	private String abbreviation;
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAbbreviation() {
+		return abbreviation;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
+	}
+
 	/**
 	 * Object Constructor
 	 * @param name The name must be a non-empty string
 	 * @param abbreviation The abbreviation has to be a non-empty string
 	 */
 	public GradSchool(String name, String abbreviation) {
-		// TODO - implement GradSchool.GradSchool
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * Object constructor
-	 * @param name The name has to be a non-empty string
-	 */
-	public GradSchool(String name) {
-		// TODO - implement GradSchool.GradSchool
-		throw new UnsupportedOperationException();
+		if ( !name.isEmpty() && !abbreviation.isEmpty()){
+			setName(name);
+			setAbbreviation(abbreviation);
+		}
+		else{
+			throw new UnsupportedOperationException();
+		}
 	}
 
 }

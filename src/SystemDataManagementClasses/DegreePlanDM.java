@@ -10,10 +10,23 @@ import com.csvreader.CsvReader;
 import java.util.*;
 
 public class DegreePlanDM {
+	ArrayList<DegreePlan> degreePlans;
+	
+	public ArrayList<DegreePlan> getDegreePlans() {
+		return degreePlans;
+	}
+
+	public void setDegreePlans(ArrayList<DegreePlan> degreePlans) {
+		this.degreePlans = degreePlans;
+	}
+
+	public DegreePlanDM(CsvReader file) {
+		super();
+		degreePlans = new ArrayList<DegreePlan>();
+		readFile(file);
+	}
+
 	public void readFile(CsvReader file){
-		
-		ArrayList<DegreePlan> degreePlans = new ArrayList<DegreePlan>();
-		
 		try {
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
@@ -45,39 +58,5 @@ public class DegreePlanDM {
 		}
 		
 
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int findRecord(CsvReader file, String key){
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int deleteRecord(CsvReader file, String Key){
-		
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean updateRecord(CsvReader file, DegreePlan record){
-		return false;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean writeRecord(CsvReader file, DegreePlan record){
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

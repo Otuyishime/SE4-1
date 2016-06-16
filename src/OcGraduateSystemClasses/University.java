@@ -29,6 +29,8 @@ public class University
 	
 	private ArrayList<Room> rooms;
 	
+	private ArrayList<DegreeRequirement> degreerequirements;
+	
 	// -------------- Accessors ---------------
 	public String getName() {
 		return name;
@@ -108,6 +110,14 @@ public class University
 
 	public void setRooms(ArrayList<Room> rooms) {
 		this.rooms = rooms;
+	}
+
+	public ArrayList<DegreeRequirement> getDegreerequirements() {
+		return degreerequirements;
+	}
+
+	public void setDegreerequirements(ArrayList<DegreeRequirement> degreerequirements) {
+		this.degreerequirements = degreerequirements;
 	}
 
 	/**

@@ -57,6 +57,11 @@ public class CourseDM {
 					String course_Prereq = file.get(headers[8]);
 					String teachers = file.get(headers[9]);
 					
+					// Print the course
+					System.out.println(course_Code + " : " + course_Name + " : " + course_Desc + " : "
+					+ course_Hrs + " : " + course_Cap + " : " + isOfferedFall + " : " + isOfferedSpring + " : " + 
+					isOfferedSummer + " : "+ course_Prereq + " : "+ teachers );
+					
 					// perform program logic here
 					boolean offeredfall, offeredspring, offeredsummer;
 					offeredfall = isOfferedFall.equals("Y") ? true: false;
