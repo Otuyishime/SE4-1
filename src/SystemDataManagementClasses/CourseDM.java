@@ -100,7 +100,9 @@ public class CourseDM {
 	public boolean loadFaculty(FacultyDM faculties){
 		if ( faculties != null){
 			for ( int i = 0; i < getCourses().size(); i++){
-				getCourses().get(i).setFaculty(faculties.getFacultyWithName(getCourses().get(i).getTeachers().get(0)));
+				for ( int j = 0; j < getCourses().get(i).getTeachers().size(); j++){
+					getCourses().get(i).addFaculty(faculties.getFacultyWithName(getCourses().get(i).getTeachers().get(j)));
+				}
 			}
 		}else{
 			throw new UnsupportedOperationException();

@@ -8,19 +8,18 @@ import java.util.*;
  */
 public class University
 {
-
-	private ArrayList<Semester> semesters;
-	private ArrayList<GradSchool> gradSchools;
-	private ArrayList<Course> courses;
-	/**
-	 * Name of the institution
-	 */
 	private String name;
-	/**
-	 * Short name of the institution name
-	 */
+	
 	private String abbreviation;
 
+	// --------------- Lists ------------------
+	private ArrayList<Semester> semesters;
+	
+	private ArrayList<GradSchool> gradSchools;
+	
+	private ArrayList<Course> courses;
+	
+	// -------------- Accessors ---------------
 	public String getName() {
 		return name;
 	}

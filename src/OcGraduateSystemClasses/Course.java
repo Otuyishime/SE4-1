@@ -7,8 +7,6 @@ import java.util.*;
  */
 public class Course
 {
-	private Faculty faculty;
-	
 	private String courseName;
 	
 	private String courseCode;
@@ -34,6 +32,8 @@ public class Course
 	
 	private ArrayList<Section> sections;
 	
+	private ArrayList<Faculty> faculties;
+	
 	// -------------------- Accessors ---------------------
 	public ArrayList<String> getTeachers() {
 		return teachers;
@@ -57,14 +57,6 @@ public class Course
 
 	public void setPrerequisites(ArrayList<Course> prerequisites) {
 		this.prerequisites = prerequisites;
-	}
-
-	public Faculty getFaculty() {
-		return faculty;
-	}
-
-	public void setFaculty(Faculty faculty) {
-		this.faculty = faculty;
 	}
 
 	public ArrayList<Section> getSections() {
@@ -139,6 +131,14 @@ public class Course
 		this.isOfferedSummer = isOfferedSummer;
 	}
 
+	public ArrayList<Faculty> getFaculties() {
+		return faculties;
+	}
+
+	public void setFaculties(ArrayList<Faculty> faculties) {
+		this.faculties = faculties;
+	}
+
 	// ------------------- Methods ----------------------
 	/**
 	 * 
@@ -165,6 +165,8 @@ public class Course
 			
 			// initialize prerequisites
 			prerequisites = new ArrayList<Course>();
+			// initialize faculties:faculties
+			faculties = new ArrayList<Faculty>();
 		}
 		else{
 			throw new UnsupportedOperationException();
@@ -175,6 +177,15 @@ public class Course
 	public boolean addPreRequisite(Course prereq){
 		if (prereq != null){
 			getPrerequisites().add(prereq);
+			return true;
+		}
+		return false;
+	}
+	
+	// add a faculty
+	public boolean addFaculty(Faculty faculty){
+		if (faculty != null){
+			getFaculties().add(faculty);
 			return true;
 		}
 		return false;

@@ -8,13 +8,26 @@ import com.csvreader.CsvReader;
 import java.util.*;
 
 public class UniversityDM {
+	ArrayList<University> universities;
 	
+	public ArrayList<University> getUniversities() {
+		return universities;
+	}
+
+	public void setUniversities(ArrayList<University> universities) {
+		this.universities = universities;
+	}
+	
+	public UniversityDM(CsvReader file) {
+		super();
+		readFile(file);
+	}
+
 	public void readFile(CsvReader file){
 		// create all universities
 		ArrayList<University> universities = new ArrayList<University>();
 		
 		try {
-			
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
 				
@@ -39,39 +52,5 @@ public class UniversityDM {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int findRecord(CsvReader file, String key){
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int deleteRecord(CsvReader file, String Key){
-		
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean updateRecord(CsvReader file, University record){
-		return false;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean writeRecord(CsvReader file, University record){
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

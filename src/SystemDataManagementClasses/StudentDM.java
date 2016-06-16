@@ -11,7 +11,6 @@ import OcGraduateSystemClasses.Semester;
 import OcGraduateSystemClasses.Student;
 
 public class StudentDM {
-
 	
 	private ArrayList<Student> StudentData;
 	
@@ -40,8 +39,6 @@ public class StudentDM {
 		return DiseredStudent;
 	}
 	
-	
-	      
 	public void readFile(CsvReader file){
 		try {
 			if (file.readHeaders()){
@@ -60,29 +57,17 @@ public class StudentDM {
 					
 					
 					for (int i = 0; i < degreeData.getNumberofDegreeImported(); i ++){
-				    if(degreeData.returnTheDegreeGivenThedegreeCode(degreeCodeFetched).getDegreeCode().equals(degreeCodeFetched)){
-				    	
-				    	StudentDegree =degreeData.returnTheDegreeGivenThedegreeCode(degreeCodeFetched);
-				    }
-				    	
-				    	
-			
+						if(degreeData.returnTheDegreeGivenThedegreeCode(degreeCodeFetched).getDegreeCode().equals(degreeCodeFetched)){
+							StudentDegree =degreeData.returnTheDegreeGivenThedegreeCode(degreeCodeFetched);
+						}
 					}
 					String  graduatiomSemester = file.get(headers[2]);
 					
-					for (int i = 0; i < semesterData.getNumberofSemesterDataImported(); i ++)
-					
-					{
+					for (int i = 0; i < semesterData.getNumberofSemesterDataImported(); i ++){
 					    if(semesterData.returnTheSemesterGivenTheSemesterName(graduatiomSemester).getName().equals(graduatiomSemester)){
-					    	
 					    	semesterloaded =semesterData.returnTheSemesterGivenTheSemesterName(graduatiomSemester);
 					    }
-					
-					
-					
-					
-					// perform program logic here
-		 		//	System.out.println(semName + " : " + semStartDateString + " : " + semEndDateString);
+					//System.out.println(semName + " : " + semStartDateString + " : " + semEndDateString);
 		 			
 					// Construct the  Student object based on the imported data.
 					Student Student  =  new Student  (studentId,StudentDegree,semesterloaded);
