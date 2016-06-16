@@ -9,7 +9,9 @@ public class Student
 {
 	private int studentId;
 	private Degree degreeCode;
-	 private Semester semesterName;
+	private Semester GraduationsemesterName;
+	 
+	 
 	public int getStudentId() {
 		return studentId;
 	}
@@ -23,16 +25,16 @@ public class Student
 		this.degreeCode = degreeCode;
 	}
 	public Semester getSemesterName() {
-		return semesterName;
+		return GraduationsemesterName;
 	}
 	public void setSemesterName(Semester semesterName) {
-		this.semesterName = semesterName;
+		this.GraduationsemesterName = semesterName;
 	}
 	
 	public Student(int studentId, Degree degreeCode, Semester semesterName) {
 		this.studentId = studentId;
 		this.degreeCode = degreeCode;
-		this.semesterName = semesterName;
+		this.GraduationsemesterName = semesterName;
 	}
 	 
 	
