@@ -1,6 +1,5 @@
 package SystemDataManagementClasses;
-
-import OcGraduateSystemClasses.University;
+import OcGraduateSystemClasses.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -8,15 +7,7 @@ import com.csvreader.CsvReader;
 import java.util.*;
 
 public class UniversityDM {
-	ArrayList<University> universities;
-	
-	public ArrayList<University> getUniversities() {
-		return universities;
-	}
-
-	public void setUniversities(ArrayList<University> universities) {
-		this.universities = universities;
-	}
+	University university;
 	
 	public UniversityDM(CsvReader file) {
 		super();
@@ -24,9 +15,6 @@ public class UniversityDM {
 	}
 
 	public void readFile(CsvReader file){
-		// create all universities
-		ArrayList<University> universities = new ArrayList<University>();
-		
 		try {
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
@@ -40,8 +28,7 @@ public class UniversityDM {
 					System.out.println(univ_Name + " : " + univ_ID);
 					
 					// Create a university object
-					University temp_Univ = new University(univ_Name, univ_ID);
-					universities.add(temp_Univ);
+					university = new University(univ_Name, univ_ID);
 				}
 				// close the file after read completion
 				file.close();
