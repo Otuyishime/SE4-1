@@ -99,4 +99,17 @@ public class FacultyDM {
 		}
 		return facultyList;
 	}
+	
+	public Faculty getFacultyWithName(String name){
+		
+		for ( int i = 0; i < getFaculties().size(); i++){
+			if ( getFaculties().get(i).getFirstName().equals(name)){
+				return getFaculties().get(i);
+			}
+			else if (getFaculties().get(i).getLastName().equals(name)){
+				return getFaculties().get(i);
+			}
+		}
+		return null;
+	}
 }

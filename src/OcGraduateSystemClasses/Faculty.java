@@ -89,6 +89,7 @@ public class Faculty
 		this.courses = courses;
 	}
 
+	// ---------------------- Methods -------------------------
 	/**
 	 * 
 	 * @param name
@@ -147,5 +148,26 @@ public class Faculty
 			return true;
 		}
 		return false;
+	}
+	
+	public int getFallLoad(){
+		if ( getFacultyLoads().get(0).getHours() > 0){
+			return getFacultyLoads().get(0).getHours();
+		}
+		return 0;
+	}
+	
+	public int getSpringLoad(){
+		if ( getFacultyLoads().get(1).getHours() > 0){
+			return getFacultyLoads().get(1).getHours();
+		}
+		return 0;
+	}
+
+	public int getSummerLoad(){
+		if ( getFacultyLoads().get(2).getHours() > 0){
+			return getFacultyLoads().get(2).getHours();
+		}
+		return 0;
 	}
 }

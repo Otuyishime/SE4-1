@@ -1,6 +1,7 @@
 package SystemDataManagementClasses;
 
 import OcGraduateSystemClasses.Course;
+import OcGraduateSystemClasses.Faculty;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -94,5 +95,16 @@ public class CourseDM {
 			}
 		}
 		return null;
+	}
+	
+	public boolean loadFaculty(FacultyDM faculties){
+		if ( faculties != null){
+			for ( int i = 0; i < getCourses().size(); i++){
+				getCourses().get(i).setFaculty(faculties.getFacultyWithName(getCourses().get(i).getTeachers().get(0)));
+			}
+		}else{
+			throw new UnsupportedOperationException();
+		}
+		return false;
 	}
 }

@@ -94,7 +94,7 @@ public class Course
 	public int getCreditHours() {
 		return creditHours;
 	}
-
+	
 	public void setCreditHours(int creditHours) {
 		this.creditHours = creditHours;
 	}
