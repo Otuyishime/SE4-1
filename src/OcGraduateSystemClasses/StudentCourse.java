@@ -1,40 +1,60 @@
 package OcGraduateSystemClasses;
 
+import OcGraduateSystemClasses.Student;
+
 /**
  * Represents a course the student can take
  */
 public class StudentCourse
 {
-
-	private Student student;
-	Course course;
-	private Semester semester;
-	/**
-	 * represents the grade obtained in the course
-	 */
-	private char grade;
-
-	/**
-	 * Default constructor
-	 */
-	public StudentCourse() {
-		// TODO - implement StudentCourse.StudentCourse
-		throw new UnsupportedOperationException();
+	private Student StudentID;
+	private Course   courseCode;
+	private Course courseName;
+	private Semester  semesterName;
+	private  String  grade;
+	public Student getStudentID() {
+		return StudentID;
+	}
+	public void setStudentID(Student ctudentID) {
+		this.StudentID = ctudentID;
+	}
+	public Course getCourseCode() {
+		return courseCode;
+	}
+	public void setCourseCode(Course courseCode) {
+		this.courseCode = courseCode;
+	}
+	public Course getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(Course courseName) {
+		this.courseName = courseName;
+	}
+	public Semester getSemesterName() {
+		return semesterName;
+	}
+	public void setSemesterName(Semester semesterName) {
+		this.semesterName = semesterName;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	
+	
+	public StudentCourse(Student ctudentID, Course courseCode, Course courseName, Semester semesterName, String grade) {
+		this.StudentID = ctudentID;
+		this.courseCode = courseCode;
+		this.courseName = courseName;
+		this.semesterName = semesterName;
+		this.grade = grade;
 	}
 
-	/**
-	 * Student course constructor
-	 * @param student must be a non-null object
-	 * @param grade must be a valid grade
-	 */
-	public StudentCourse(Student student, char grade) {
-		// TODO - implement StudentCourse.StudentCourse
-		throw new UnsupportedOperationException();
-	}
+	
+	
+	
 
-	public void fetchStudentCourseData() {
-		// TODO - implement StudentCourse.fetchStudentCourseData
-		throw new UnsupportedOperationException();
-	}
 
 }

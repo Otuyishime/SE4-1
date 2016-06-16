@@ -28,7 +28,7 @@ public class SemesterDM {
 		readFile(fileName);
 	}
 	
-	
+	// the size of the imported csv
  public int getNumberofSemesterDataImported(){
 		 
 		 return semesterData.size();

@@ -39,6 +39,10 @@ public class CourseDM {
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
 				
+				
+				DegreeDM degreeData =  new DegreeDM(file);
+				SemesterDM semesterData = new SemesterDM(file);
+				
 				while (file.readRecord())
 				{
 					String course_Code = file.get(headers[0]);
@@ -95,4 +99,9 @@ public class CourseDM {
 		}
 		return null;
 	}
+	// the size of the imported csv
+	 public int getNumberofCourseDataImported(){
+			 
+			 return coursesData.size();
+		 }
 }
