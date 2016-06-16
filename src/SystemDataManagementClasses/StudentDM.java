@@ -41,17 +41,13 @@ public class StudentDM {
 	    }
 		return DiseredStudent;
 	}
-<<<<<<< HEAD
 	
-=======
 	// the size of the imported csv
 	 public int getNumberofStudentataImported(){
 			 
 			 return StudentData.size();
 		 }
 	
-	      
->>>>>>> branch 'master' of https://github.com/Otuyishime/SE4-1
 	public void readFile(CsvReader file){
 		try {
 			

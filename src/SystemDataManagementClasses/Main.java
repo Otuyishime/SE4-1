@@ -11,12 +11,10 @@ public class Main {
 		// TODO Auto-generated method stub
 		try {
 			CsvReader file;
-<<<<<<< HEAD
 			/*System.out.println(" ---------------------- University -------------------");
 			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataUniversityName.csv");
 			UniversityDM univ = new UniversityDM(file);
 			System.out.println();*/
-=======
 			
 			/*
 			System.out.println(" ---------------------- University -------------------");
@@ -33,7 +31,6 @@ public class Main {
 			System.out.println(sem.getSemesterData().size());
 			System.out.println();
 			*/
->>>>>>> branch 'master' of https://github.com/Otuyishime/SE4-1
 			
 			/*
 			System.out.println(" ---------------------- Grad Schools --------------------");
@@ -78,17 +75,6 @@ public class Main {
 			degreeReq.readFile(file);
 			System.out.println();
 			*/
-<<<<<<< HEAD
-=======
-			
-			/*
-			System.out.println(" ---------------------- Courses--------------------");
-			// file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataCourses.csv");
-			file = new CsvReader("src/Data/TestDataCourses.csv");
-			CourseDM courses = new CourseDM(file);
-			System.out.println(courses.getCourses().get(0).getPrerequisites().get(0).getCourseName());
-			*/
->>>>>>> branch 'master' of https://github.com/Otuyishime/SE4-1
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
