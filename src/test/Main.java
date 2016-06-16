@@ -13,7 +13,8 @@ public class Main {
 		try {
 			CsvReader file;
 			System.out.println(" ---------------------- University -------------------");
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataUniversityName.csv");
+			// file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataUniversityName.csv");
+			file = new CsvReader("src/Data/TestDataUniversityName.csv");
 			UniversityDM univ = new UniversityDM(file);
 			System.out.println();
 			
@@ -24,7 +25,8 @@ public class Main {
 			System.out.println();
 			
 			System.out.println(" ---------------------- Semesters --------------------");
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataSemesters.csv");
+			// file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataSemesters.csv");
+			file = new CsvReader("src/Data/TestDataSemesters.csv");
 			SemesterDM sem = new SemesterDM(file);
 			System.out.println(sem.getSemesterData().size());
 			System.out.println();
@@ -35,7 +37,8 @@ public class Main {
 			System.out.println();
 			
 			System.out.println(" ---------------------- Courses--------------------");
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataCourses.csv");
+			// file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataCourses.csv");
+			file = new CsvReader("src/Data/TestDataCourses.csv");
 			CourseDM courses = new CourseDM(file);
 			courses.loadFaculty(faculty);
 			System.out.println(courses.getCourses().get(5).getFaculties().get(0).getLastName());
@@ -52,6 +55,8 @@ public class Main {
 			DegreePlanReqDM degreeReq = new DegreePlanReqDM();
 			degreeReq.readFile(file);
 			System.out.println();
+			
+			System.out.println("...Done printing out imported infomation...");
 			
 			
 		} catch (FileNotFoundException e) {
