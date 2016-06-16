@@ -55,7 +55,7 @@ public class SemesterDM {
 					String  semEndDateString = file.get(headers[2]);
 					Date semEndDate = new SimpleDateFormat("mm/dd/yyyy").parse(semEndDateString);
 					
-		 			//System.out.println(semName + " : " + semStartDateString + " : " + semEndDateString);
+		 			System.out.println(semName + " : " + semStartDateString + " : " + semEndDateString);
 		 			
 					// Construct the  semester object based on the imported data.
 					Semester semester  =  new Semester  (semName,semStartDate,semEndDate);
