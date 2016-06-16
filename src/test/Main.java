@@ -18,6 +18,8 @@ public class Main {
 			UniversityDM univ = new UniversityDM(file);
 			System.out.println();
 			
+			
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
