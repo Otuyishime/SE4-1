@@ -11,16 +11,38 @@ public class Main {
 		// TODO Auto-generated method stub
 		try {
 			CsvReader file;
+<<<<<<< HEAD
 			/*System.out.println(" ---------------------- University -------------------");
 			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataUniversityName.csv");
 			UniversityDM univ = new UniversityDM(file);
 			System.out.println();*/
+=======
 			
-			/*System.out.println(" ---------------------- Grad Schools --------------------");
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataGradSchools.csv");
+			/*
+			System.out.println(" ---------------------- University -------------------");
+			file = new CsvReader("src/Data/TestDataUniversityName.csv");
+			UniversityDM univ = new UniversityDM();
+			univ.readFile(file);
+			System.out.println();
+			*/
+			
+			/*
+			System.out.println(" ---------------------- Semesters --------------------");
+			file = new CsvReader("src/Data/TestDataSemesters.csv");
+			SemesterDM sem = new SemesterDM(file);
+			System.out.println(sem.getSemesterData().size());
+			System.out.println();
+			*/
+>>>>>>> branch 'master' of https://github.com/Otuyishime/SE4-1
+			
+			/*
+			System.out.println(" ---------------------- Grad Schools --------------------");
+			file = new CsvReader("src/Data/TestDataGradSchools.csv");
 			GradSchoolDM gradSchl = new GradSchoolDM();
 			gradSchl.readFile(file);
-			System.out.println();*/
+			System.out.println();
+			*/
+			
 			
 			/*System.out.println(" ---------------------- Semesters --------------------");
 			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataSemesters.csv");
@@ -29,7 +51,7 @@ public class Main {
 			System.out.println();*/
 			
 			System.out.println(" ---------------------- Faculty --------------------");
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataFaculty.csv");
+			file = new CsvReader("src/Data/TestDataFaculty.csv");
 			FacultyDM faculty = new FacultyDM(file);
 			System.out.println();
 			
@@ -40,18 +62,33 @@ public class Main {
 			System.out.println(courses.getCourses().get(5).getFaculties().get(0).getLastName());
 			System.out.println();
 			
-			/*System.out.println(" ---------------------- Degrees --------------------");
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataDegrees.csv");
+			
+			/*
+			System.out.println(" ---------------------- Degrees --------------------");
+			file = new CsvReader("src/Data/TestDataDegrees.csv");
 			DegreePlanDM degrees = new DegreePlanDM();
 			degrees.readFile(file);
 			System.out.println();
+			*/
 			
+			/*
 			System.out.println(" ---------------------- Degree Requirements--------------------");
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataDegreePlanReq.csv");
+			file = new CsvReader("src/Data/TestDataDegreePlanReq.csv");
 			DegreePlanReqDM degreeReq = new DegreePlanReqDM();
 			degreeReq.readFile(file);
 			System.out.println();
 			*/
+<<<<<<< HEAD
+=======
+			
+			/*
+			System.out.println(" ---------------------- Courses--------------------");
+			// file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataCourses.csv");
+			file = new CsvReader("src/Data/TestDataCourses.csv");
+			CourseDM courses = new CourseDM(file);
+			System.out.println(courses.getCourses().get(0).getPrerequisites().get(0).getCourseName());
+			*/
+>>>>>>> branch 'master' of https://github.com/Otuyishime/SE4-1
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

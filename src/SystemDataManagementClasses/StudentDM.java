@@ -18,9 +18,12 @@ public class StudentDM {
 		return StudentData;
 	}
 
-	public void setStudentData(ArrayList<Student> StudentData) {
-		this.StudentData = StudentData;
+	
+	public void setStudentData(ArrayList<Student> studentData) {
+		this.StudentData = studentData;
 	}
+
+	//  Constructor
 
 	public StudentDM(CsvReader fileName){
 		
@@ -38,17 +41,31 @@ public class StudentDM {
 	    }
 		return DiseredStudent;
 	}
+<<<<<<< HEAD
 	
+=======
+	// the size of the imported csv
+	 public int getNumberofStudentataImported(){
+			 
+			 return StudentData.size();
+		 }
+	
+	      
+>>>>>>> branch 'master' of https://github.com/Otuyishime/SE4-1
 	public void readFile(CsvReader file){
 		try {
+			
+			DegreeDM degreeData =  new DegreeDM(file);
+			SemesterDM semesterData = new SemesterDM(file);
+			Degree StudentDegree= null;
+			Semester  semesterloaded =null;
+			
+			
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
 				file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataCourses.csv");
 
-				DegreeDM degreeData =  new DegreeDM(file);
-				SemesterDM semesterData = new SemesterDM(file);
-				Degree StudentDegree= null;
-				Semester  semesterloaded =null;
+			
 				while (file.readRecord())
 				{
 					int studentId = Integer.parseInt(file.get(headers[0]));

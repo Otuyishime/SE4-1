@@ -27,9 +27,17 @@ public class SemesterDM {
 		readFile(fileName);
 	}
 	
+<<<<<<< HEAD
 	public int getNumberofSemesterDataImported(){
 		return semesterData.size();
 	}
+=======
+	// the size of the imported csv
+ public int getNumberofSemesterDataImported(){
+		 
+		 return semesterData.size();
+	 }
+>>>>>>> branch 'master' of https://github.com/Otuyishime/SE4-1
 	
 	// Return the Semester whenever you have the semester nbame
 	public Semester returnTheSemesterGivenTheSemesterName(String semesterName){
