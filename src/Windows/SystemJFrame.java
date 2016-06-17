@@ -24,11 +24,13 @@ public class SystemJFrame extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 *//*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// 
+					
 					SystemJFrame frame = new SystemJFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -36,7 +38,7 @@ public class SystemJFrame extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.

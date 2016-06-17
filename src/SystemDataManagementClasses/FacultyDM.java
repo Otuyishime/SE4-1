@@ -47,8 +47,8 @@ public class FacultyDM {
 					String maxLoadSpring = file.get(headers[7]);
 					String maxLoadSummer = file.get(headers[8]);
 					
-					/*System.out.println(fac_firstName + " : " + fac_LastName + " : " + gradSchl + " : " + degree + " : " + 
-					title + " : " + daysToTeach + " : " + maxLoadFall + " : " + maxLoadSpring + " : " + maxLoadSummer);*/
+					System.out.println(fac_firstName + " : " + fac_LastName + " : " + gradSchl + " : " + degree + " : " + 
+					title + " : " + daysToTeach + " : " + maxLoadFall + " : " + maxLoadSpring + " : " + maxLoadSummer);
 					
 					// Extract data
 					// create a temporary faculty load list
