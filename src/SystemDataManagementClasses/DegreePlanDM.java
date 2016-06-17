@@ -39,7 +39,7 @@ public class DegreePlanDM {
 					String forecast = file.get(headers[3]);
 					
 					// perform program logic here
-					System.out.println(degree_Code + " : " + grad_Schl + " : " + degree_Name + " : " + forecast);
+					/*System.out.println(degree_Code + " : " + grad_Schl + " : " + degree_Name + " : " + forecast);*/
 					
 					// Create a degree object
 					DegreePlan degree = new DegreePlan(degree_Code, degree_Name, grad_Schl);

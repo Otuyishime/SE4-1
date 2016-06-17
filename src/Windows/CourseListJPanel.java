@@ -20,10 +20,6 @@ public class CourseListJPanel extends JPanel {
 	
 	DefaultListModel listModel;
 	JList list_courses;
-
-	DefaultListModel listModel;
-	//JList list;
-	JList list_courses;
 	
 	/**
 	 * Create the panel.

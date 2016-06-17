@@ -58,13 +58,8 @@ private ArrayList<StudentCourse> StudentCourseData;
 			Student studentLoaded = null;
 			Course  courseLoaded = null;
 			
-			
-			
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
-				
-		
-				
 				
 				while (file.readRecord())
 				{
@@ -92,8 +87,6 @@ private ArrayList<StudentCourse> StudentCourseData;
 			 
 				   String  courseName = file.get(headers[2]);
 				   
-				   
-				   
 					String   courseSemester = file.get(headers[3]);
 					
 					for (int i = 0; i < semesterData.getNumberofSemesterDataImported(); i ++)
@@ -105,9 +98,6 @@ private ArrayList<StudentCourse> StudentCourseData;
 					    }
 						   String  gradeName = file.get(headers[4]);
 
-					
-					
-					
 					StudentCourse tempStudentCourse  =  new StudentCourse  (studentLoaded,courseLoaded,courseLoaded,semesterLoaded,gradeName);
 					StudentCourseData.add(tempStudentCourse);
 				}
@@ -121,13 +111,5 @@ private ArrayList<StudentCourse> StudentCourseData;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	
-
-	
-	
-	
-	
-
+	}	
 }

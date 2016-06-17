@@ -38,7 +38,8 @@ public class GradSchoolDM {
 					String gradSchl_Name = file.get(headers[1]);
 					
 					// perform program logic here
-					System.out.println(gradSchl_Abbr + " : " + gradSchl_Name);
+					/*System.out.println(gradSchl_Abbr + " : " + gradSchl_Name);*/
+					
 					// create a temporary grad school
 					GradSchool gradschool = new GradSchool(gradSchl_Name,gradSchl_Abbr);
 					getGradSchools().add(gradschool);

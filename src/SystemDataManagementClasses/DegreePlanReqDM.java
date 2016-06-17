@@ -38,7 +38,7 @@ public class DegreePlanReqDM {
 					String courses = file.get(headers[4]);
 					
 					// perform program logic here
-					System.out.println(degree_Code + " : " + degree_desc + " : " + hours + " : " + type + " : " + courses);
+					/*System.out.println(degree_Code + " : " + degree_desc + " : " + hours + " : " + type + " : " + courses);*/
 					
 					// split the courses to get the course codes
 					if ( !courses.isEmpty()){

@@ -59,9 +59,9 @@ public class CourseDM {
 					
 					// print courses
 					// Print the course
-					System.out.println(course_Code + " : " + course_Name + " : " + course_Desc + " : "
+					/*System.out.println(course_Code + " : " + course_Name + " : " + course_Desc + " : "
 					+ course_Hrs + " : " + course_Cap + " : " + isOfferedFall + " : " + isOfferedSpring + " : " + 
-					isOfferedSummer + " : "+ course_Prereq + " : "+ teachers );
+					isOfferedSummer + " : "+ course_Prereq + " : "+ teachers );*/
 					
 					// perform program logic here
 					boolean offeredfall, offeredspring, offeredsummer;

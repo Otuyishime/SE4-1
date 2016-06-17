@@ -68,7 +68,6 @@ public class StudentDM {
 					
 					String   degreeCodeFetched  = file.get(headers[1]);
 					
-					
 					for (int i = 0; i < degreeData.getNumberofDegreeImported(); i ++){
 						if(degreeData.returnTheDegreeGivenThedegreeCode(degreeCodeFetched).getDegreeCode().equals(degreeCodeFetched)){
 							StudentDegree =degreeData.returnTheDegreeGivenThedegreeCode(degreeCodeFetched);

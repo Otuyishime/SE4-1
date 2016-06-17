@@ -59,7 +59,7 @@ public void setDegreeData(ArrayList<Degree> degreeData) {
 
 					
 					// perform program logic here
-		 			System.out.println(DegreeCode + " : " + GradSchoolName + " : " + DegreeName);
+		 			/*System.out.println(DegreeCode + " : " + GradSchoolName + " : " + DegreeName);*/
 					
 					
 					// Construct the  semester object based on the imported data.
