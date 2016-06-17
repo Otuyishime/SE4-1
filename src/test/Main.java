@@ -15,7 +15,7 @@ public class Main {
 		try {
 			CsvReader file;
 			System.out.println(" ---------------------- University -------------------");
-<<<<<<< HEAD
+			
 			// file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataUniversityName.csv");
 			file = new CsvReader("src/Data/TestDataUniversityName.csv");
 			UniversityDM univ = new UniversityDM(file);
@@ -23,10 +23,9 @@ public class Main {
 			
 			System.out.println("...Done printing out imported infomation...");
 			
-=======
+
 			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataUniversityName.csv");
 			univ = new UniversityDM(file);
->>>>>>> 076802ce7d0da8a429195be4060f2680888065ca
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
