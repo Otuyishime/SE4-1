@@ -60,7 +60,7 @@ public class UniversityDM {
 			GradSchoolDM gradSchl = new GradSchoolDM(file);
 			university.setGradSchools(gradSchl.getGradSchools());
 			
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataSemesters.csv");
+			file = new CsvReader("src/Data/TestDataSemesters.csv");
 			SemesterDM sem = new SemesterDM(file);
 			university.setSemesters(sem.getSemesterData());
 			
@@ -68,7 +68,7 @@ public class UniversityDM {
 			FacultyDM faculty = new FacultyDM(file);
 			university.setFaculties(faculty.getFaculties());
 			
-			file = new CsvReader("/Users/olivier.tuyishime/Google Drive/Summer project I/Test Data/TestData/TestDataCourses.csv");
+			file = new CsvReader("src/Data/TestDataCourses.csv");
 			CourseDM courses = new CourseDM(file);
 			courses.loadFaculty(faculty);
 			university.setCourses(courses.getCourses());
