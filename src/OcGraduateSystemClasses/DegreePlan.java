@@ -97,5 +97,10 @@ public class DegreePlan
 		}
 		return null;
 	}
+	
+	public void print(){
+		// Print the course
+		System.out.println(getCode() + " : " + getName() + " : " + getGradSchool());
+	}
 
 }

@@ -52,9 +52,7 @@ public class StudentCourse
 		this.grade = grade;
 	}
 
-	
-	
-	
-
-
+	public void print(){
+		System.out.println(StudentID + " : " + courseCode + " : " + courseName + " : " + semesterName + " : " + grade);
+	}
 }

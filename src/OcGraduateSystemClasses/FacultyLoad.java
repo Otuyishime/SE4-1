@@ -55,4 +55,8 @@ public class FacultyLoad
 			setHours(hours);
 		}
 	}
+	
+	public void printHrs(){
+		System.out.println(hours);
+	}
 }

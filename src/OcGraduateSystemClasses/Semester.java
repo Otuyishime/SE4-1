@@ -53,4 +53,9 @@ public class Semester
 		super();
 		this.name = name;
 	}
+	
+	public void print(){
+		// Print the course
+		System.out.println(name + " : " + startDate + " : " + endDate);
+	}
 }

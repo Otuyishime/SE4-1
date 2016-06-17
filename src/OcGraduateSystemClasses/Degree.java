@@ -44,7 +44,10 @@ public class Degree {
 	
 	}
 	
-	
+	public void print(){
+		System.out.print(DegreeCode + " : " + GradSchool + " : " + DegreeName + " : " + Forecast);
+		System.out.println();
+	}
 	
 	
 	

@@ -47,5 +47,9 @@ public class GradSchool
 			throw new UnsupportedOperationException();
 		}
 	}
+	
+	public void print(){
+		System.out.println(name + " : " + abbreviation);
+	}
 
 }

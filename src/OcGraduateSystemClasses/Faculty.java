@@ -104,6 +104,7 @@ public class Faculty
 			setGradSchool(gradschool);
 			setDegree(degree);
 			setTitle(title);
+			setTeachingDays(teachdays);
 			setFacultyLoads(arrayList);
 		}
 		else{
@@ -169,5 +170,11 @@ public class Faculty
 			return getFacultyLoads().get(2).getHours();
 		}
 		return 0;
+	}
+	
+	public void print(){
+		// Print the course
+		System.out.println(firstName + " : " + lastName + " : " + gradSchool + " : " + degree + " : " + title + " : " + 
+		teachingDays + " : " + getFallLoad() + " : " + getSpringLoad() + " : " + getSummerLoad());
 	}
 }

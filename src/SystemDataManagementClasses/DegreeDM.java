@@ -9,6 +9,14 @@ import OcGraduateSystemClasses.Degree;
 public class DegreeDM {	
  private ArrayList<Degree> degreeData;
 	
+	public ArrayList<Degree> getDegreeData() {
+	return degreeData;
+}
+
+public void setDegreeData(ArrayList<Degree> degreeData) {
+	this.degreeData = degreeData;
+}
+
 	public DegreeDM(CsvReader fileName){
 		degreeData =  new ArrayList<Degree>();	
 		readFile(fileName);

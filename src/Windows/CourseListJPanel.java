@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.Font;
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 
 public class CourseListJPanel extends JPanel {
 	private JButton btn_coursesListToMain;
+	
+	DefaultListModel listModel;
+	JList list_courses;
 
 	DefaultListModel listModel;
 	//JList list;
@@ -104,6 +108,8 @@ public class CourseListJPanel extends JPanel {
 		});
 		btn_coursesListToMain.setBounds(500, 200, 100, 30);
 		add(btn_coursesListToMain);
-
+		
+		// add the list model
+		
 	}
 }

@@ -148,4 +148,44 @@ public class University
 			System.out.println("university was not created!");
 		}
 	}
+	
+	public void print(){
+		// Print the course
+		System.out.println(name + " : " + abbreviation);
+	}
+	
+	public void printData(){
+		for ( int i = 0; i < gradSchools.size(); i++){
+			gradSchools.get(i).print();
+		}
+		
+		System.out.println();
+		
+		for ( int i = 0; i < semesters.size(); i++){
+			semesters.get(i).print();
+		}
+		
+		System.out.println();
+		
+		for ( int i = 0; i < courses.size(); i++){
+			courses.get(i).print();
+		}
+		
+		System.out.println();
+		for ( int i = 0; i < degrees.size(); i++){
+			degrees.get(i).print();
+		}
+		
+		System.out.println();
+		
+		for ( int i = 0; i < faculties.size(); i++){
+			faculties.get(i).print();
+		}
+		
+		System.out.println();
+		
+		for ( int i = 0; i < degreerequirements.size(); i++){
+			degreerequirements.get(i).print();
+		}
+	}
 }

@@ -37,7 +37,8 @@ public class Student
 		this.GraduationsemesterName = semesterName;
 	}
 	 
-	
-	
-
+	public void print(){
+		// Print the course
+		System.out.println(studentId + " : " + degreeCode);
+	}
 }

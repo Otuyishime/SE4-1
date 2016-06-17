@@ -82,8 +82,8 @@ public class UniversityDM {
 			
 			System.out.println(" ---------------------- Degrees --------------------");
 			file = new CsvReader("src/Data/TestDataDegrees.csv");
-			DegreePlanDM degrees = new DegreePlanDM(file);
-			university.setDegreeplans(degrees.getDegreePlans());
+			DegreeDM degrees = new DegreeDM(file);
+			university.setDegrees(degrees.getDegreeData());
 			System.out.println();
 			
 			System.out.println(" ---------------------- Degree Requirements--------------------");

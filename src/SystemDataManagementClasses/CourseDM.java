@@ -57,6 +57,7 @@ public class CourseDM {
 					String course_Prereq = file.get(headers[8]);
 					String teachers = file.get(headers[9]);
 					
+					// print courses
 					// Print the course
 					System.out.println(course_Code + " : " + course_Name + " : " + course_Desc + " : "
 					+ course_Hrs + " : " + course_Cap + " : " + isOfferedFall + " : " + isOfferedSpring + " : " + 

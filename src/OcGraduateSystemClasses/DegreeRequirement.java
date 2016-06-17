@@ -142,4 +142,11 @@ public class DegreeRequirement
 		// TODO - implement DegreeRequirement.listOfCourseToTake
 		throw new UnsupportedOperationException();
 	}
+	
+	public void print(){
+		// Print the course
+		System.out.print(degreeCode);
+		
+		//degree.print();
+	}
 }

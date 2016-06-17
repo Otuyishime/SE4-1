@@ -190,4 +190,12 @@ public class Course
 		}
 		return false;
 	}
+	
+	// print course
+	public void print(){
+		// Print the course
+		System.out.println(getCourseCode() + " : " + getCourseName() + " : " + getDescription() + " : "
+		+ getCreditHours() + " : " + getCourseCap() + " : " + isOfferedFall() + " : " + isOfferedSpring() + " : " + 
+		isOfferedSummer() + " : "+ prereq + " : "+ getTeachers() );
+	}
 }
