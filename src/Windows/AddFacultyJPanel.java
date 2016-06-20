@@ -10,13 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import OcGraduateSystemClasses.University;
+
 public class AddFacultyJPanel extends JPanel {
 	private JTextField textField;
 
 	/**
 	 * Create the panel.
 	 */
-	public AddFacultyJPanel(JFrame currentFrame) {
+	public AddFacultyJPanel(JFrame currentFrame, University university) {
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -44,7 +46,7 @@ public class AddFacultyJPanel extends JPanel {
 				// Get info from text fields, Create a new faculty and add it to the list of courses 
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new FacultyListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new FacultyListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -61,7 +63,7 @@ public class AddFacultyJPanel extends JPanel {
 				// Nothing to do here - just go back to the course list page
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new FacultyListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new FacultyListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});

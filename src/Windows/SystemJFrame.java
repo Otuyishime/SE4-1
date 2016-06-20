@@ -77,7 +77,7 @@ public class SystemJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Editing University info...");
 				getContentPane().removeAll();
-				getContentPane().add(new UniversityEditPanel(currentFrame));
+				getContentPane().add(new UniversityEditPanel(currentFrame, university));
 				getContentPane().revalidate();
 			}
 		});
@@ -91,7 +91,7 @@ public class SystemJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Editing Faculty info...");
 				getContentPane().removeAll();
-				getContentPane().add(new FacultyListJPanel(currentFrame));
+				getContentPane().add(new FacultyListJPanel(currentFrame, university));
 				getContentPane().revalidate();
 			}
 		});
@@ -103,7 +103,7 @@ public class SystemJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Editing Degree Plan info...");
 				getContentPane().removeAll();
-				getContentPane().add(new DegreePlanListJPanel(currentFrame));
+				getContentPane().add(new DegreePlanListJPanel(currentFrame, university));
 				getContentPane().revalidate();
 			}
 		});
@@ -115,7 +115,7 @@ public class SystemJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Editing Room info...");
 				getContentPane().removeAll();
-				getContentPane().add(new RoomListJPanel(currentFrame));
+				getContentPane().add(new RoomListJPanel(currentFrame, university));
 				getContentPane().revalidate();
 			}
 		});
@@ -146,7 +146,7 @@ public class SystemJFrame extends JFrame {
 		mnReport.add(mntmStudentsCompletedCourses);
 		
 		getContentPane().removeAll();
-		MainJPanel mainJPanel = new MainJPanel();
+		MainJPanel mainJPanel = new MainJPanel(university);
 		getContentPane().add(mainJPanel);
 		getContentPane().revalidate();
 	}

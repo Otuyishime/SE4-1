@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import OcGraduateSystemClasses.University;
+
 public class EditRoomJPanel extends JPanel {
 	
 	private JTextField textField;
@@ -17,7 +19,7 @@ public class EditRoomJPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EditRoomJPanel(JFrame currentFrame) {
+	public EditRoomJPanel(JFrame currentFrame, University university) {
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -45,7 +47,7 @@ public class EditRoomJPanel extends JPanel {
 				// Get new info from text fields, and update a current Room to save updated info
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new RoomListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new RoomListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -62,7 +64,7 @@ public class EditRoomJPanel extends JPanel {
 				// Nothing to do here - just go back to the Room list page
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new RoomListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new RoomListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});

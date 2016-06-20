@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import OcGraduateSystemClasses.University;
+
 public class AddDegreePlanJPanel extends JPanel {
 	
 	private JTextField textField;
@@ -17,7 +19,7 @@ public class AddDegreePlanJPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AddDegreePlanJPanel(JFrame currentFrame) {
+	public AddDegreePlanJPanel(JFrame currentFrame, University university) {
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -45,7 +47,7 @@ public class AddDegreePlanJPanel extends JPanel {
 				// Get info from text fields, Create a new DegreePlan and add it to the list of DegreePlans 
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new DegreePlanListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new DegreePlanListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -62,7 +64,7 @@ public class AddDegreePlanJPanel extends JPanel {
 				// Nothing to do here - just go back to the DegreePlan list page
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new DegreePlanListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new DegreePlanListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});

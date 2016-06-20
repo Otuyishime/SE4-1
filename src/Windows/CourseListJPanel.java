@@ -114,7 +114,7 @@ public class CourseListJPanel extends JPanel {
 		btn_coursesListToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new MainJPanel());
+				currentFrame.getContentPane().add(new MainJPanel(university));
 				currentFrame.revalidate();	
 			}
 		});

@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import OcGraduateSystemClasses.University;
+
 public class DegreePlanListJPanel extends JPanel {
 	
 	private JButton btn_DegreePlansListToMain;
@@ -18,7 +20,7 @@ public class DegreePlanListJPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DegreePlanListJPanel(JFrame currentFrame) {
+	public DegreePlanListJPanel(JFrame currentFrame, University university) {
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -37,7 +39,7 @@ public class DegreePlanListJPanel extends JPanel {
 		btn_createNewDegreePlan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new AddDegreePlanJPanel(currentFrame));
+				currentFrame.getContentPane().add(new AddDegreePlanJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -53,7 +55,7 @@ public class DegreePlanListJPanel extends JPanel {
 				// get the selected DegreePlan and pass its information to the edit page
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new EditDegreePlanJPanel(currentFrame));
+				currentFrame.getContentPane().add(new EditDegreePlanJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -70,7 +72,7 @@ public class DegreePlanListJPanel extends JPanel {
 				
 				// stay on the same page - refresh 
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new DegreePlanListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new DegreePlanListJPanel(currentFrame, university ));
 				currentFrame.revalidate();	
 			}
 		});
@@ -82,7 +84,7 @@ public class DegreePlanListJPanel extends JPanel {
 		btn_DegreePlansListToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new MainJPanel());
+				currentFrame.getContentPane().add(new MainJPanel(university));
 				currentFrame.revalidate();	
 			}
 		});

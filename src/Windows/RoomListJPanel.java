@@ -11,13 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import OcGraduateSystemClasses.University;
+
 public class RoomListJPanel extends JPanel {
 	private JButton btn_RoomsListToMain;
 
 	/**
 	 * Create the panel.
 	 */
-	public RoomListJPanel(JFrame currentFrame) {
+	public RoomListJPanel(JFrame currentFrame, University university) {
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -36,7 +38,7 @@ public class RoomListJPanel extends JPanel {
 		btn_createNewRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new AddRoomJPanel(currentFrame));
+				currentFrame.getContentPane().add(new AddRoomJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -52,7 +54,7 @@ public class RoomListJPanel extends JPanel {
 				// get the selected Room and pass its information to the edit page
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new EditRoomJPanel(currentFrame));
+				currentFrame.getContentPane().add(new EditRoomJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -69,7 +71,7 @@ public class RoomListJPanel extends JPanel {
 				
 				// stay on the same page - refresh 
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new RoomListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new RoomListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -81,7 +83,7 @@ public class RoomListJPanel extends JPanel {
 		btn_RoomsListToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new MainJPanel());
+				currentFrame.getContentPane().add(new MainJPanel(university));
 				currentFrame.revalidate();	
 			}
 		});

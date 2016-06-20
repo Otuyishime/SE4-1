@@ -11,6 +11,8 @@ import java.awt.Rectangle;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import OcGraduateSystemClasses.University;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -20,7 +22,7 @@ public class UniversityEditPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public UniversityEditPanel(JFrame currentFrame) {
+	public UniversityEditPanel(JFrame currentFrame, University university) {
 		setBounds(new Rectangle(0, 0, 700, 600));
 		
 		setLayout(null);
@@ -46,7 +48,7 @@ public class UniversityEditPanel extends JPanel {
 		btn_saveUniversityEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new MainJPanel());
+				currentFrame.getContentPane().add(new MainJPanel(university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -58,7 +60,7 @@ public class UniversityEditPanel extends JPanel {
 		btn_cancelUniversityEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new MainJPanel());
+				currentFrame.getContentPane().add(new MainJPanel(university));
 				currentFrame.revalidate();	
 			}
 		});
