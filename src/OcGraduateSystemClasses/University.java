@@ -64,14 +64,24 @@ public class University
 		this.semesters = semesters;
 	}
 
+	
+	// Courses
 	public ArrayList<Course> getCourses() {
 		return courses;
 	}
-
 	public void setCourses(ArrayList<Course> courses) {
 		this.courses = courses;
 	}
-
+	public void removeCourse(Course course)
+	{
+		this.courses.remove(course);
+	}
+	public void addCourse(Course course)
+	{
+		this.courses.add(course);
+	}
+	
+	
 	public ArrayList<Degree> getDegrees() {
 		return degrees;
 	}

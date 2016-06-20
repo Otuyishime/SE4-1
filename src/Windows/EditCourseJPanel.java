@@ -10,13 +10,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import OcGraduateSystemClasses.University;
+
+//	TODO - need to add error handling 
+//	1. when fields are left unfilled
+//	2. when course hours and cap inputs are not integers
+//	3. when button are clicked with no selected course or faculty
+//	4. when the Add button is clicked with some missing information
+
 public class EditCourseJPanel extends JPanel {
 	private JTextField textField;
 
 	/**
 	 * Create the panel.
 	 */
-	public EditCourseJPanel(JFrame currentFrame) {
+	public EditCourseJPanel(JFrame currentFrame, University university) {
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -44,7 +52,7 @@ public class EditCourseJPanel extends JPanel {
 				// Get new info from text fields, and update a current course to save updated info
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new CourseListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new CourseListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
@@ -61,7 +69,7 @@ public class EditCourseJPanel extends JPanel {
 				// Nothing to do here - just go back to the course list page
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new CourseListJPanel(currentFrame));
+				currentFrame.getContentPane().add(new CourseListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});

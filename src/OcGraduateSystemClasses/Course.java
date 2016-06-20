@@ -198,4 +198,16 @@ public class Course
 		+ getCreditHours() + " : " + getCourseCap() + " : " + isOfferedFall() + " : " + isOfferedSpring() + " : " + 
 		isOfferedSummer() + " : "+ prereq + " : "+ getTeachers() );
 	}
+	
+	
+	/*
+	 * override a toString method
+	 * this will help up be able to display what we want on the JList of this object
+	 * instead of displaying this object's memory address
+	 */
+	
+	@Override
+	public String toString() {
+	    return this.courseName;
+	}
 }

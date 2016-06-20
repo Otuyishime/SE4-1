@@ -16,34 +16,19 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JEditorPane;
+
+import OcGraduateSystemClasses.University;
 
 public class SystemJFrame extends JFrame {
 	
 	private JFrame currentFrame;
 
 	/**
-	 * Launch the application.
-	 *//*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// 
-					
-					SystemJFrame frame = new SystemJFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
 	 * Create the frame.
 	 */
-	public SystemJFrame() {
+	public SystemJFrame(University university) {
 		
 		currentFrame = this;
 		
@@ -81,7 +66,7 @@ public class SystemJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Switching to Courses list...");
 				getContentPane().removeAll();
-				getContentPane().add(new CourseListJPanel(currentFrame));
+				getContentPane().add(new CourseListJPanel(currentFrame, university));
 				getContentPane().revalidate();
 			}
 		});

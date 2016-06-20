@@ -1,62 +1,78 @@
 package Windows;
 
-import java.awt.Rectangle;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
+import java.awt.*;
+import javax.swing.*;
+import com.csvreader.CsvReader;
+import OcGraduateSystemClasses.*;
+import SystemDataManagementClasses.*;
 
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import java.awt.event.*;
+import java.io.FileNotFoundException;
+
+//	TODO - need to add error handling 
+// 	1. when button are clicked with no selected course
+// 	2. enable or disable buttons accordingly 
+// 	3. cancel selection - if needed!
 
 public class CourseListJPanel extends JPanel {
-	private JButton btn_coursesListToMain;
 	
-	DefaultListModel listModel;
+	JScrollPane scrollpane;
+	DefaultListModel <Course> listModel;
 	JList list_courses;
 	
 	/**
 	 * Create the panel.
 	 */
-	public CourseListJPanel(JFrame currentFrame) {
+	public CourseListJPanel(JFrame currentFrame, University university) {
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
 		
+		// title label
 		JLabel lblListOfAvailable = new JLabel("List of Available Courses");
 		lblListOfAvailable.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblListOfAvailable.setBounds(100, 20, 300, 25);
+		lblListOfAvailable.setBounds(50, 20, 300, 25);
 		add(lblListOfAvailable);
 		
-		listModel = new DefaultListModel();
-		ArrayList<String> l = new ArrayList<String>(); 
-		l.add("JP");
-		l.add("Gustave");
-		l.add("Olivier");
-		for (int i = 0; i < 3; i++){
-			listModel.addElement(l.get(i));
-		}
+		// get the list of courses and create a list model for them 
+		// the JList needs to be added to the scroll pane to give it the scrolling ability
+		listModel = new DefaultListModel<>();
+		for (Course course : university.getCourses())
+			listModel.addElement(course);
 		list_courses = new JList(listModel);
+		scrollpane = new JScrollPane(list_courses);
+		scrollpane.setBounds(50, 50, 400, 500);
+		add(scrollpane);
 		
-		list_courses.setBounds(100, 50, 300, 500);
-		add(list_courses);
-		
-		// Add button - it leads to a new course creation course
-		JButton btn_createNewCourse = new JButton("Add");
-		btn_createNewCourse.addActionListener(new ActionListener() {
+		// Add button - it leads to a new course creation page
+		JButton btn_addNewCourse = new JButton("Add");
+		btn_addNewCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new AddCourseJPanel(currentFrame));
+				currentFrame.getContentPane().add(new AddCourseJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
-		btn_createNewCourse.setBounds(500, 50, 100, 30);
-		add(btn_createNewCourse);
+		btn_addNewCourse.setBounds(500, 50, 100, 30);
+		add(btn_addNewCourse);
+		
+		// View button - it lets you view details about a selected course
+		JButton btn_viewCourseDetails = new JButton("View");
+		btn_viewCourseDetails.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// TODO - get the selected course and send it to the view JPanel
+				// the work here is done, we have a selected course, just need to work on the edit page
+				
+				
+				Course selectedCourse = (Course) list_courses.getSelectedValue();
+				currentFrame.getContentPane().removeAll();
+				currentFrame.getContentPane().add(new CourseDetailsJPanel(currentFrame, selectedCourse, university));
+				currentFrame.revalidate();	
+			}
+		});
+		btn_viewCourseDetails.setBounds(500, 100, 100, 30);
+		add(btn_viewCourseDetails);
 		
 		// Edit button - it takes you to a course edit page
 		JButton btn_editCourseInfo = new JButton("Edit");
@@ -65,13 +81,15 @@ public class CourseListJPanel extends JPanel {
 				
 				// TODO
 				// get the selected course and pass its information to the edit page
+				// this is partially done - just need to add more fields on the edit page
+				// it is going to look exactly like the add course page with pre-filled fields
 				
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new EditCourseJPanel(currentFrame));
+				currentFrame.getContentPane().add(new EditCourseJPanel(currentFrame, university));
 				currentFrame.revalidate();	
 			}
 		});
-		btn_editCourseInfo.setBounds(500, 100, 100, 30);
+		btn_editCourseInfo.setBounds(500, 150, 100, 30);
 		add(btn_editCourseInfo);
 		
 		// Delete button - it deletes the selected course from the list
@@ -79,22 +97,20 @@ public class CourseListJPanel extends JPanel {
 		btn_deleteCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				listModel.removeElement(list_courses.getSelectedValue());
-				
-				// TODO
+				// TODO - almost done - just add error handling code
 				// get the selected course and deleted if from the list
 				
-				// stay on the same page - refresh 
-				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new CourseListJPanel(currentFrame));
-				currentFrame.revalidate();	
+				Course selectedCourse = (Course) list_courses.getSelectedValue();
+				university.removeCourse(selectedCourse);
+				listModel.removeElement(selectedCourse);	
 			}
 		});
-		btn_deleteCourse.setBounds(500, 150, 100, 30);
+		
+		btn_deleteCourse.setBounds(500, 200, 100, 30);
 		add(btn_deleteCourse);
 		
 		// Back button from the list of courses back to main
-		btn_coursesListToMain = new JButton("< Back");
+		JButton btn_coursesListToMain = new JButton("< Back");
 		btn_coursesListToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
@@ -102,10 +118,7 @@ public class CourseListJPanel extends JPanel {
 				currentFrame.revalidate();	
 			}
 		});
-		btn_coursesListToMain.setBounds(500, 200, 100, 30);
+		btn_coursesListToMain.setBounds(500, 250, 100, 30);
 		add(btn_coursesListToMain);
-		
-		// add the list model
-		
 	}
 }
