@@ -173,6 +173,28 @@ public class Course
 		}
 	}
 	
+	public Course(String code, String name, String description, 
+			int credithours, int coursecap, 
+			boolean isofferedfall,  boolean isofferedspring,  boolean isofferedsummer, 
+			ArrayList<Course> prereqs, ArrayList<Faculty> teachers) {
+		
+		if ((!code.isEmpty() && !name.isEmpty() && !description.isEmpty() ) && credithours > 0){
+			setCourseCode(code);
+			setCourseName(name);
+			setDescription(description);
+			setCreditHours(credithours);
+			setCourseCap(coursecap);
+			setOfferedFall(isofferedfall);
+			setOfferedSpring(isofferedspring);
+			setOfferedSummer(isofferedsummer);
+			setPrerequisites(prereqs);
+			setFaculties(teachers);
+		}
+		else{
+			throw new UnsupportedOperationException();
+		}
+	}
+	
 	// add a prerequisite
 	public boolean addPreRequisite(Course prereq){
 		if (prereq != null){
@@ -194,9 +216,33 @@ public class Course
 	// print course
 	public void print(){
 		// Print the course
-		System.out.println(getCourseCode() + " : " + getCourseName() + " : " + getDescription() + " : "
+		System.out.println("Printing a course with following info: \n" + getCourseCode() + " : " + getCourseName() + " : " + getDescription() + " : "
 		+ getCreditHours() + " : " + getCourseCap() + " : " + isOfferedFall() + " : " + isOfferedSpring() + " : " + 
-		isOfferedSummer() + " : "+ prereq + " : "+ getTeachers() );
+		isOfferedSummer() + " : "+ print_prereqs() + " : "+ print_faculties() );
+	}
+	
+	public String print_prereqs()
+	{
+		String result = " <";
+		if (this.prerequisites.size() == 0)
+			return "No Prereqs";
+		
+		for (Course course : prerequisites)
+			result += course.getCourseCode() + ", ";
+		
+		return result+= ">";
+	}
+	
+	public String print_faculties()
+	{
+		String result = " <";
+		if (this.faculties.size() == 0)
+			return "No Faculty";
+		
+		for (Faculty faculty : faculties)
+			result += faculty.getLastName() + ", ";
+		
+		return result+= ">";
 	}
 	
 	

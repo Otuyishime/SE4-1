@@ -39,7 +39,7 @@ public class AddCourseJPanel extends JPanel {
 	private JTextArea textArea_courseDescription;
 	
 	private boolean fall, spring, summer;
-	private ArrayList<Course> prereq;
+	private ArrayList<Course> prereqs;
 	private ArrayList<Faculty> faculties;
 	
 	// for courses
@@ -53,12 +53,13 @@ public class AddCourseJPanel extends JPanel {
 	JList list_faculty;
 
 	JScrollPane scrollpane_description;
+	
 	/**
 	 * Create the panel.
 	 */
 	public AddCourseJPanel(JFrame currentFrame, University university) {
 		fall = spring = summer = false;
-		prereq = new ArrayList<Course>();
+		prereqs = new ArrayList<Course>();
 		faculties = new ArrayList<Faculty>();
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
@@ -229,14 +230,14 @@ public class AddCourseJPanel extends JPanel {
 				// TODO - get the selected course and append it to the list of a course's prereq
 				// and update the choosen courses placeholder
 				Course selectedCourse = (Course) list_courses.getSelectedValue();
-				prereq.add(selectedCourse);
+				prereqs.add(selectedCourse);
 				
-				if (prereq.size() == 0)
+				if (prereqs.size() == 0)
 					lbl_choosen_prereq.setText("No prerequisite choosen yet");
 				else
 				{
 					lbl_choosen_prereq.setText("");
-					for (Course course : prereq)
+					for (Course course : prereqs)
 						lbl_choosen_prereq.setText((lbl_choosen_prereq.getText() + course.getCourseCode() + " - "));		
 				}
 			}
@@ -291,6 +292,16 @@ public class AddCourseJPanel extends JPanel {
 				System.out.println("Fall: " + fall);
 				System.out.println("Spring: " + spring);
 				System.out.println("Summer: " + summer);	
+				
+				Course newCourse = new Course(courseCode, courseName, courseDecription, 
+						courseHours, courseCap, 
+						fall,  spring, summer, 
+						prereqs, faculties);
+				
+				System.out.println("New Course Added");
+				newCourse.print();
+				
+				university.addCourse(newCourse);	// add the new course to the list of courses
 				
 				// TODO - create a new course and add it to the list of existing courses
 				// at this point, we have everything we need to cretae a new course and add

@@ -80,6 +80,10 @@ public class University
 	{
 		this.courses.add(course);
 	}
+	public void updateCourse(Course oldCourse, Course newCourse)
+	{
+		
+	}
 	
 	
 	public ArrayList<Degree> getDegrees() {

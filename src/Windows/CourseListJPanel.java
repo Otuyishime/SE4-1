@@ -84,8 +84,9 @@ public class CourseListJPanel extends JPanel {
 				// this is partially done - just need to add more fields on the edit page
 				// it is going to look exactly like the add course page with pre-filled fields
 				
+				Course selectedCourse = (Course) list_courses.getSelectedValue();
 				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(new EditCourseJPanel(currentFrame, university));
+				currentFrame.getContentPane().add(new EditCourseJPanel(currentFrame, university, selectedCourse));
 				currentFrame.revalidate();	
 			}
 		});
