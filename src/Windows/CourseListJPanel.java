@@ -9,17 +9,23 @@ import SystemDataManagementClasses.*;
 import java.awt.Font;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 //	TODO - need to add error handling 
-// 	1. when button are clicked with no selected course
-// 	2. enable or disable buttons accordingly 
-// 	3. cancel selection - if needed!
+// 	1. cancel selection - if needed!
 
 public class CourseListJPanel extends JPanel {
 	
 	JScrollPane scrollpane;
 	DefaultListModel <Course> listModel;
 	JList list_courses;
+	JLabel lblListOfAvailable;
+	JButton btn_addNewCourse;
+	JButton btn_viewCourseDetails;
+	JButton btn_editCourseInfo;
+	JButton btn_deleteCourse;
+	JButton btn_coursesListToMain;
 	
 	/**
 	 * Create the panel.
@@ -29,23 +35,13 @@ public class CourseListJPanel extends JPanel {
 		setLayout(null);
 		
 		// title label
-		JLabel lblListOfAvailable = new JLabel("List of Available Courses");
+		lblListOfAvailable = new JLabel("List of Available Courses");
 		lblListOfAvailable.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		lblListOfAvailable.setBounds(50, 20, 300, 25);
 		add(lblListOfAvailable);
 		
-		// get the list of courses and create a list model for them 
-		// the JList needs to be added to the scroll pane to give it the scrolling ability
-		listModel = new DefaultListModel<>();
-		for (Course course : university.getCourses())
-			listModel.addElement(course);
-		list_courses = new JList(listModel);
-		scrollpane = new JScrollPane(list_courses);
-		scrollpane.setBounds(50, 50, 400, 500);
-		add(scrollpane);
-		
 		// Add button - it leads to a new course creation page
-		JButton btn_addNewCourse = new JButton("Add");
+		btn_addNewCourse = new JButton("Add");
 		btn_addNewCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
@@ -57,14 +53,13 @@ public class CourseListJPanel extends JPanel {
 		add(btn_addNewCourse);
 		
 		// View button - it lets you view details about a selected course
-		JButton btn_viewCourseDetails = new JButton("View");
+		btn_viewCourseDetails = new JButton("View");
+		btn_viewCourseDetails.setEnabled(false);
 		btn_viewCourseDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				// TODO - get the selected course and send it to the view JPanel
-				// the work here is done, we have a selected course, just need to work on the edit page
-				
-				
+				// the work here is done, we have a selected course, just need to work on the edit page	
 				Course selectedCourse = (Course) list_courses.getSelectedValue();
 				currentFrame.getContentPane().removeAll();
 				currentFrame.getContentPane().add(new CourseDetailsJPanel(currentFrame, selectedCourse, university));
@@ -75,7 +70,8 @@ public class CourseListJPanel extends JPanel {
 		add(btn_viewCourseDetails);
 		
 		// Edit button - it takes you to a course edit page
-		JButton btn_editCourseInfo = new JButton("Edit");
+		btn_editCourseInfo = new JButton("Edit");
+		btn_editCourseInfo.setEnabled(false);
 		btn_editCourseInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -94,7 +90,8 @@ public class CourseListJPanel extends JPanel {
 		add(btn_editCourseInfo);
 		
 		// Delete button - it deletes the selected course from the list
-		JButton btn_deleteCourse = new JButton("Delete");
+		btn_deleteCourse = new JButton("Delete");
+		btn_deleteCourse.setEnabled(false);
 		btn_deleteCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -111,7 +108,7 @@ public class CourseListJPanel extends JPanel {
 		add(btn_deleteCourse);
 		
 		// Back button from the list of courses back to main
-		JButton btn_coursesListToMain = new JButton("< Back");
+		btn_coursesListToMain = new JButton("< Back");
 		btn_coursesListToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentFrame.getContentPane().removeAll();
@@ -120,6 +117,36 @@ public class CourseListJPanel extends JPanel {
 			}
 		});
 		btn_coursesListToMain.setBounds(500, 250, 100, 30);
-		add(btn_coursesListToMain);
+		add(btn_coursesListToMain);	
+		
+		// get the list of courses and create a list model for them 
+		// the JList needs to be added to the scroll pane to give it the scrolling ability
+		listModel = new DefaultListModel<>();
+		for (Course course : university.getCourses())
+			listModel.addElement(course);
+		list_courses = new JList(listModel);
+		list_courses.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// allow view, edit and delete only when there is a selected item
+				if (list_courses.getSelectedValue() != null)
+				{
+					btn_viewCourseDetails.setEnabled(true);
+					btn_editCourseInfo.setEnabled(true);
+					btn_deleteCourse.setEnabled(true);
+					
+				}
+				else
+				{
+					btn_viewCourseDetails.setEnabled(false);
+					btn_editCourseInfo.setEnabled(false);
+					btn_deleteCourse.setEnabled(false);
+				}
+			}
+		});
+		
+		scrollpane = new JScrollPane(list_courses);
+		scrollpane.setBounds(50, 50, 400, 500);
+		add(scrollpane);
 	}
 }
