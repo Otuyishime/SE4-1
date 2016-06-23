@@ -24,7 +24,20 @@ public class RoomDM {
 	// Add a default constructor
 	public RoomDM() {
 		super();
-		// TODO Auto-generated constructor stub
+		// TODO - Create a room list in order to maintain the rooms
+		rooms = new ArrayList<Room>();
+		loadRandomRooms();
+	}
+	
+	private void loadRandomRooms(){
+		getRooms().add(new Room(201, "PEC"));
+		getRooms().add(new Room(202, "PEC"));
+		getRooms().add(new Room(203, "PEC"));
+		getRooms().add(new Room(204, "PEC"));
+		getRooms().add(new Room(205, "PEC"));
+		getRooms().add(new Room(206, "PEC"));
+		getRooms().add(new Room(207, "PEC"));
+		getRooms().add(new Room(208, "PEC"));
 	}
 	
 }
