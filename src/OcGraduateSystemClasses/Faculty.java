@@ -172,6 +172,25 @@ public class Faculty
 		return 0;
 	}
 	
+	// Add faculty loads setters
+	public void setFallLoad(int load){
+		if ( load >= 0){
+			getFacultyLoads().get(0).setHours(load);
+		}
+	}
+	
+	public void setSpringLoad(int load){
+		if ( load >= 0){
+			getFacultyLoads().get(1).setHours(load);
+		}
+	}
+
+	public void setSummerLoad(int load){
+		if ( load >= 0){
+			getFacultyLoads().get(2).setHours(load);
+		}
+	}
+	
 	public void print(){
 		// Print the course
 		System.out.println(firstName + " : " + lastName + " : " + gradSchool + " : " + degree + " : " + title + " : " + 
