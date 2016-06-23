@@ -23,13 +23,11 @@ import java.util.ArrayList;
 import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
 
-//	TODO - need to add error handling 
-// 	1. when fields are left unfilled
-// 	2. when course hours and cap inputs are not integers
-// 	3. when button are clicked with no selected course or faculty
-// 	4. when the Add button is clicked with some missing information
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-// NOTE - fields are in order they appear on the panel
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class AddCourseJPanel extends JPanel {
 	private JTextField textField_courseName;
@@ -37,6 +35,9 @@ public class AddCourseJPanel extends JPanel {
 	private JTextField textField_courseHours;
 	private JTextField textField_courseCap;
 	private JTextArea textArea_courseDescription;
+	private JButton btn_addNewCourse;
+	private JButton btnAdd_course;
+	private JButton btnAdd_faculty;
 	
 	private boolean fall, spring, summer;
 	private ArrayList<Course> prereqs;
@@ -54,10 +55,31 @@ public class AddCourseJPanel extends JPanel {
 
 	JScrollPane scrollpane_description;
 	
+	private boolean name_ok;
+	private boolean code_ok;
+	private boolean hours_ok;
+	private boolean cap_ok;
+	private boolean description_ok;
+	private String courseName;
+	private String courseCode;
+	private String courseHours;
+	private String courseCap;
+	private String courseDescription;
+	
 	/**
 	 * Create the panel.
 	 */
 	public AddCourseJPanel(JFrame currentFrame, University university) {
+		name_ok = false;
+		code_ok = false;
+		hours_ok = false;
+		cap_ok = false;
+		description_ok = false;
+		courseName = "";
+		courseCode = "";
+		courseHours = "";
+		courseCap = "";
+		courseDescription = "";
 		fall = spring = summer = false;
 		prereqs = new ArrayList<Course>();
 		faculties = new ArrayList<Faculty>();
@@ -78,6 +100,23 @@ public class AddCourseJPanel extends JPanel {
 		
 		// name text field
 		textField_courseName = new JTextField();
+		textField_courseName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				courseName = textField_courseName.getText();
+				if ((courseName.replace(" ", "").compareTo("") == 0))
+					name_ok = false;
+				else
+					name_ok = true;
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addNewCourse.setEnabled(true);
+				else
+					btn_addNewCourse.setEnabled(false);
+			}
+		});
 		textField_courseName.setToolTipText("");
 		textField_courseName.setBounds(140, 50, 500, 25);
 		add(textField_courseName);
@@ -90,6 +129,23 @@ public class AddCourseJPanel extends JPanel {
 		
 		// course code text field
 		textField_courseCode = new JTextField();
+		textField_courseCode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseCode = textField_courseCode.getText();
+				if ((courseCode.replace(" ", "").compareTo("") == 0))
+					code_ok = false;
+				else
+					code_ok = true;
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addNewCourse.setEnabled(true);
+				else
+					btn_addNewCourse.setEnabled(false);
+				
+			}
+		});
 		textField_courseCode.setBounds(140, 79, 100, 25);
 		add(textField_courseCode);
 		textField_courseCode.setColumns(10);
@@ -101,6 +157,32 @@ public class AddCourseJPanel extends JPanel {
 		
 		// course hours text field
 		textField_courseHours = new JTextField();
+		textField_courseHours.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseHours = textField_courseHours.getText();
+				if ((courseHours.replace(" ", "").compareTo("") == 0))
+					hours_ok = false;
+				else
+				{
+					 try
+					 {
+						 Integer.parseInt(textField_courseHours.getText());
+						 hours_ok = true;
+					 }
+					 catch (NumberFormatException e1)
+					 {
+						 hours_ok = false;
+					 }
+				}
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addNewCourse.setEnabled(true);
+				else
+					btn_addNewCourse.setEnabled(false);
+			}
+		});
 		textField_courseHours.setBounds(340, 80, 50, 25);
 		add(textField_courseHours);
 		textField_courseHours.setColumns(10);
@@ -112,6 +194,32 @@ public class AddCourseJPanel extends JPanel {
 		
 		// course cap text field
 		textField_courseCap = new JTextField();
+		textField_courseCap.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseCap = textField_courseCap.getText();
+				if ((courseCap.replace(" ", "").compareTo("") == 0))
+					cap_ok = false;
+				else
+				{
+					try
+					 {
+						 Integer.parseInt(textField_courseCap.getText());
+						 cap_ok = true;
+					 }
+					 catch (NumberFormatException e1)
+					 {
+						 cap_ok = false;
+					 }
+				}
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addNewCourse.setEnabled(true);
+				else
+					btn_addNewCourse.setEnabled(false);
+			}
+		});
 		textField_courseCap.setBounds(500, 80, 50, 25);
 		add(textField_courseCap);
 		textField_courseCap.setColumns(10);
@@ -125,6 +233,23 @@ public class AddCourseJPanel extends JPanel {
 		// NOTE - the text area is wrapped into a scroll pane to make sure we can scroll once
 		// description gets too long
 		textArea_courseDescription = new JTextArea();
+		textArea_courseDescription.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				courseDescription = textArea_courseDescription.getText();
+				if ((courseDescription.replace(" ", "").compareTo("") == 0))
+					description_ok = false;
+				else
+					description_ok = true;
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addNewCourse.setEnabled(true);
+				else
+					btn_addNewCourse.setEnabled(false);
+			}
+		});
 		textArea_courseDescription.setLineWrap(true);
 		textArea_courseDescription.setRows(2);	
 		textArea_courseDescription.setWrapStyleWord(true);
@@ -188,6 +313,14 @@ public class AddCourseJPanel extends JPanel {
 			listModel_courses.addElement(course);
 
 		list_courses = new JList(listModel_courses);
+		list_courses.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (list_courses.getSelectedValue() != null)
+					btnAdd_course.setEnabled(true);
+				else
+					btnAdd_course.setEnabled(false);
+			}
+		});
 		scrollpane_courses = new JScrollPane(list_courses);
 		scrollpane_courses.setBounds(50, 260, 250, 230);
 		add(scrollpane_courses);
@@ -202,6 +335,14 @@ public class AddCourseJPanel extends JPanel {
 			listModel_faculty.addElement(faculty);
 		
 		list_faculty = new JList(listModel_faculty);
+		list_faculty.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (list_faculty.getSelectedValue() != null)
+					btnAdd_faculty.setEnabled(true);
+				else
+					btnAdd_faculty.setEnabled(false);
+			}
+		});
 		scrollpane_faculty = new JScrollPane(list_faculty);
 		scrollpane_faculty.setBounds(370, 260, 250, 230);
 		add(scrollpane_faculty);
@@ -210,7 +351,7 @@ public class AddCourseJPanel extends JPanel {
 		JLabel lblChoosen = new JLabel("Choosen courses:");
 		lblChoosen.setBounds(50, 500, 120, 25);
 		add(lblChoosen);
-		JLabel lbl_choosen_prereq = new JLabel("No prerequisite choosen yet!");
+		JLabel lbl_choosen_prereq = new JLabel("<None>");
 		lbl_choosen_prereq.setBounds(182, 500, 500, 25);
 		add(lbl_choosen_prereq);
 		
@@ -218,13 +359,14 @@ public class AddCourseJPanel extends JPanel {
 		JLabel lblChoosenFaculty = new JLabel("Choosen faculty:");
 		lblChoosenFaculty.setBounds(50, 525, 120, 25);
 		add(lblChoosenFaculty);
-		JLabel lbl_choosen_faculty = new JLabel("No faculty choosen yet!");
+		JLabel lbl_choosen_faculty = new JLabel("<None>");
 		lbl_choosen_faculty.setBounds(182, 525, 500, 25);
 		add(lbl_choosen_faculty);
 		
 		// this button is for adding a course to a list of prereq
 		// just select the course and hit this button to add it
-		JButton btnAdd_course = new JButton("Add");
+		btnAdd_course = new JButton("Add");
+		btnAdd_course.setEnabled(false);
 		btnAdd_course.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO - get the selected course and append it to the list of a course's prereq
@@ -233,12 +375,12 @@ public class AddCourseJPanel extends JPanel {
 				prereqs.add(selectedCourse);
 				
 				if (prereqs.size() == 0)
-					lbl_choosen_prereq.setText("No prerequisite choosen yet");
+					lbl_choosen_prereq.setText("<None>");
 				else
 				{
 					lbl_choosen_prereq.setText("");
 					for (Course course : prereqs)
-						lbl_choosen_prereq.setText((lbl_choosen_prereq.getText() + course.getCourseCode() + " - "));		
+						lbl_choosen_prereq.setText((lbl_choosen_prereq.getText() + course.getCourseCode() + "  "));		
 				}
 			}
 		});
@@ -247,7 +389,8 @@ public class AddCourseJPanel extends JPanel {
 		
 		// this button is for adding a faculty to a list of faculties
 		// just select the faculty and hit this button to add it
-		JButton btnAdd_faculty = new JButton("Add");
+		btnAdd_faculty = new JButton("Add");
+		btnAdd_faculty.setEnabled(false);
 		btnAdd_faculty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -257,12 +400,12 @@ public class AddCourseJPanel extends JPanel {
 				faculties.add(selectedFaculty);
 				
 				if (faculties.size() == 0)
-					lbl_choosen_faculty.setText("No faculty choosen yet");
+					lbl_choosen_faculty.setText("<None>");
 				else
 				{
 					lbl_choosen_faculty.setText("");
 					for (Faculty faculty : faculties)
-						lbl_choosen_faculty.setText((lbl_choosen_faculty.getText() + faculty.getLastName() + " - "));		
+						lbl_choosen_faculty.setText((lbl_choosen_faculty.getText() + faculty.getLastName() + "  "));		
 				}
 			}
 		});
@@ -271,7 +414,8 @@ public class AddCourseJPanel extends JPanel {
 		
 		// Add button - it adds a new course from the creation page
 		boolean completed = false; //this checks if the form is completed - TODO 
-		JButton btn_addNewCourse = new JButton("Add");
+		btn_addNewCourse = new JButton("Add");
+		btn_addNewCourse.setEnabled(false);
 		btn_addNewCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -302,14 +446,7 @@ public class AddCourseJPanel extends JPanel {
 				newCourse.print();
 				
 				university.addCourse(newCourse);	// add the new course to the list of courses
-				
-				// TODO - create a new course and add it to the list of existing courses
-				// at this point, we have everything we need to cretae a new course and add
-				// it to an existing list of courses - just need to talk to Olivier about the way
-				// he implemented the course constructor. I have a list of prereq and a lit of faculty
-				// who can teach the course, but it looks like the course constructor expects a 
-				// a string of prereq??? and a list of teachers as strings nor faculty!!!!!
-				
+
 				// TODO - this is done only when the form is completely filled out.
 				currentFrame.getContentPane().removeAll();
 				currentFrame.getContentPane().add(new CourseListJPanel(currentFrame, university));

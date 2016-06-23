@@ -21,11 +21,10 @@ import OcGraduateSystemClasses.Course;
 import OcGraduateSystemClasses.Faculty;
 import OcGraduateSystemClasses.University;
 
-//	TODO - need to add error handling 
-//	1. when fields are left unfilled
-//	2. when course hours and cap inputs are not integers
-//	3. when button are clicked with no selected course or faculty
-//	4. when the Add button is clicked with some missing information
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class EditCourseJPanel extends JPanel {
 	
@@ -37,10 +36,14 @@ public class EditCourseJPanel extends JPanel {
 	private JCheckBox chckbxFall;
 	private JCheckBox chckbxSpring;
 	private JCheckBox chckbxSummer;
+	private JButton btnAdd_course;
+	private JButton btnAdd_faculty;
 	
 	private boolean fall, spring, summer;
 	private ArrayList<Course> prereqs;
 	private ArrayList<Faculty> faculties;
+	
+	private JButton btn_addUpdateCourse;
 	
 	// for courses
 	JScrollPane scrollpane_courses;
@@ -54,6 +57,17 @@ public class EditCourseJPanel extends JPanel {
 
 	JScrollPane scrollpane_description;
 	
+	private boolean name_ok;
+	private boolean code_ok;
+	private boolean hours_ok;
+	private boolean cap_ok;
+	private boolean description_ok;
+	private String courseName;
+	private String courseCode;
+	private String courseHours;
+	private String courseCap;
+	private String courseDescription;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -61,6 +75,17 @@ public class EditCourseJPanel extends JPanel {
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
+		
+		name_ok = true;
+		code_ok = true;
+		hours_ok = true;
+		cap_ok = true;
+		description_ok = true;
+		courseName = currentCourse.getCourseName();
+		courseCode = currentCourse.getCourseCode();
+		courseHours = Integer.toString(currentCourse.getCreditHours()); 
+		courseCap = Integer.toString(currentCourse.getCourseCap());
+		courseDescription = currentCourse.getDescription();
 		
 		prereqs = new ArrayList<Course>();
 		faculties = new ArrayList<Faculty>();
@@ -78,6 +103,22 @@ public class EditCourseJPanel extends JPanel {
 		
 		// name text field
 		textField_courseName = new JTextField(currentCourse.getCourseName());
+		textField_courseName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseName = textField_courseName.getText();
+				if ((courseName.replace(" ", "").compareTo("") == 0))
+					name_ok = false;
+				else
+					name_ok = true;
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addUpdateCourse.setEnabled(true);
+				else
+					btn_addUpdateCourse.setEnabled(false);
+			}
+		});
 		textField_courseName.setToolTipText("");
 		textField_courseName.setBounds(140, 50, 500, 25);
 		add(textField_courseName);
@@ -90,6 +131,22 @@ public class EditCourseJPanel extends JPanel {
 		
 		// course code text field
 		textField_courseCode = new JTextField(currentCourse.getCourseCode());
+		textField_courseCode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseCode = textField_courseCode.getText();
+				if ((courseCode.replace(" ", "").compareTo("") == 0))
+					code_ok = false;
+				else
+					code_ok = true;
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addUpdateCourse.setEnabled(true);
+				else
+					btn_addUpdateCourse.setEnabled(false);
+			}
+		});
 		textField_courseCode.setBounds(140, 79, 100, 25);
 		add(textField_courseCode);
 		textField_courseCode.setColumns(10);
@@ -102,6 +159,31 @@ public class EditCourseJPanel extends JPanel {
 		
 		// course hours text field
 		textField_courseHours = new JTextField(Integer.toString(currentCourse.getCreditHours()));
+		textField_courseHours.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseHours = textField_courseHours.getText();
+				if ((courseHours.replace(" ", "").compareTo("") == 0))
+					hours_ok = false;
+				else
+				{
+					 try
+					 {
+						 Integer.parseInt(textField_courseHours.getText());
+						 hours_ok = true;
+					 }
+					 catch (NumberFormatException e1)
+					 {
+						 hours_ok = false;
+					 }
+				}
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addUpdateCourse.setEnabled(true);
+				else
+					btn_addUpdateCourse.setEnabled(false);
+			}
+		});
 		textField_courseHours.setBounds(340, 80, 50, 25);
 		add(textField_courseHours);
 		textField_courseHours.setColumns(10);
@@ -113,6 +195,32 @@ public class EditCourseJPanel extends JPanel {
 		
 		// course cap text field
 		textField_courseCap = new JTextField(Integer.toString(currentCourse.getCourseCap()));
+		textField_courseCap.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseCap = textField_courseCap.getText();
+				if ((courseCap.replace(" ", "").compareTo("") == 0))
+					cap_ok = false;
+				else
+				{
+					try
+					 {
+						 Integer.parseInt(textField_courseCap.getText());
+						 cap_ok = true;
+					 }
+					 catch (NumberFormatException e1)
+					 {
+						 cap_ok = false;
+					 }
+				}
+				
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addUpdateCourse.setEnabled(true);
+				else
+					btn_addUpdateCourse.setEnabled(false);
+			}
+		});
 		textField_courseCap.setBounds(500, 80, 50, 25);
 		add(textField_courseCap);
 		textField_courseCap.setColumns(10);
@@ -126,6 +234,22 @@ public class EditCourseJPanel extends JPanel {
 		// NOTE - the text area is wrapped into a scroll pane to make sure we can scroll once
 		// description gets too long
 		textArea_courseDescription = new JTextArea(currentCourse.getDescription());
+		textArea_courseDescription.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				courseDescription = textArea_courseDescription.getText();
+				if ((courseDescription.replace(" ", "").compareTo("") == 0))
+					description_ok = false;
+				else
+					description_ok = true;
+		
+				// enable the add button
+				if (name_ok & code_ok & hours_ok & cap_ok & description_ok)
+					btn_addUpdateCourse.setEnabled(true);
+				else
+					btn_addUpdateCourse.setEnabled(false);
+			}
+		});
 		textArea_courseDescription.setLineWrap(true);
 		textArea_courseDescription.setRows(2);	
 		textArea_courseDescription.setWrapStyleWord(true);
@@ -211,6 +335,14 @@ public class EditCourseJPanel extends JPanel {
 			listModel_courses.addElement(course);
 
 		list_courses = new JList(listModel_courses);
+		list_courses.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (list_courses.getSelectedValue() != null)
+					btnAdd_course.setEnabled(true);
+				else
+					btnAdd_course.setEnabled(false);
+			}
+		});
 		scrollpane_courses = new JScrollPane(list_courses);
 		scrollpane_courses.setBounds(50, 260, 250, 230);
 		add(scrollpane_courses);
@@ -229,7 +361,7 @@ public class EditCourseJPanel extends JPanel {
 			for (Course course : currentCourse.getPrerequisites())
 			{
 				prereqs.add(course);
-				lbl_choosen_prereq.setText(lbl_choosen_prereq.getText() + " " + course.getCourseCode());
+				lbl_choosen_prereq.setText(lbl_choosen_prereq.getText() + "  " + course.getCourseCode());
 			}
 		}
 		lbl_choosen_prereq.setBounds(182, 500, 500, 25);
@@ -237,14 +369,23 @@ public class EditCourseJPanel extends JPanel {
 		
 		// this button is for adding a course to a list of prereqs
 		// just select the course and hit this button to add it
-		JButton btnAdd_course = new JButton("Add");
+		btnAdd_course = new JButton("Add");
+		btnAdd_course.setEnabled(false);
 		btnAdd_course.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO - get the selected course and append it to the list of a course's prereq
 				// and update the choosen courses placeholder
 				Course selectedCourse = (Course) list_courses.getSelectedValue();
 				prereqs.add(selectedCourse);
-				lbl_choosen_prereq.setText((lbl_choosen_prereq.getText() + " " + selectedCourse.getCourseCode()));
+				
+				if (prereqs.size() == 0)
+					lbl_choosen_prereq.setText("<None>");
+				else
+				{
+					lbl_choosen_prereq.setText("");
+					for (Course course : prereqs)
+						lbl_choosen_prereq.setText((lbl_choosen_prereq.getText() + course.getCourseCode() + " "));		
+				}
 			}
 		});
 		btnAdd_course.setBounds(305, 260, 50, 30);
@@ -261,6 +402,14 @@ public class EditCourseJPanel extends JPanel {
 			listModel_faculty.addElement(faculty);
 		
 		list_faculty = new JList(listModel_faculty);
+		list_faculty.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (list_faculty.getSelectedValue() != null)
+					btnAdd_faculty.setEnabled(true);
+				else
+					btnAdd_faculty.setEnabled(false);
+			}
+		});
 		scrollpane_faculty = new JScrollPane(list_faculty);
 		scrollpane_faculty.setBounds(370, 260, 250, 230);
 		add(scrollpane_faculty);
@@ -282,7 +431,7 @@ public class EditCourseJPanel extends JPanel {
 			for (Faculty faculty : currentCourse.getFaculties())
 			{
 				faculties.add(faculty);
-				lbl_choosen_faculty.setText(lbl_choosen_faculty.getText() + " " + faculty.getLastName());
+				lbl_choosen_faculty.setText(lbl_choosen_faculty.getText() + "  " + faculty.getLastName());
 			}
 		}
 		lbl_choosen_faculty.setBounds(182, 525, 500, 25);
@@ -290,7 +439,8 @@ public class EditCourseJPanel extends JPanel {
 		
 		// this button is for adding a faculty to a list of faculties
 		// just select the faculty and hit this button to add it
-		JButton btnAdd_faculty = new JButton("Add");
+		btnAdd_faculty = new JButton("Add");
+		btnAdd_faculty.setEnabled(false);
 		btnAdd_faculty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -298,7 +448,15 @@ public class EditCourseJPanel extends JPanel {
 				// and update the choosen faculty placeholder
 				Faculty selectedFaculty = (Faculty) list_faculty.getSelectedValue();
 				faculties.add(selectedFaculty);
-				lbl_choosen_faculty.setText((lbl_choosen_faculty.getText() + " " + selectedFaculty.getLastName()));		
+				
+				if (faculties.size() == 0)
+					lbl_choosen_faculty.setText("<None>");
+				else
+				{
+					lbl_choosen_faculty.setText("");
+					for (Faculty faculty : faculties)
+						lbl_choosen_faculty.setText((lbl_choosen_faculty.getText() + faculty.getLastName() + "  "));		
+				}
 			}
 		});
 		btnAdd_faculty.setBounds(625, 260, 50, 30);
@@ -306,8 +464,8 @@ public class EditCourseJPanel extends JPanel {
 		
 		// Add button - it adds a new course from the creation page
 		boolean completed = false; //this checks if the form is completed - TODO 
-		JButton btn_addNewCourse = new JButton("Update");
-		btn_addNewCourse.addActionListener(new ActionListener() {
+		btn_addUpdateCourse = new JButton("Update");
+		btn_addUpdateCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				// TODO - add error handling
@@ -354,8 +512,8 @@ public class EditCourseJPanel extends JPanel {
 				currentFrame.revalidate();	
 			}
 		});
-		btn_addNewCourse.setBounds(118, 570, 100, 30);
-		add(btn_addNewCourse);
+		btn_addUpdateCourse.setBounds(118, 570, 100, 30);
+		add(btn_addUpdateCourse);
 				
 		
 		// Cancel button - it cancels the action of creating a new course 
