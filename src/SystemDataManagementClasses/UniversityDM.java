@@ -78,9 +78,9 @@ public class UniversityDM {
 			university.setDegrees(degrees.getDegreeData());
 			
 			file = new CsvReader("src/Data/TestDataDegreePlanReq.csv");
-			DegreePlanReqDM degreeReq = new DegreePlanReqDM();
-			degreeReq.readFile(file);
-			university.setDegreerequirements(degreeReq.getDegree_Requirements());
+			DegreePlanReqDM degreeReqs = new DegreePlanReqDM(file);
+			degreeReqs.loadCourses(courses);
+			university.setDegreerequirements(degreeReqs.getDegree_Requirements());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

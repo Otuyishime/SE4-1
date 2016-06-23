@@ -22,7 +22,7 @@ public class Main {
 			universityDM = new UniversityDM(file);
 			System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 			university = universityDM.getUniversity();
-			university.printData();
+			//System.out.println(university.getDegreerequirements().get(0).getCourses().get(0).getCourseName());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

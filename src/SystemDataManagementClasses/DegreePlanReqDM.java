@@ -19,12 +19,15 @@ public class DegreePlanReqDM {
 		this.degree_Requirements = degree_Requirements;
 	}
 
-	public DegreePlanReqDM() {
+	public DegreePlanReqDM(CsvReader file) {
 		super();
-		degree_Requirements = new ArrayList<DegreeRequirement>();
+		if ( file != null){
+			degree_Requirements = new ArrayList<DegreeRequirement>();
+			readFile(file);
+		}	
 	}
 	
-	public void readFile(CsvReader file){
+	private void readFile(CsvReader file){
 		try {
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
@@ -71,5 +74,19 @@ public class DegreePlanReqDM {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean loadCourses(CourseDM courses){
+		if ( courses != null){
+			for ( int i = 0; i < getDegree_Requirements().size(); i++){
+				for ( int j = 0; j < getDegree_Requirements().get(i).getCourseCodes().size(); j++){
+					//System.out.println(courses.getCourseWithCode(getDegree_Requirements().get(i).getCourseCodes().get(j)));
+					getDegree_Requirements().get(i).addCourses(courses.getCourseWithCode(getDegree_Requirements().get(i).getCourseCodes().get(j)));
+				}
+			}
+		}else{
+			throw new UnsupportedOperationException();
+		}
+		return false;
 	}
 }
