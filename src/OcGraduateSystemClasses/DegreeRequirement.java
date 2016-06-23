@@ -57,9 +57,8 @@ public class DegreeRequirement
 		this.courses = courses;
 	}
 	
-	public void addCourses(Course course){
+	public void addCourse(Course course){
 		if (course != null){
-			System.out.println(course);
 			getCourses().add(course);
 		}
 		else{
@@ -125,14 +124,17 @@ public class DegreeRequirement
 		}
 	}
 	
-	public DegreeRequirement(String type, String description, int hours, String degreecode, ArrayList<String> courses) {
+	public DegreeRequirement(String type, String description, int hours, String degreecode, ArrayList<String> coursecodes) {
 		// set the description and the type
-		if (( !type.isEmpty() && !description.isEmpty() && !degreecode.isEmpty() && !courses.isEmpty()) && hours > 0){
+		if (( !type.isEmpty() && !description.isEmpty() && !degreecode.isEmpty() && !coursecodes.isEmpty()) && hours > 0){
 			setDescription(description);
 			setDegreeRequirementsType(type);
 			setHours(hours);
 			setDegreeCode(degreecode);
-			setCourseCodes(courses);
+			setCourseCodes(coursecodes);
+			
+			// create the course list
+			courses = new ArrayList<Course>();
 		}
 		else{
 			System.out.println("Can't initialize the degree requirements");

@@ -81,7 +81,7 @@ public class DegreePlanReqDM {
 			for ( int i = 0; i < getDegree_Requirements().size(); i++){
 				for ( int j = 0; j < getDegree_Requirements().get(i).getCourseCodes().size(); j++){
 					//System.out.println(courses.getCourseWithCode(getDegree_Requirements().get(i).getCourseCodes().get(j)));
-					getDegree_Requirements().get(i).addCourses(courses.getCourseWithCode(getDegree_Requirements().get(i).getCourseCodes().get(j)));
+					getDegree_Requirements().get(i).addCourse(courses.getCourseWithCode(getDegree_Requirements().get(i).getCourseCodes().get(j)));
 				}
 			}
 		}else{
