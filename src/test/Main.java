@@ -23,9 +23,6 @@ public class Main {
 			System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 			university = universityDM.getUniversity();
 			//university.printData();
-			for ( int i = 0; i < university.getStudents().get(100).getElectiveCoursesNeedToTake().size(); i++ ){
-				System.out.println(university.getStudents().get(100).getRequiredCoursesTaken().get(i));
-			}
 			System.out.println(university.getStudents().get(100).getStudentId());
 			
 		} catch (FileNotFoundException e) {
