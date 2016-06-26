@@ -161,6 +161,9 @@ public class Student
 		// Get the number of hours taken by the student
 		int requiredHrsTaken = getRequiredCoursesTaken().size() * 3;
 	
+		if ( this.getDegree() == null){
+			System.out.println("null");
+		}
 		for ( DegreeRequirement degreereqtomeet: this.getDegree().getDegreeRequirements()){
 			
 			// check if the requirement is required and if the student didn't complete his/her required courses
@@ -196,6 +199,29 @@ public class Student
 		}
 		
 		return courseselectiveneedtotake;
+	}
+	
+	private boolean haspassedCourse(Course course){
+		for ( StudentCourse stdCourse : this.getStudentcoursesTaken()){
+			if ( stdCourse.getCourse().getCourseCode().equals(course.getCourseCode())){
+				if ( stdCourse.getGrade().equals("F") || stdCourse.getGrade().equals("I")){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	private ArrayList<Course> getCoursesNeedToRetake(){
+		
+		ArrayList<Course> coursesToRetake = new ArrayList<Course>();
+		for ( StudentCourse stdCourse : this.getStudentcoursesTaken()){
+				if ( stdCourse.getGrade().equals("F") || stdCourse.getGrade().equals("I")){
+					coursesToRetake.add(stdCourse.getCourse());
+				}
+		}
+		
+		return coursesToRetake;
 	}
 	
 	public void print(){

@@ -23,8 +23,10 @@ public class Main {
 			System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 			university = universityDM.getUniversity();
 			//university.printData();
-			university.getStudents().get(2).printReqCoursesToTake();
-			//System.out.println(university.getStudents().get(10).getRequiredCoursesNeedToTake().size());
+			for ( int i = 0; i < university.getStudents().get(100).getElectiveCoursesNeedToTake().size(); i++ ){
+				System.out.println(university.getStudents().get(100).getRequiredCoursesTaken().get(i));
+			}
+			System.out.println(university.getStudents().get(100).getStudentId());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
