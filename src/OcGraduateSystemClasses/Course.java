@@ -216,7 +216,7 @@ public class Course
 	// print course
 	public void print(){
 		// Print the course
-		System.out.println("Printing a course with following info: \n" + getCourseCode() + " : " + getCourseName() + " : " + getDescription() + " : "
+		System.out.println("Printing a course with following info: \n" + getCourseCode() + " : " + getCourseName() + " : "
 		+ getCreditHours() + " : " + getCourseCap() + " : " + isOfferedFall() + " : " + isOfferedSpring() + " : " + 
 		isOfferedSummer() + " : "+ print_prereqs() + " : "+ print_faculties() );
 	}

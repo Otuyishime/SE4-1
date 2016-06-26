@@ -1,5 +1,7 @@
 package OcGraduateSystemClasses;
 
+import java.util.ArrayList;
+
 public class Degree {
 	
 	
@@ -8,15 +10,7 @@ public class Degree {
 	private String DegreeName;
 	private int Forecast;
 	
-	
-	
-	
-	public Degree(String degreeCode, String gradSchool, String degreeName, int forecast) {
-		DegreeCode = degreeCode;
-		GradSchool = gradSchool;
-		DegreeName = degreeName;
-		Forecast = forecast;
-	}
+	private ArrayList<DegreeRequirement> degreeRequirements;
 	
 	public String getDegreeCode() {
 		return DegreeCode;
@@ -42,6 +36,30 @@ public class Degree {
 	public void setForecast(int forecast) {
 		Forecast = forecast;
 	
+	}
+	
+	public ArrayList<DegreeRequirement> getDegreeRequirements() {
+		return degreeRequirements;
+	}
+	
+	public void setDegreeRequirements(ArrayList<DegreeRequirement> degreeReqs) {
+		this.degreeRequirements = degreeReqs;
+	}
+	
+	public void addDegreeRequirements(DegreeRequirement degreereq) {
+		if ( degreereq != null){
+			getDegreeRequirements().add(degreereq);
+		}
+	}
+	
+	public Degree(String degreeCode, String gradSchool, String degreeName, int forecast) {
+		DegreeCode = degreeCode;
+		GradSchool = gradSchool;
+		DegreeName = degreeName;
+		Forecast = forecast;
+		
+		// create degree requirement list
+		degreeRequirements = new ArrayList<DegreeRequirement>();
 	}
 	
 	public void print(){

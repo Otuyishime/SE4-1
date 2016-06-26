@@ -25,6 +25,8 @@ public class University
 	
 	private ArrayList<Student> students;
 	
+	private ArrayList<StudentCourse> studentcourses;
+	
 	private ArrayList<Faculty> faculties;
 	
 	private ArrayList<Room> rooms;
@@ -69,22 +71,20 @@ public class University
 	public ArrayList<Course> getCourses() {
 		return courses;
 	}
+	
 	public void setCourses(ArrayList<Course> courses) {
 		this.courses = courses;
 	}
+	
 	public void removeCourse(Course course)
 	{
 		this.courses.remove(course);
 	}
+	
 	public void addCourse(Course course)
 	{
 		this.courses.add(course);
 	}
-	public void updateCourse(Course oldCourse, Course newCourse)
-	{
-		
-	}
-	
 	
 	public ArrayList<Degree> getDegrees() {
 		return degrees;
@@ -108,6 +108,14 @@ public class University
 
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
+	}
+
+	public ArrayList<StudentCourse> getStudentcourses() {
+		return studentcourses;
+	}
+
+	public void setStudentcourses(ArrayList<StudentCourse> studentcourses) {
+		this.studentcourses = studentcourses;
 	}
 
 	public ArrayList<Faculty> getFaculties() {
@@ -189,13 +197,21 @@ public class University
 		for ( int i = 0; i < degrees.size(); i++){
 			degrees.get(i).print();
 		}
+		System.out.println();
 		
+		for ( int i = 0; i < getStudents().size(); i++){
+			getStudents().get(i).print();
+		}
+		System.out.println();
+		
+		for ( int i = 0; i < getStudentcourses().size(); i++){
+			getStudentcourses().get(i).print();
+		}
 		System.out.println();
 		
 		for ( int i = 0; i < faculties.size(); i++){
 			faculties.get(i).print();
 		}
-		
 		System.out.println();
 		
 		for ( int i = 0; i < degreerequirements.size(); i++){

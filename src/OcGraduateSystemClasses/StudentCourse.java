@@ -7,49 +7,82 @@ import OcGraduateSystemClasses.Student;
  */
 public class StudentCourse
 {
-	private Student StudentID;
-	private Course   courseCode;
-	private Course courseName;
-	private Semester  semesterName;
-	private  String  grade;
-	public Student getStudentID() {
+	private String StudentID;
+	
+	private String  courseCode;
+	private String courseName;
+	private Course  course;
+	
+	private String  semesterName;
+	private Semester semester;
+	
+	private String  grade;
+	
+	
+	// --------- Accessors -----------
+	public String getStudentID() {
 		return StudentID;
 	}
-	public void setStudentID(Student ctudentID) {
+	
+	public void setStudentID(String ctudentID) {
 		this.StudentID = ctudentID;
 	}
-	public Course getCourseCode() {
+	
+	public String getCourseCode() {
 		return courseCode;
 	}
-	public void setCourseCode(Course courseCode) {
+
+	private void setCourseCode(String courseCode) {
 		this.courseCode = courseCode;
 	}
-	public Course getCourseName() {
+	
+	public String getCourseName() {
 		return courseName;
 	}
-	public void setCourseName(Course courseName) {
+	
+	private void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	public Semester getSemesterName() {
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+	
+	public String getSemesterName() {
 		return semesterName;
 	}
-	public void setSemesterName(Semester semesterName) {
+	
+	private void setSemesterName(String semesterName) {
 		this.semesterName = semesterName;
 	}
+	
+	public Semester getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Semester semester) {
+		this.semester = semester;
+	}
+
 	public String getGrade() {
 		return grade;
 	}
+	
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 	
-	
-	public StudentCourse(Student ctudentID, Course courseCode, Course courseName, Semester semesterName, String grade) {
-		this.StudentID = ctudentID;
-		this.courseCode = courseCode;
-		this.courseName = courseName;
-		this.semesterName = semesterName;
-		this.grade = grade;
+	// --------- Methods -----------
+	public StudentCourse(String studentID, String courseCode, String courseName, String semesterName, String grade) {
+		this.setStudentID(studentID);
+		this.setCourseCode(courseCode);
+		this.setCourseName(courseName);
+		this.setSemesterName(semesterName);
+		this.setGrade(grade);
 	}
 
 	public void print(){
