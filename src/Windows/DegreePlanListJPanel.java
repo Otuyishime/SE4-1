@@ -5,17 +5,28 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
+// import com.sun.javafx.geom.transform.BaseTransform.Degree;
+
+import OcGraduateSystemClasses.Course;
 import OcGraduateSystemClasses.University;
+import OcGraduateSystemClasses.Degree;
 
 public class DegreePlanListJPanel extends JPanel {
 	
 	private JButton btn_DegreePlansListToMain;
+	
+	JScrollPane scrollpane;
+	// DefaultListModel <Course> listModel;
+	DefaultListModel <Degree> listModel;
+	JList list_degreePlans;
 
 	/**
 	 * Create the panel.
@@ -30,9 +41,19 @@ public class DegreePlanListJPanel extends JPanel {
 		lblListOfAvailable.setBounds(100, 20, 300, 25);
 		add(lblListOfAvailable);
 		
-		JList list_DegreePlans = new JList();
-		list_DegreePlans.setBounds(100, 50, 300, 500);
-		add(list_DegreePlans);
+	
+		// get the list of courses and create a list model for them 
+		// the JList needs to be added to the scroll pane to give it the scrolling ability
+		listModel = new DefaultListModel<>();
+		for (Degree degree : university.getDegrees())
+			listModel.addElement(degree);
+		
+		System.out.print("*********" + university.getDegrees().size());
+		
+		list_degreePlans = new JList(listModel);		
+		scrollpane = new JScrollPane(list_degreePlans);
+		scrollpane.setBounds(50, 50, 400, 500);
+		add(scrollpane);
 		
 		// Add button - it leads to a new DegreePlan creation DegreePlan
 		JButton btn_createNewDegreePlan = new JButton("Add");
@@ -90,8 +111,5 @@ public class DegreePlanListJPanel extends JPanel {
 		});
 		btn_DegreePlansListToMain.setBounds(500, 200, 100, 30);
 		add(btn_DegreePlansListToMain);
-
-
 	}
-
 }

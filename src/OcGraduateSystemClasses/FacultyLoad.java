@@ -44,7 +44,6 @@ public class FacultyLoad
 	}
 
 	/**
-	 * 
 	 * @param faculty
 	 * @param semester
 	 */

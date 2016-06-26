@@ -80,9 +80,21 @@ public class University
 	{
 		this.courses.add(course);
 	}
-	public void updateCourse(Course oldCourse, Course newCourse)
+	
+	// Faculty
+	public ArrayList<Faculty> getFaculties() {
+		return faculties;
+	}
+	public void setFaculties(ArrayList<Faculty> faculties) {
+		this.faculties = faculties;
+	}
+	public void removeFaculty(Faculty faculty)
 	{
-		
+		this.faculties.remove(faculty);
+	}
+	public void addFaculty(Faculty faculty)
+	{
+		this.faculties.add(faculty);
 	}
 	
 	
@@ -108,14 +120,6 @@ public class University
 
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
-	}
-
-	public ArrayList<Faculty> getFaculties() {
-		return faculties;
-	}
-
-	public void setFaculties(ArrayList<Faculty> faculties) {
-		this.faculties = faculties;
 	}
 
 	public ArrayList<Room> getRooms() {

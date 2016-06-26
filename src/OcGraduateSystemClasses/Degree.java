@@ -1,5 +1,7 @@
 package OcGraduateSystemClasses;
 
+import java.util.ArrayList;
+
 public class Degree {
 	
 	
@@ -8,9 +10,20 @@ public class Degree {
 	private String DegreeName;
 	private int Forecast;
 	
+	private ArrayList<DegreeRequirement> degreePlanReqs;
 	
+	public ArrayList<DegreeRequirement> getDegreePlanReqs() {
+		return degreePlanReqs;
+	}
+
+	public void setDegreePlanReqs(ArrayList<DegreeRequirement> degreePlanReqs) {
+		this.degreePlanReqs = degreePlanReqs;
+	}
 	
-	
+	public void AddDegreePlanReqs(DegreeRequirement degreePlanReq) {
+		getDegreePlanReqs().add(degreePlanReq);
+	}
+
 	public Degree(String degreeCode, String gradSchool, String degreeName, int forecast) {
 		DegreeCode = degreeCode;
 		GradSchool = gradSchool;
@@ -49,7 +62,16 @@ public class Degree {
 		System.out.println();
 	}
 	
+	/*
+	 * override a toString method
+	 * this will help up be able to display what we want on the JList of this object
+	 * instead of displaying this object's memory address
+	 */
 	
+	@Override
+	public String toString() {
+	    return this.getDegreeName();
+	}
 	
 	
 }

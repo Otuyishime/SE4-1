@@ -261,7 +261,7 @@ public class AddCourseJPanel extends JPanel {
 		// following are the checkboxes to determine if the course is offered in
 		// fall, or spring, or summer 
 		JLabel lblOffered = new JLabel("Offered:");
-		lblOffered.setBounds(50, 190, 60, 25);
+		lblOffered.setBounds(50, 180, 60, 25);
 		add(lblOffered);
 		
 		// check box for fall
@@ -274,7 +274,7 @@ public class AddCourseJPanel extends JPanel {
 					fall = false;
 			}
 		});
-		chckbxFall.setBounds(140, 190, 100, 25);
+		chckbxFall.setBounds(140, 180, 100, 25);
 		add(chckbxFall);
 		
 		// checkbox for spring
@@ -287,7 +287,7 @@ public class AddCourseJPanel extends JPanel {
 					spring = false;
 			}
 		});
-		chckbxSpring.setBounds(250, 190, 100, 25);
+		chckbxSpring.setBounds(250, 180, 100, 25);
 		add(chckbxSpring);
 		
 		// checkbox for summer
@@ -300,12 +300,12 @@ public class AddCourseJPanel extends JPanel {
 					summer = false;
 			}
 		});
-		chckbxSummer.setBounds(360, 190, 100, 25);
+		chckbxSummer.setBounds(360, 180, 100, 25);
 		add(chckbxSummer);
 		
 		// provide a list of courses to choose from
 		JLabel lblCoursesToChoose = new JLabel("Courses to choose from:");
-		lblCoursesToChoose.setBounds(50, 230, 180, 25);
+		lblCoursesToChoose.setBounds(50, 260, 180, 25);
 		add(lblCoursesToChoose);
 		
 		listModel_courses = new DefaultListModel<>();
@@ -322,12 +322,12 @@ public class AddCourseJPanel extends JPanel {
 			}
 		});
 		scrollpane_courses = new JScrollPane(list_courses);
-		scrollpane_courses.setBounds(50, 260, 250, 230);
+		scrollpane_courses.setBounds(50, 285, 250, 250);
 		add(scrollpane_courses);
 		
 		// provide a list of Faculty to choose from
 		JLabel lblFacultyToChoose = new JLabel("Faculty to choose from:");
-		lblFacultyToChoose.setBounds(370, 230, 180, 25);
+		lblFacultyToChoose.setBounds(370, 260, 180, 25);
 		add(lblFacultyToChoose);
 		
 		listModel_faculty = new DefaultListModel<>();
@@ -344,23 +344,23 @@ public class AddCourseJPanel extends JPanel {
 			}
 		});
 		scrollpane_faculty = new JScrollPane(list_faculty);
-		scrollpane_faculty.setBounds(370, 260, 250, 230);
+		scrollpane_faculty.setBounds(370, 285, 250, 250);
 		add(scrollpane_faculty);
 		
 		// labels for choosen courses
-		JLabel lblChoosen = new JLabel("Choosen courses:");
-		lblChoosen.setBounds(50, 500, 120, 25);
+		JLabel lblChoosen = new JLabel("Prereqs:");
+		lblChoosen.setBounds(50, 210, 120, 25);
 		add(lblChoosen);
 		JLabel lbl_choosen_prereq = new JLabel("<None>");
-		lbl_choosen_prereq.setBounds(182, 500, 500, 25);
+		lbl_choosen_prereq.setBounds(50, 230, 300, 25);
 		add(lbl_choosen_prereq);
 		
 		// labels for selected faculty
-		JLabel lblChoosenFaculty = new JLabel("Choosen faculty:");
-		lblChoosenFaculty.setBounds(50, 525, 120, 25);
+		JLabel lblChoosenFaculty = new JLabel("Faculty:");
+		lblChoosenFaculty.setBounds(370, 210, 120, 25);
 		add(lblChoosenFaculty);
 		JLabel lbl_choosen_faculty = new JLabel("<None>");
-		lbl_choosen_faculty.setBounds(182, 525, 500, 25);
+		lbl_choosen_faculty.setBounds(370, 230, 300, 25);
 		add(lbl_choosen_faculty);
 		
 		// this button is for adding a course to a list of prereq
@@ -384,7 +384,7 @@ public class AddCourseJPanel extends JPanel {
 				}
 			}
 		});
-		btnAdd_course.setBounds(305, 260, 50, 30);
+		btnAdd_course.setBounds(305, 280, 50, 30);
 		add(btnAdd_course);
 		
 		// this button is for adding a faculty to a list of faculties
@@ -409,7 +409,7 @@ public class AddCourseJPanel extends JPanel {
 				}
 			}
 		});
-		btnAdd_faculty.setBounds(625, 260, 50, 30);
+		btnAdd_faculty.setBounds(625, 280, 50, 30);
 		add(btnAdd_faculty);
 		
 		// Add button - it adds a new course from the creation page
@@ -453,7 +453,7 @@ public class AddCourseJPanel extends JPanel {
 				currentFrame.revalidate();	
 			}
 		});
-		btn_addNewCourse.setBounds(118, 570, 100, 30);
+		btn_addNewCourse.setBounds(230, 555, 100, 30);
 		add(btn_addNewCourse);
 		
 		// Cancel button - it cancels the action of creating a new course 
@@ -470,7 +470,7 @@ public class AddCourseJPanel extends JPanel {
 				currentFrame.revalidate();	
 			}
 		});
-		btn_cancelNewCourse.setBounds(310, 570, 100, 30);
+		btn_cancelNewCourse.setBounds(340, 555, 100, 30);
 		add(btn_cancelNewCourse);
 	}
 }

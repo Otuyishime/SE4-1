@@ -72,4 +72,18 @@ public class DegreePlanReqDM {
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<DegreeRequirement> getDegreeRequirementByDegreeName(String degree_name){
+		// add list to return
+		ArrayList<DegreeRequirement> degreeReqs = new ArrayList<DegreeRequirement>();
+		
+		if (!degree_name.isEmpty() && !getDegree_Requirements().isEmpty()){
+			for (int i = 0; i < getDegree_Requirements().size(); i++ ){
+				if ( getDegree_Requirements().get(i).getDegreeCode().equals(degree_name)){
+					degreeReqs.add(getDegree_Requirements().get(i));
+				}
+			}
+		}
+		return degreeReqs;
+	}
 }
