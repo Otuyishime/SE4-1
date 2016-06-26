@@ -7,8 +7,6 @@ import java.util.*;
  */
 public class DegreeRequirement
 {
-
-	private DegreePlan degree;	// Don't think it is needed
 	
 	private String degreeCode;
 	
@@ -59,9 +57,9 @@ public class DegreeRequirement
 		this.courses = courses;
 	}
 	
-	public void addCourses(Course course){
+	public void addCourse(Course course){
 		if (course != null){
-			this.courses.add(course);
+			getCourses().add(course);
 		}
 		else{
 			System.out.println("The course was not added to the degree requirement courses");
@@ -101,6 +99,9 @@ public class DegreeRequirement
 		if ( !type.isEmpty() && !description.isEmpty()){
 			setDescription(description);
 			setDegreeRequirementsType(type);
+			
+			// create the course list
+			courses = new ArrayList<Course>();
 		}
 		else{
 			System.out.println("Can't initialize the degree requirements");
@@ -114,34 +115,33 @@ public class DegreeRequirement
 			setDegreeRequirementsType(type);
 			setHours(hours);
 			setDegreeCode(degreecode);
+			
+			// create the course list
+			courses = new ArrayList<Course>();
 		}
 		else{
 			System.out.println("Can't initialize the degree requirements");
 		}
 	}
 	
-	public DegreeRequirement(String type, String description, int hours, String degreecode, ArrayList<String> courses) {
+	public DegreeRequirement(String type, String description, int hours, String degreecode, ArrayList<String> coursecodes) {
 		// set the description and the type
-		if (( !type.isEmpty() && !description.isEmpty() && !degreecode.isEmpty() && !courses.isEmpty()) && hours > 0){
+		if (( !type.isEmpty() && !description.isEmpty() && !degreecode.isEmpty() && !coursecodes.isEmpty()) && hours > 0){
 			setDescription(description);
 			setDegreeRequirementsType(type);
 			setHours(hours);
 			setDegreeCode(degreecode);
-			setCourseCodes(courses);
+			setCourseCodes(coursecodes);
+			
+			// create the course list
+			courses = new ArrayList<Course>();
 		}
 		else{
 			System.out.println("Can't initialize the degree requirements");
 		}
 	}
 	
-	/**
-	 * returns all required courses
-	 * @param student
-	 */
-	public void listOfCourseToTake(Student student) {
-		// TODO - implement DegreeRequirement.listOfCourseToTake
-		throw new UnsupportedOperationException();
-	}
+	
 	
 	public void print(){
 		// Print the course

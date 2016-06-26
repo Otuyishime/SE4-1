@@ -22,7 +22,9 @@ public class Main {
 			universityDM = new UniversityDM(file);
 			System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 			university = universityDM.getUniversity();
-			university.printData();
+			//university.printData();
+			university.getStudents().get(2).printReqCoursesToTake();
+			//System.out.println(university.getStudents().get(10).getRequiredCoursesNeedToTake().size());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -43,8 +45,8 @@ public class Main {
 					// create university
 					loadUniversitymain();
 					
-					SystemJFrame frame = new SystemJFrame(university);
-					frame.setVisible(true);
+					//SystemJFrame frame = new SystemJFrame(university);
+					//frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

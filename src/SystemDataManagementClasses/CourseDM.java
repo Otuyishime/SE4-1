@@ -120,8 +120,8 @@ public class CourseDM {
 		return false;
 	}
 	// the size of the imported csv
-	 public int getNumberofCourseDataImported(){
+	public int getNumberofCourseDataImported(){
 			 
-			 return coursesData.size();
-		 }
+		return coursesData.size();
+	}
 }

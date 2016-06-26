@@ -21,8 +21,6 @@ public class DegreePlan
 	 * name of the degree plan
 	 */
 	private String name;
-	
-	private String track;	// Do not think we need this since we have the gradschool variable
 
 	
 	public ArrayList<DegreeRequirement> getDegreeReqs() {
@@ -80,22 +78,6 @@ public class DegreePlan
 	public Course numberCoursesNeeded() {
 		// TODO - implement DegreePlan.numberCoursesNeeded
 		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * All courses the student has to take to complete the degree
-	 * @param student
-	 */
-	public ArrayList<DegreeRequirement> ListCoursesToTake(Student student) {
-		if (student != null){
-			// return the list of degree rquirements if 
-			if (student.getDegreeCode().getDegreeCode() == getCode() && !getDegreeReqs().isEmpty()){
-				return getDegreeReqs();
-			}
-		}else{
-			throw new UnsupportedOperationException();
-		}
-		return null;
 	}
 	
 	public void print(){
