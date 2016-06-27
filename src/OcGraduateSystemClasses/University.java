@@ -25,13 +25,14 @@ public class University
 	
 	private ArrayList<Student> students;
 	
-	private ArrayList<StudentCourse> studentcourses;
+	private static ArrayList<StudentCourse> studentcourses;
+	
 	
 	private ArrayList<Faculty> faculties;
 	
 	private ArrayList<Room> rooms;
 	
-	private ArrayList<DegreeRequirement> degreerequirements;
+	private static ArrayList<DegreeRequirement> degreerequirements;
 	
 	// -------------- Accessors ---------------
 	public String getName() {
@@ -85,7 +86,6 @@ public class University
 	{
 		this.courses.add(course);
 	}
-<<<<<<< HEAD
 	
 	// Faculty
 	public ArrayList<Faculty> getFaculties() {
@@ -102,9 +102,6 @@ public class University
 	{
 		this.faculties.add(faculty);
 	}
-	
-=======
->>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
 	
 	public ArrayList<Degree> getDegrees() {
 		return degrees;
@@ -129,9 +126,7 @@ public class University
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
 	}
-
-<<<<<<< HEAD
-=======
+	
 	public ArrayList<StudentCourse> getStudentcourses() {
 		return studentcourses;
 	}
@@ -139,16 +134,7 @@ public class University
 	public void setStudentcourses(ArrayList<StudentCourse> studentcourses) {
 		this.studentcourses = studentcourses;
 	}
-
-	public ArrayList<Faculty> getFaculties() {
-		return faculties;
-	}
-
-	public void setFaculties(ArrayList<Faculty> faculties) {
-		this.faculties = faculties;
-	}
-
->>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
+	
 	public ArrayList<Room> getRooms() {
 		return rooms;
 	}
@@ -184,6 +170,7 @@ public class University
 	 * @param name The name has to be a non-empty string
 	 * @param abbreviation the abbreviation has to be a non-empty string
 	 */
+
 	public University(String name, String abbreviation) {
 		if (!name.isEmpty() && !abbreviation.isEmpty()){
 			setName(name);
@@ -241,4 +228,235 @@ public class University
 			degreerequirements.get(i).print();
 		}
 	}
+	
+	
+	ArrayList<Section> section;
+
+	
+	public ArrayList<Section> generateSections(Semester term){
+
+		
+		for (Student stud : students){
+			
+			
+			 String degreeCode = stud.getDegreeCode();
+			 switch(degreeCode){
+			 
+			 case "MSCS.SFTW.ENG":
+					ArrayList<Course> requiredCoursesList = stud.getRequiredCoursesNeedToTake();
+					   for (Course course:requiredCoursesList){
+						    
+						   if (course.isAvalaible(term)){
+							   
+							   
+							   
+						   }
+						   
+						   
+						   
+					   }
+			  
+			 
+			 }
+		}
+		
+//		String studentID;
+//		int numberOfStudent = 0;
+//
+//		for (Student stud: students){
+//			studentID= stud.getStudentId();
+//			for(int i=0; i < degreerequirements.size();i++)
+//				if (stud.getDegree().getDegreeCode().equals(degreerequirements.get(i).getDegreeCode())){
+//					String caseOfdegreeplan =(degreerequirements.get(i).getDegreeCode()).toString();
+//
+//					switch(caseOfdegreeplan) {
+//
+//					case "MSCS.SFTW.ENG":
+//						//do {
+//
+//							ArrayList<Course> requiredCoursesList = returnCourseList("Required","MSCS.SFTW.ENG");
+//
+//							for( Course course : requiredCoursesList){
+//
+//								if (isAvailableInThisTerm(term,course)){
+//
+//									Section tempSectionOfRequired = new Section(course.getCourseCode(),course.
+//											getDescription(),course.getFaculties().get(0).getFirstName(),term.getName(),"MSCS.SFTW.ENG");
+//									
+//									if (tempSectionOfRequired !=null){
+//										
+//									
+//								//	section.add(tempSectionOfRequired);  
+//									}
+//								
+//								}
+//
+//							}
+//
+//
+//
+//
+////						}while( !hasPassed(studentID,degreerequirements.get(i).getCourses().
+////								get(i).getCourseCode()));
+//						break;
+//
+//					}
+//
+//				}// end of if statement 
+//			
+//
+//		}// end of student for loop
+
+		return section;
+	}// End of generate schedule method
+
+	static  boolean hasPassed(String id, String course){
+
+		for (StudentCourse studentCourse:studentcourses ){
+			if(studentCourse.getStudentID().equals(id) && studentCourse.getCourseCode().
+					equals(course))
+			{
+
+				return true;
+
+			}
+
+		}
+		return false;
+	}// end of the method
+
+	static boolean hasTakenPrequesite(int id, String course){
+
+
+		return false;	
+	}
+
+
+
+	static ArrayList <Course> returnCourseList(String  type, String degreeCode ){
+
+		ArrayList<Course> courseCodes = null;
+		for (int i = 0; i < degreerequirements.size();i++){
+
+			if (degreerequirements.get(i).getDegreeRequirementsType().equals(type) && degreerequirements.get(i).getDegreeCode().toString().equals(degreeCode)){
+				courseCodes= degreerequirements.get(i).getCourses();
+
+			}
+
+		}
+
+		return courseCodes;		
+
+	}
+
+
+	static boolean isAvailableInThisTerm (Semester semesterName, Course couseCode){
+
+		String semesterSuffix = semesterName.getName().substring(4, 6);
+
+		switch(semesterSuffix){
+
+		case "SP":
+			if(couseCode.isOfferedSpring())
+
+
+			{
+				for(Faculty fac:couseCode.getFaculties() )  { 
+
+					if( fac.getSpringLoad()>0){
+
+
+						return true;
+					}
+				}
+			}
+			break;
+
+		case "FA":  
+
+			if(couseCode.isOfferedFall()){
+
+				for(Faculty fac:couseCode.getFaculties() )  { 
+
+					if( fac.getFallLoad()>0){
+
+
+						return true;
+					}
+				}
+			}
+			break;
+
+
+		case "SU":   
+			if(couseCode.isOfferedSummer()){
+
+
+				for(Faculty fac:couseCode.getFaculties() )  { 
+
+					if( fac.getSummerLoad()>0){
+
+
+						return true;
+					}
+				}
+			}
+			break;
+
+		}
+		return false;
+	}
+
+	public void generateSchedule(ArrayList<Section> section){
+		int count =0;
+
+		for (Section sec: section){
+
+			switch(sec.getCourse().toString()){
+
+			case "CMSC 5623":
+				count++;
+				if (count ==25)
+				{
+					System.out.println(sec.getCourse()+"   |  "+sec.getCoursedescription()+"  | "+sec.getFacultyName()+" |  "+sec.getSemesterName()); 
+
+				}
+				break;
+
+			case "CMSC 5633":
+				count++;
+				if (count ==25)
+				{
+					System.out.println(sec.getCourse()+"   |  "+sec.getCoursedescription()+"  | "+sec.getFacultyName()+" |  "+sec.getSemesterName()); 
+
+				}
+				break;
+			case "CMSC 5733":
+				count++;
+				if (count ==25)
+				{
+					System.out.println(sec.getCourse()+"   |  "+sec.getCoursedescription()+"  | "+sec.getFacultyName()+" |  "+sec.getSemesterName()); 
+
+				}
+				break;
+
+			case "CMSC 5743":
+				count++;
+				if (count ==25)
+				{
+					System.out.println(sec.getCourse()+"   |  "+sec.getCoursedescription()+"  | "+sec.getFacultyName()+" |  "+sec.getSemesterName()); 
+
+				}
+				break;
+			default: break;
+			}
+		}
+
+
+	}
+
+	
+	
+	
+	
 }

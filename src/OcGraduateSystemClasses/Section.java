@@ -6,43 +6,55 @@ package OcGraduateSystemClasses;
 public class Section
 {
 
-	private Course course;
-	private Schedule secion;
-	private Faculty faculty;
-	/**
-	 * represents the section number. This number is used to identify and differentiate sections
-	 */
-	private int sectionNumber;
-	/**
-	 * The room in which the class section will be taught
-	 */
-	private Room room;
-	/**
-	 * season( or period) in which the class section will be offered
-	 */
-	private Semester semester;
-	/**
-	 * students who are attending the section
-	 */
-	private Student students;
-
-	/**
-	 * Default Constructor
-	 * @param number
-	 * @param semester
-	 */
-	public Section(int number, Semester semester) {
-		// TODO - implement Section.Section
-		throw new UnsupportedOperationException();
+	private String courseCode;
+	private String facultyName;
+	private String  SemesterName;
+	private String coursedescription;
+	private String degreetype;
+	public String getCourse() {
+		return courseCode;
 	}
-
-	/**
-	 * adds the faculty who can teach the course
-	 * @param faculty
-	 */
-	public void setCanTeachFaculty(Faculty faculty) {
-		// TODO - implement Section.setCanTeachFaculty
-		throw new UnsupportedOperationException();
+	public void setCourse(String course) {
+		this.courseCode = course;
 	}
-
+	public String getFacultyName() {
+		return facultyName;
+	}
+	public void setFacultyName(String facultyName) {
+		this.facultyName = facultyName;
+	}
+	public String getSemesterName() {
+		return SemesterName;
+	}
+	public void setSemesterName(String semesterName) {
+		SemesterName = semesterName;
+	}
+	public String getCoursedescription() {
+		return coursedescription;
+	}
+	public void setCoursedescription(String coursedescription) {
+		this.coursedescription = coursedescription;
+	}
+	public String getDegreetype() {
+		return degreetype;
+	}
+	public void setDegreetype(String degreetype) {
+		this.degreetype = degreetype;
+	}
+	
+	
+	
+	public Section(String course,String coursedescription, String facultyName, String semesterName,
+			String degreetype) {
+		this.courseCode = course;
+		this.coursedescription = coursedescription;
+		this.facultyName = facultyName;
+		SemesterName = semesterName;
+		this.degreetype = degreetype;
+	}
+	
+	
+	
+	
+	
 }
