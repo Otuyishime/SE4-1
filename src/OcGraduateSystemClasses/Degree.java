@@ -10,30 +10,7 @@ public class Degree {
 	private String DegreeName;
 	private int Forecast;
 	
-<<<<<<< HEAD
-	private ArrayList<DegreeRequirement> degreePlanReqs;
-	
-	public ArrayList<DegreeRequirement> getDegreePlanReqs() {
-		return degreePlanReqs;
-	}
-
-	public void setDegreePlanReqs(ArrayList<DegreeRequirement> degreePlanReqs) {
-		this.degreePlanReqs = degreePlanReqs;
-	}
-	
-	public void AddDegreePlanReqs(DegreeRequirement degreePlanReq) {
-		getDegreePlanReqs().add(degreePlanReq);
-	}
-
-	public Degree(String degreeCode, String gradSchool, String degreeName, int forecast) {
-		DegreeCode = degreeCode;
-		GradSchool = gradSchool;
-		DegreeName = degreeName;
-		Forecast = forecast;
-	}
-=======
 	private ArrayList<DegreeRequirement> degreeRequirements;
->>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
 	
 	public String getDegreeCode() {
 		return DegreeCode;

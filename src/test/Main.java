@@ -2,6 +2,7 @@ package test;
 import OcGraduateSystemClasses.*;
 import SystemDataManagementClasses.*;
 import Windows.*;
+
 import com.csvreader.CsvReader;
 
 import java.awt.EventQueue;
@@ -20,11 +21,11 @@ public class Main {
 			CsvReader file;
 			file = new CsvReader("src/Data/TestDataUniversityName.csv");
 			universityDM = new UniversityDM(file);
-			System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
+			// System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 			university = universityDM.getUniversity();
-			//university.printData();
-			university.getStudents().get(2).printReqCoursesToTake();
-			//System.out.println(university.getStudents().get(10).getRequiredCoursesNeedToTake().size());
+			// university.printData();
+			// university.getStudents().get(2).printReqCoursesToTake();
+			// System.out.println(university.getStudents().get(10).getRequiredCoursesNeedToTake().size());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -45,8 +46,23 @@ public class Main {
 					// create university
 					loadUniversitymain();
 					
-					//SystemJFrame frame = new SystemJFrame(university);
-					//frame.setVisible(true);
+					//**********************************************************
+					// for testing 
+					
+					for (Degree degree : university.getDegrees())
+					{
+						System.out.println(degree.getDegreeName() + "\n");
+						for (DegreeRequirement drq : degree.getDegreeRequirements())
+						{
+							System.out.println(drq.getDegreeCode() + " -- " + drq.getDescription() + " -- " + drq.getHours() + " -- " + drq.getDegreeRequirementsType());
+						}
+						System.out.println();
+					}
+						
+					//**********************************************************
+					
+					SystemJFrame frame = new SystemJFrame(university);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

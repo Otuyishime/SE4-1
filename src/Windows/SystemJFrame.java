@@ -35,7 +35,9 @@ public class SystemJFrame extends JFrame {
 		setTitle("Course Scheduling System");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 50, 700, 650);
+		
+		//setBounds(300, 50, 700, 650);
+		setBounds(200, 5, 900, 750);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

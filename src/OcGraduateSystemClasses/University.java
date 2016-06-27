@@ -85,7 +85,6 @@ public class University
 	{
 		this.courses.add(course);
 	}
-<<<<<<< HEAD
 	
 	// Faculty
 	public ArrayList<Faculty> getFaculties() {
@@ -103,11 +102,14 @@ public class University
 		this.faculties.add(faculty);
 	}
 	
-=======
->>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
-	
+	// for degrees
 	public ArrayList<Degree> getDegrees() {
 		return degrees;
+	}
+	
+	public void addDegree(Degree degree)
+	{
+		this.degrees.add(degree);
 	}
 
 	public void setDegrees(ArrayList<Degree> degrees) {
@@ -129,9 +131,7 @@ public class University
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
 	}
-
-<<<<<<< HEAD
-=======
+	
 	public ArrayList<StudentCourse> getStudentcourses() {
 		return studentcourses;
 	}
@@ -140,15 +140,6 @@ public class University
 		this.studentcourses = studentcourses;
 	}
 
-	public ArrayList<Faculty> getFaculties() {
-		return faculties;
-	}
-
-	public void setFaculties(ArrayList<Faculty> faculties) {
-		this.faculties = faculties;
-	}
-
->>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
 	public ArrayList<Room> getRooms() {
 		return rooms;
 	}
