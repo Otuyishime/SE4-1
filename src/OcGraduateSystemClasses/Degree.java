@@ -9,7 +9,7 @@ public class Degree {
 	private String GradSchool;
 	private String DegreeName;
 	private int Forecast;
-	
+   	
 	private ArrayList<DegreeRequirement> degreeRequirements;
 	
 	public String getDegreeCode() {

@@ -256,4 +256,64 @@ public class Course
 	public String toString() {
 	    return this.courseName;
 	}
+	
+	public boolean isAvalaible(Semester semester){
+		
+		
+		String semesterSuffix = semester.getName().substring(4, 6);
+		
+		
+
+		switch(semesterSuffix){
+
+		case "SP":
+			if(isOfferedSpring())
+
+
+			{
+				for(Faculty fac:getFaculties() )  { 
+
+					if( fac.getSpringLoad()>0){
+
+
+						return true;
+					}
+				}
+			}
+			break;
+
+		case "FA":  
+
+			if(isOfferedFall()){
+
+				for(Faculty fac:getFaculties() )  { 
+
+					if( fac.getFallLoad()>0){
+
+
+						return true;
+					}
+				}
+			}
+			break;
+
+
+		case "SU":   
+			if(isOfferedSummer()){
+
+
+				for(Faculty fac:getFaculties() )  { 
+
+					if( fac.getSummerLoad()>0){
+
+
+						return true;
+					}
+				}
+			}
+			break;
+
+		}
+		return false;
+	}
 }

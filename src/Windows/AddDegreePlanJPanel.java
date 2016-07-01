@@ -28,6 +28,18 @@ import OcGraduateSystemClasses.University;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
+
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
+import java.awt.event.HierarchyListener;
+import java.awt.event.HierarchyEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+
 public class AddDegreePlanJPanel extends JPanel {
 	
 	JScrollPane scrollpane_degree_reqs;
@@ -63,12 +75,28 @@ public class AddDegreePlanJPanel extends JPanel {
 	private JButton btnCancel_degree_req;
 	private JLabel lblDegreeRequirements;
 	private JButton btnRemove_degree_req;
-
+	
+	private JButton btn_addNewDegree;
+	
+	private boolean code_ok;
+	private boolean gradSchool_ok;
+	private boolean name_ok;
+	private boolean forecast_ok;
+	private boolean req_ok;
+	
+	private boolean description_ok;
+	private boolean hours_ok;
+	private boolean type_ok;
+	private boolean courses_ok;
+	
+	
 	/**
 	 * Create the panel.
 	 */
 	public AddDegreePlanJPanel(JFrame currentFrame, University university) {
 		
+		code_ok = gradSchool_ok = name_ok = forecast_ok = req_ok = false;	
+		description_ok = hours_ok = type_ok = courses_ok = false;
 		selected_courses = new ArrayList<Course>();
 		degreeRequirements = new ArrayList<DegreeRequirement>();
 		
@@ -85,13 +113,167 @@ public class AddDegreePlanJPanel extends JPanel {
 		add(lblName);
 		
 		textField_code = new JTextField();
+		textField_code.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				String value = textField_code.getText();
+				textField_degree_req_code.setText(value);
+				if ((value.replace(" ", "").compareTo("") == 0))
+					code_ok = false;
+				else
+					code_ok = true;
+		
+				// enable the add button
+				if (code_ok & gradSchool_ok & name_ok & forecast_ok & req_ok)
+					btn_addNewDegree.setEnabled(true);
+				else
+					btn_addNewDegree.setEnabled(false);
+			}
+		});
 		textField_code.setToolTipText("");
 		textField_code.setBounds(200, 50, 250, 25);
 		add(textField_code);
 		textField_code.setColumns(10);
 		
+		JLabel lblNewLabel = new JLabel("Grad School:");
+		lblNewLabel.setBounds(100, 80, 85, 25);
+		add(lblNewLabel);
+		
+		textField_grad_school = new JTextField();
+		textField_grad_school.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String value = textField_grad_school.getText();
+				if ((value.replace(" ", "").compareTo("") == 0))
+					gradSchool_ok = false;
+				else
+					gradSchool_ok = true;
+		
+				// enable the add button
+				if (code_ok & gradSchool_ok & name_ok & forecast_ok & req_ok)
+					btn_addNewDegree.setEnabled(true);
+				else
+					btn_addNewDegree.setEnabled(false);
+			}
+		});
+		textField_grad_school.setBounds(200, 80, 250, 25);
+		add(textField_grad_school);
+		textField_grad_school.setColumns(10);
+		
+		JLabel lblName_1 = new JLabel("Name:");
+		lblName_1.setBounds(100, 110, 85, 25);
+		add(lblName_1);
+		
+		textField_name = new JTextField();
+		textField_name.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String value = textField_name.getText();
+				if ((value.replace(" ", "").compareTo("") == 0))
+					name_ok = false;
+				else
+					name_ok = true;
+		
+				// enable the add button
+				if (code_ok & gradSchool_ok & name_ok & forecast_ok & req_ok)
+					btn_addNewDegree.setEnabled(true);
+				else
+					btn_addNewDegree.setEnabled(false);
+			}
+		});
+		textField_name.setBounds(200, 110, 250, 25);
+		add(textField_name);
+		textField_name.setColumns(10);
+		
+		JLabel lblForecast = new JLabel("Forecast:");
+		lblForecast.setBounds(100, 140, 85, 25);
+		add(lblForecast);
+		
+		textField_forecast = new JTextField();
+		textField_forecast.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String value = textField_forecast.getText();
+				if ((value.replace(" ", "").compareTo("") == 0))
+					forecast_ok = false;
+				else
+				{
+					try
+					 {
+						 Integer.parseInt(value);
+						 forecast_ok = true;
+					 }
+					 catch (NumberFormatException e1)
+					 {
+						 forecast_ok = false;
+					 }
+				}
+				// enable the add button
+				if (code_ok & gradSchool_ok & name_ok & forecast_ok & req_ok)
+					btn_addNewDegree.setEnabled(true);
+				else
+					btn_addNewDegree.setEnabled(false);
+			}
+		});
+		textField_forecast.setBounds(200, 140, 250, 25);
+		add(textField_forecast);
+		textField_forecast.setColumns(10);
+		
+		lblDegreeRequirements = new JLabel("Degree Requirements:");
+		lblDegreeRequirements.setBounds(462, 54, 150, 25);
+		add(lblDegreeRequirements);
+		
+		listModel_degree_reqs= new DefaultListModel<>();
+		for (DegreeRequirement degreeReq  : degreeRequirements)
+			listModel_degree_reqs.addElement(degreeReq);
+		list_degree_reqs = new JList(listModel_degree_reqs);
+		
+		list_degree_reqs.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// allow view, edit and delete only when there is a selected item
+				if (list_degree_reqs.getSelectedValue() != null)
+				{
+					btnRemove_degree_req.setEnabled(true);
+				}
+				else
+				{
+					btnRemove_degree_req.setEnabled(false);
+				}
+			}
+		});
+		scrollpane_degree_reqs = new JScrollPane(list_degree_reqs);
+		scrollpane_degree_reqs.setBounds(610, 54, 150, 120);
+		add(scrollpane_degree_reqs);
+		
+		btnRemove_degree_req = new JButton("Remove");
+		btnRemove_degree_req.setEnabled(false);
+		btnRemove_degree_req.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DegreeRequirement selectedDegreeReq = (DegreeRequirement) list_degree_reqs.getSelectedValue();	
+				
+				degreeRequirements.remove(selectedDegreeReq);
+				listModel_degree_reqs.removeElement(selectedDegreeReq);
+				
+				// check the size of degreeRequirements
+				if (degreeRequirements.size() == 0)
+					req_ok = false;
+				else
+					req_ok = true;
+				// enable the add button
+				if (code_ok & gradSchool_ok & name_ok & forecast_ok & req_ok)
+					btn_addNewDegree.setEnabled(true);
+				else
+					btn_addNewDegree.setEnabled(false);
+			}
+		});
+		btnRemove_degree_req.setBounds(764, 49, 80, 25);
+		add(btnRemove_degree_req);
+		
 		// Add button - it adds a new DegreePlan from the creation page
-		JButton btn_addNewDegree = new JButton("Add");
+		btn_addNewDegree = new JButton("Add");
+		btn_addNewDegree.setEnabled(false);
 		btn_addNewDegree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -132,32 +314,6 @@ public class AddDegreePlanJPanel extends JPanel {
 		btn_cancelNewDegreePlan.setBounds(214, 592, 100, 30);
 		add(btn_cancelNewDegreePlan);
 		
-		JLabel lblNewLabel = new JLabel("Grad School:");
-		lblNewLabel.setBounds(100, 80, 85, 25);
-		add(lblNewLabel);
-		
-		textField_grad_school = new JTextField();
-		textField_grad_school.setBounds(200, 80, 250, 25);
-		add(textField_grad_school);
-		textField_grad_school.setColumns(10);
-		
-		JLabel lblName_1 = new JLabel("Name:");
-		lblName_1.setBounds(100, 110, 85, 25);
-		add(lblName_1);
-		
-		textField_name = new JTextField();
-		textField_name.setBounds(200, 110, 250, 25);
-		add(textField_name);
-		textField_name.setColumns(10);
-		
-		JLabel lblForecast = new JLabel("Forecast:");
-		lblForecast.setBounds(100, 140, 85, 25);
-		add(lblForecast);
-		
-		textField_forecast = new JTextField();
-		textField_forecast.setBounds(200, 140, 250, 25);
-		add(textField_forecast);
-		textField_forecast.setColumns(10);
 		
 		JLabel lblAddDegreeRequirements = new JLabel("Add Degree Requirements:");
 		lblAddDegreeRequirements.setBounds(50, 190, 180, 25);
@@ -168,7 +324,8 @@ public class AddDegreePlanJPanel extends JPanel {
 		add(lblDegreeCode);
 		
 		textField_degree_req_code = new JTextField();
-		textField_degree_req_code.setBounds(150, 250, 130, 25);
+		textField_degree_req_code.setEditable(false);
+		textField_degree_req_code.setBounds(150, 250, 200, 25);
 		add(textField_degree_req_code);
 		textField_degree_req_code.setColumns(10);
 		
@@ -180,6 +337,17 @@ public class AddDegreePlanJPanel extends JPanel {
 		textArea_degree_req_description.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
+				String value = textArea_degree_req_description.getText();
+				if ((value.replace(" ", "").compareTo("") == 0))
+					description_ok = false;
+				else
+					description_ok = true;
+		
+				// enable the add button
+				if (description_ok & hours_ok & type_ok & courses_ok)
+					btnAdd_degree_req.setEnabled(true);
+				else
+					btnAdd_degree_req.setEnabled(false);
 			}
 		});
 		textArea_degree_req_description.setLineWrap(true);
@@ -195,7 +363,33 @@ public class AddDegreePlanJPanel extends JPanel {
 		add(lblHours);
 		
 		textField_degree_req_hours = new JTextField();
-		textField_degree_req_hours.setBounds(150, 360, 130, 25);
+		textField_degree_req_hours.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String value = textField_degree_req_hours.getText();
+				if ((value.replace(" ", "").compareTo("") == 0))
+					hours_ok = false;
+				else
+				{
+					try
+					 {
+						 Integer.parseInt(value);
+						 hours_ok = true;
+					 }
+					 catch (NumberFormatException e1)
+					 {
+						 hours_ok = false;
+					 }
+				}
+		
+				// enable the add button
+				if (description_ok & hours_ok & type_ok & courses_ok)
+					btnAdd_degree_req.setEnabled(true);
+				else
+					btnAdd_degree_req.setEnabled(false);
+			}
+		});
+		textField_degree_req_hours.setBounds(150, 360, 200, 25);
 		add(textField_degree_req_hours);
 		textField_degree_req_hours.setColumns(10);
 		
@@ -204,7 +398,23 @@ public class AddDegreePlanJPanel extends JPanel {
 		add(lblType);
 		
 		textField_degree_req_type = new JTextField();
-		textField_degree_req_type.setBounds(150, 390, 130, 25);
+		textField_degree_req_type.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String value = textField_degree_req_type.getText();
+				if ((value.replace(" ", "").compareTo("") == 0))
+					type_ok = false;
+				else
+					type_ok = true;
+		
+				// enable the add button
+				if (description_ok & hours_ok & type_ok & courses_ok)
+					btnAdd_degree_req.setEnabled(true);
+				else
+					btnAdd_degree_req.setEnabled(false);
+			}
+		});
+		textField_degree_req_type.setBounds(150, 390, 200, 25);
 		add(textField_degree_req_type);
 		textField_degree_req_type.setColumns(10);
 
@@ -232,10 +442,10 @@ public class AddDegreePlanJPanel extends JPanel {
 		scrollpane_courses.setBounds(370, 250, 200, 250);
 		add(scrollpane_courses);
 		
-		
 		listModel_selected = new DefaultListModel<>();
 		for (Course course : selected_courses)
 			listModel_selected.addElement(course);
+	
 		list_courses_selected = new JList(listModel_selected);
 		list_courses_selected.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -265,6 +475,17 @@ public class AddDegreePlanJPanel extends JPanel {
 				selected_courses.add(selectedCourse);
 				System.out.println("Added course -- " + selectedCourse.getCourseName() + " -- " + selected_courses.size() );
 				listModel_selected.addElement(selectedCourse);	
+				
+				if (selected_courses.size() == 0)
+					courses_ok = false;
+				else
+					courses_ok = true;
+		
+				// enable the add button
+				if (description_ok & hours_ok & type_ok & courses_ok)
+					btnAdd_degree_req.setEnabled(true);
+				else
+					btnAdd_degree_req.setEnabled(false);
 			}
 		});
 		btnAdd_course_to_degree_req.setBounds(565, 251, 50, 25);
@@ -278,6 +499,17 @@ public class AddDegreePlanJPanel extends JPanel {
 				selected_courses.remove(selectedCourse);
 				System.out.println("Removed course -- " + selectedCourse.getCourseName() + " -- " + selected_courses.size() );
 				listModel_selected.removeElement(selectedCourse);
+				
+				if (selected_courses.size() == 0)
+					courses_ok = false;
+				else
+					courses_ok = true;
+		
+				// enable the add button
+				if (description_ok & hours_ok & type_ok & courses_ok)
+					btnAdd_degree_req.setEnabled(true);
+				else
+					btnAdd_degree_req.setEnabled(false);
 			}
 		});
 		btnRemove_course_from_degree_req.setBounds(817, 249, 80, 25);
@@ -292,6 +524,7 @@ public class AddDegreePlanJPanel extends JPanel {
 		add(lblSelectedCourses);
 		
 		btnAdd_degree_req = new JButton("Add Degree Requirement");
+		btnAdd_degree_req.setEnabled(false);
 		btnAdd_degree_req.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -303,11 +536,31 @@ public class AddDegreePlanJPanel extends JPanel {
 				
 				DegreeRequirement degree_req = new DegreeRequirement(type, description, hours, code);
 				degree_req.setCourses(selected_courses);
+				
 				degreeRequirements.add(degree_req);
+				listModel_degree_reqs.addElement(degree_req);
 				
-				// System.out.println("Removed course -- " + selectedCourse.getCourseName() + " -- " + selected_courses.size() );
+				// check the size of degreeRequirements
+				if (degreeRequirements.size() == 0)
+					req_ok = false;
+				else
+					req_ok = true;
+				// enable the add button
+				if (code_ok & gradSchool_ok & name_ok & forecast_ok & req_ok)
+					btn_addNewDegree.setEnabled(true);
+				else
+					btn_addNewDegree.setEnabled(false);
 				
-				listModel_degree_reqs.addElement(degree_req);			
+				// clear everything
+				//textField_degree_req_code.setText("");
+				textArea_degree_req_description.setText("");
+				textField_degree_req_hours.setText("");
+				textField_degree_req_type.setText("");
+				
+				selected_courses.clear();
+				listModel_selected.clear();
+				
+				btnAdd_degree_req.setEnabled(false);
 			}
 		});
 		btnAdd_degree_req.setBounds(50, 471, 200, 25);
@@ -316,54 +569,19 @@ public class AddDegreePlanJPanel extends JPanel {
 		btnCancel_degree_req = new JButton("Clear");
 		btnCancel_degree_req.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// clear the degree req form
-				textField_degree_req_code.setText("");
+				// clear everything
+				//textField_degree_req_code.setText("");
 				textArea_degree_req_description.setText("");
 				textField_degree_req_hours.setText("");
 				textField_degree_req_type.setText("");
 				
-				selected_courses.removeAll(selected_courses);
-				listModel_selected.removeAllElements();
+				selected_courses.clear();
+				listModel_selected.clear();
 				
+				btnAdd_degree_req.setEnabled(false);
 			}
 		});
 		btnCancel_degree_req.setBounds(252, 471, 80, 25);
 		add(btnCancel_degree_req);
-		
-		lblDegreeRequirements = new JLabel("Degree Requirements:");
-		lblDegreeRequirements.setBounds(462, 54, 150, 25);
-		add(lblDegreeRequirements);
-		
-		listModel_degree_reqs= new DefaultListModel<>();
-		for (DegreeRequirement degreeReq  : degreeRequirements)
-			listModel_degree_reqs.addElement(degreeReq);
-		list_degree_reqs = new JList(listModel_degree_reqs);
-		list_degree_reqs.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				
-				// allow view, edit and delete only when there is a selected item
-				if (list_degree_reqs.getSelectedValue() != null)
-				{
-					btnRemove_degree_req.setEnabled(true);
-				}
-				else
-				{
-					btnRemove_degree_req.setEnabled(false);
-				}
-			}
-		});
-		scrollpane_degree_reqs = new JScrollPane(list_degree_reqs);
-		scrollpane_degree_reqs.setBounds(610, 54, 150, 120);
-		add(scrollpane_degree_reqs);
-		
-		btnRemove_degree_req = new JButton("Remove");
-		btnRemove_degree_req.setEnabled(false);
-		btnRemove_degree_req.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnRemove_degree_req.setBounds(764, 49, 80, 25);
-		add(btnRemove_degree_req);
 	}
 }

@@ -40,20 +40,35 @@ public class EditCourseJPanel extends JPanel {
 	private JButton btnAdd_faculty;
 	
 	private boolean fall, spring, summer;
-	private ArrayList<Course> prereqs;
-	private ArrayList<Faculty> faculties;
 	
 	private JButton btn_addUpdateCourse;
+	
 	
 	// for courses
 	JScrollPane scrollpane_courses;
 	DefaultListModel <Course> listModel_courses;
 	JList list_courses;
 	
+	
+	// for selected prereqs
+	JScrollPane scrollpane_selected_courses;
+	DefaultListModel <Course> listModel_selected_courses;
+	JList list_courses_selected;
+	private ArrayList<Course> prereqs;
+	
+	
 	// for Faculty
 	JScrollPane scrollpane_faculty;
 	DefaultListModel <Faculty> listModel_faculty;
 	JList list_faculty;
+	
+	
+	// for faculty
+	JScrollPane scrollpane_selected_faculties;
+	DefaultListModel <Faculty> listModel_selected_faculties;
+	JList list_faculties_selected;
+	private ArrayList<Faculty> selected_faculties;
+	
 
 	JScrollPane scrollpane_description;
 	
@@ -67,6 +82,10 @@ public class EditCourseJPanel extends JPanel {
 	private String courseHours;
 	private String courseCap;
 	private String courseDescription;
+	
+	JButton btn_remove_prereq;
+
+	JButton btn_remove_faculty;
 	
 	/**
 	 * Create the panel.
@@ -88,7 +107,7 @@ public class EditCourseJPanel extends JPanel {
 		courseDescription = currentCourse.getDescription();
 		
 		prereqs = new ArrayList<Course>();
-		faculties = new ArrayList<Faculty>();
+		selected_faculties = new ArrayList<Faculty>();
 		
 		// title label
 		JLabel lbl_title = new JLabel("Edit Course : " + currentCourse.getCourseCode());
@@ -325,9 +344,52 @@ public class EditCourseJPanel extends JPanel {
 		add(chckbxSummer);	
 		
 		
+		
+		//*********************************
+		listModel_selected_courses = new DefaultListModel<>();
+		for (Course course : currentCourse.getPrerequisites())
+		{
+			prereqs.add(course);
+			listModel_selected_courses.addElement(course);
+		}
+	
+		list_courses_selected = new JList(listModel_selected_courses);
+		list_courses_selected.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// allow view, edit and delete only when there is a selected item
+				if (list_courses_selected.getSelectedValue() != null)
+				{
+					btn_remove_prereq.setEnabled(true);
+				}
+				else
+				{
+					btn_remove_prereq.setEnabled(false);
+				}
+			}
+		});
+		scrollpane_selected_courses = new JScrollPane(list_courses_selected);
+		scrollpane_selected_courses.setBounds(50, 230, 250, 106);
+		add(scrollpane_selected_courses);
+		
+		btn_remove_prereq = new JButton("Remove");
+		btn_remove_prereq.setEnabled(false);
+		btn_remove_prereq.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Course selectedCourse = (Course) list_courses_selected.getSelectedValue();	
+				prereqs.remove(selectedCourse);
+				//System.out.println("Removed course -- " + selectedCourse.getCourseName() + " -- " + selected_courses.size() );
+				listModel_selected_courses.removeElement(selectedCourse);
+			}
+		});
+		btn_remove_prereq.setBounds(227, 335, 85, 25);
+		add(btn_remove_prereq);
+		//********************************
+		
+		
 		// provide a list of courses to choose from
 		JLabel lblCoursesToChoose = new JLabel("Courses to choose from:");
-		lblCoursesToChoose.setBounds(50, 260, 180, 25);
+		lblCoursesToChoose.setBounds(50, 381, 180, 25);
 		add(lblCoursesToChoose);
 		
 		listModel_courses = new DefaultListModel<>();
@@ -344,29 +406,22 @@ public class EditCourseJPanel extends JPanel {
 			}
 		});
 		scrollpane_courses = new JScrollPane(list_courses);
-		scrollpane_courses.setBounds(50, 285, 250, 230);
+		scrollpane_courses.setBounds(50, 400, 250, 200);
 		add(scrollpane_courses);
 		
-		// labels for choosen courses
-		JLabel lblChoosen = new JLabel("Prereqs:");
-		lblChoosen.setBounds(50, 210, 120, 25);
-		add(lblChoosen);
-		JLabel lbl_choosen_prereq = new JLabel();
-		
+		/*
 		// get the list of prereqs		
-		if (currentCourse.getPrerequisites().size() == 0)
-			lbl_choosen_prereq.setText("<None>");
+		if (currentCourse.getPrerequisites().size() == 0){}
+			//lbl_choosen_prereq.setText("<None>");
 		else
 		{
 			for (Course course : currentCourse.getPrerequisites())
 			{
 				prereqs.add(course);
-				lbl_choosen_prereq.setText(lbl_choosen_prereq.getText() + "  " + course.getCourseCode());
+				//lbl_choosen_prereq.setText(lbl_choosen_prereq.getText() + "  " + course.getCourseCode());
 			}
 		}
-		lbl_choosen_prereq.setBounds(50, 230, 300, 25);
-		add(lbl_choosen_prereq);
-		
+		*/
 		// this button is for adding a course to a list of prereqs
 		// just select the course and hit this button to add it
 		btnAdd_course = new JButton("Add");
@@ -377,24 +432,69 @@ public class EditCourseJPanel extends JPanel {
 				// and update the choosen courses placeholder
 				Course selectedCourse = (Course) list_courses.getSelectedValue();
 				prereqs.add(selectedCourse);
+				listModel_selected_courses.addElement(selectedCourse);	
 				
-				if (prereqs.size() == 0)
-					lbl_choosen_prereq.setText("<None>");
+				if (prereqs.size() == 0){}
+					//lbl_choosen_prereq.setText("<None>");
 				else
 				{
-					lbl_choosen_prereq.setText("");
-					for (Course course : prereqs)
-						lbl_choosen_prereq.setText((lbl_choosen_prereq.getText() + course.getCourseCode() + " "));		
+					//lbl_choosen_prereq.setText("");
+					for (Course course : prereqs){}
+						//lbl_choosen_prereq.setText((lbl_choosen_prereq.getText() + course.getCourseCode() + " "));		
 				}
 			}
 		});
-		btnAdd_course.setBounds(305, 280, 50, 30);
+		btnAdd_course.setBounds(250, 372, 50, 30);
 		add(btnAdd_course);
 				
+		
+		//********************************
+		
+		listModel_selected_faculties = new DefaultListModel<>();
+		
+		for (Faculty faculty : currentCourse.getFaculties())
+		{
+			selected_faculties.add(faculty);
+			listModel_selected_faculties.addElement(faculty);
+		}
+	
+		list_faculties_selected = new JList(listModel_selected_faculties);
+		list_faculties_selected.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// allow view, edit and delete only when there is a selected item
+				if (list_faculties_selected.getSelectedValue() != null)
+				{
+					btn_remove_faculty.setEnabled(true);
+				}
+				else
+				{
+					btn_remove_faculty.setEnabled(false);
+				}
+			}
+		});
+		scrollpane_selected_faculties = new JScrollPane(list_faculties_selected);
+		scrollpane_selected_faculties.setBounds(400, 230, 250, 106);
+		add(scrollpane_selected_faculties);
+		
+		btn_remove_faculty = new JButton("Remove");
+		btn_remove_faculty.setEnabled(false);
+		btn_remove_faculty.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Faculty selectedFaculty = (Faculty) list_faculties_selected.getSelectedValue();	
+				selected_faculties.remove(selectedFaculty);
+				//System.out.println("Removed course -- " + selectedCourse.getCourseName() + " -- " + selected_courses.size() );
+				listModel_selected_faculties.removeElement(selectedFaculty);
+			}
+		});
+		btn_remove_faculty.setBounds(576, 333, 80, 29);
+		add(btn_remove_faculty);
+		//********************************
 			
 		// provide a list of Faculty to choose from
 		JLabel lblFacultyToChoose = new JLabel("Faculty to choose from:");
-		lblFacultyToChoose.setBounds(370, 260, 180, 25);
+		lblFacultyToChoose.setBounds(370, 381, 180, 25);
 		add(lblFacultyToChoose);
 		
 		listModel_faculty = new DefaultListModel<>();
@@ -411,18 +511,16 @@ public class EditCourseJPanel extends JPanel {
 			}
 		});
 		scrollpane_faculty = new JScrollPane(list_faculty);
-		scrollpane_faculty.setBounds(370, 285, 250, 230);
+		scrollpane_faculty.setBounds(400, 400, 250, 200);
 		add(scrollpane_faculty);
-				
-		// labels for selected faculty
-		JLabel lblChoosenFaculty = new JLabel("Faculty:");
-		lblChoosenFaculty.setBounds(370, 210, 120, 25);
-		add(lblChoosenFaculty);
-		JLabel lbl_choosen_faculty = new JLabel();
-		// JLabel lbl_choosen_faculty = new JLabel("No faculty choosen yet!");
-		lbl_choosen_faculty.setBounds(370, 525, 500, 10);
-		add(lbl_choosen_faculty);
 		
+		
+		//JLabel lbl_choosen_faculty = new JLabel();
+		// JLabel lbl_choosen_faculty = new JLabel("No faculty choosen yet!");
+		//lbl_choosen_faculty.setBounds(370, 525, 500, 10);
+		//add(lbl_choosen_faculty);
+		
+		/*
 		// get the list of faculty		
 		if (currentCourse.getFaculties().size() == 0)
 			lbl_choosen_faculty.setText("<None>");
@@ -430,12 +528,14 @@ public class EditCourseJPanel extends JPanel {
 		{
 			for (Faculty faculty : currentCourse.getFaculties())
 			{
-				faculties.add(faculty);
+				selected_faculties.add(faculty);
 				lbl_choosen_faculty.setText(lbl_choosen_faculty.getText() + "  " + faculty.getLastName());
 			}
 		}
-		lbl_choosen_faculty.setBounds(370, 230, 300, 25);
-		add(lbl_choosen_faculty);
+		*/
+		
+		//lbl_choosen_faculty.setBounds(370, 230, 300, 25);
+		//add(lbl_choosen_faculty);
 		
 		// this button is for adding a faculty to a list of faculties
 		// just select the faculty and hit this button to add it
@@ -447,19 +547,20 @@ public class EditCourseJPanel extends JPanel {
 				// TODO - get the selected course and append it to the list of a course's faculties
 				// and update the choosen faculty placeholder
 				Faculty selectedFaculty = (Faculty) list_faculty.getSelectedValue();
-				faculties.add(selectedFaculty);
+				selected_faculties.add(selectedFaculty);
+				listModel_selected_faculties.addElement(selectedFaculty);	
 				
-				if (faculties.size() == 0)
-					lbl_choosen_faculty.setText("<None>");
+				if (selected_faculties.size() == 0){}
+					//lbl_choosen_faculty.setText("<None>");
 				else
 				{
-					lbl_choosen_faculty.setText("");
-					for (Faculty faculty : faculties)
-						lbl_choosen_faculty.setText((lbl_choosen_faculty.getText() + faculty.getLastName() + "  "));		
+					//lbl_choosen_faculty.setText("");
+					for (Faculty faculty : selected_faculties){}
+						//lbl_choosen_faculty.setText((lbl_choosen_faculty.getText() + faculty.getLastName() + "  "));		
 				}
 			}
 		});
-		btnAdd_faculty.setBounds(625, 280, 50, 30);
+		btnAdd_faculty.setBounds(600, 374, 50, 30);
 		add(btnAdd_faculty);
 		
 		// Add button - it adds a new course from the creation page
@@ -486,13 +587,13 @@ public class EditCourseJPanel extends JPanel {
 				System.out.println("Spring: " + spring);
 				System.out.println("Summer: " + summer);	
 				
-				Course newCourse = new Course(courseCode, courseName, courseDecription, 
-						courseHours, courseCap, 
-						fall,  spring, summer, 
-						prereqs, faculties);
+				//Course newCourse = new Course(courseCode, courseName, courseDecription, 
+						//courseHours, courseCap, 
+						//fall,  spring, summer, 
+						//prereqs, selected_faculties);
 				
-				System.out.println("New Course Added");
-				newCourse.print();
+				//System.out.println("New Course Added");
+				//newCourse.print();
 				
 				// modify current course
 				currentCourse.setCourseName(courseName);
@@ -504,7 +605,10 @@ public class EditCourseJPanel extends JPanel {
 				currentCourse.setOfferedSpring(spring);
 				currentCourse.setOfferedSummer(summer);
 				currentCourse.setPrerequisites(prereqs);
-				currentCourse.setFaculties(faculties);
+				currentCourse.setFaculties(selected_faculties);
+				
+				System.out.println("****** faculty size - " + currentCourse.getFaculties().size());
+				System.out.println("****** prereqs size - " + currentCourse.getPrerequisites().size());
 				
 				// TODO - this is done only when the form is completely filled out.
 				currentFrame.getContentPane().removeAll();
@@ -512,7 +616,7 @@ public class EditCourseJPanel extends JPanel {
 				currentFrame.revalidate();	
 			}
 		});
-		btn_addUpdateCourse.setBounds(240, 555, 100, 30);
+		btn_addUpdateCourse.setBounds(245, 629, 100, 30);
 		add(btn_addUpdateCourse);
 				
 		
@@ -530,7 +634,7 @@ public class EditCourseJPanel extends JPanel {
 				currentFrame.revalidate();	
 			}
 		});
-		btn_cancelNewCourse.setBounds(340, 555, 100, 30);
+		btn_cancelNewCourse.setBounds(347, 629, 100, 30);
 		add(btn_cancelNewCourse);
 	}
 

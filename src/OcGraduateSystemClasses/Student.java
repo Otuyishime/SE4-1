@@ -92,7 +92,8 @@ public class Student
 					
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
-							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode())){
+							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && 
+									!this.hasPassedCourse(stdcourse.getCourse())){
 								
 								requiredcoursestaken.add(reqcourse);
 							}
@@ -115,7 +116,8 @@ public class Student
 
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
-							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode())){
+							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && 
+									!this.hasPassedCourse(reqcourse)){
 
 								electivecoursestaken.add(reqcourse);
 							}
@@ -222,6 +224,22 @@ public class Student
 	}
 	
 	// ------------ Helper method -------------
+	private boolean hasPassedCourse(Course course){
+		
+		for ( StudentCourse stdcourse : this.getStudentcoursesTaken()){
+			if ( stdcourse.getCourse().getCourseCode().equals(course.getCourseCode())){
+				if ( stdcourse.getGrade().equals("F") || stdcourse.getGrade().equals("I")){
+					return false;
+				}
+			}
+//			else{
+//				System.out.println(course.getCourseName());
+//			}
+		}
+		
+		return true;
+	}
+	
 	private boolean containsCourse(ArrayList<Course> list, Course course){
 		for ( Course listCourse: list){
 			if ( listCourse.getCourseCode().equals(course.getCourseCode())){
@@ -230,4 +248,17 @@ public class Student
 		}
 		return false;
 	}
+
+	public Degree  returnStudentdegreeCodegivenId(String id){
+		
+		 Degree degreeCode= null;
+		if (getStudentId().equals(id)){
+			 
+			degreeCode= getDegree();
+			
+		}
+		return degreeCode;
+		
+		 
+	}// end of  returnStudentdegreeCodegivenId
 }

@@ -40,12 +40,16 @@ public class StudentDM {
 					
 					// test print
 					//System.out.println(studentId + " : " + degreeCodeFetched + " : " + graduatiomSemester);
-
-					// create a temporary student
-					Student temp_student = new Student(studentId, degreeCodeFetched, graduatiomSemester);
 					
-					// add the temporary student to the list of students
-					getStudentData().add(temp_student);
+					if (degreeCodeFetched.equals("MSE.ENGMGT") || degreeCodeFetched.equals("MSE.ECE")){
+						// We omit these two degrees
+						
+					}else{
+						// create a temporary student
+						Student temp_student = new Student(studentId, degreeCodeFetched, graduatiomSemester);
+						// add the temporary student to the list of students
+						getStudentData().add(temp_student);
+					}
 				}
 				
 				// close the file after read completion

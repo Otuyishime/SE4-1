@@ -89,7 +89,6 @@ public class DegreePlanReqDM {
 		}
 		return degreeReqs;
 	}
-	
 	public boolean loadCourses(CourseDM courses){
 		if ( courses != null){
 			for ( int i = 0; i < getDegree_Requirements().size(); i++){

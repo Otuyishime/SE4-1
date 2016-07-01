@@ -54,7 +54,9 @@ public class DegreeRequirement
 	}
 
 	public void setCourses(ArrayList<Course> courses) {
-		this.courses = courses;
+		// this.courses = courses;
+		for (Course c : courses)
+			this.courses.add(c);
 	}
 	
 	public void addCourse(Course course){
