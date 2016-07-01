@@ -274,6 +274,6 @@ public class Faculty
 
 	@Override
 	public String toString() {
-		return (firstName + " : " + lastName + " : " + gradSchool + " : " + degree + " : " + title + " : " + " : " + getFallLoad() + " : " + getSpringLoad() + " : " + getSummerLoad());
+		return (firstName + " : " + lastName );
 	}
 }
