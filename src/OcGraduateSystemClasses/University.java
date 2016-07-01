@@ -128,6 +128,15 @@ public class University
 	public ArrayList<Degree> getDegrees() {
 		return degrees;
 	}
+	
+	public void addDegree(Degree degree)
+	{
+		this.degrees.add(degree);
+	}
+	public void removeDegree(Degree degree)
+	{
+		this.degrees.remove(degree);
+	}
 
 	public void setDegrees(ArrayList<Degree> degrees) {
 		this.degrees = degrees;
@@ -156,7 +165,6 @@ public class University
 	public void setStudentcourses(ArrayList<StudentCourse> studentcourses) {
 		this.studentcourses = studentcourses;
 	}
-	
 	public ArrayList<Room> getRooms() {
 		return rooms;
 	}

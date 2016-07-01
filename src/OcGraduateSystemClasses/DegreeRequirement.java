@@ -54,7 +54,9 @@ public class DegreeRequirement
 	}
 
 	public void setCourses(ArrayList<Course> courses) {
-		this.courses = courses;
+		// this.courses = courses;
+		for (Course c : courses)
+			this.courses.add(c);
 	}
 	
 	public void addCourse(Course course){
@@ -148,5 +150,16 @@ public class DegreeRequirement
 		System.out.print(degreeCode);
 		
 		//degree.print();
+	}
+	
+	/*
+	 * override a toString method
+	 * this will help up be able to display what we want on the JList of this object
+	 * instead of displaying this object's memory address
+	 */
+	
+	@Override
+	public String toString() {
+	    return this.getDegreeRequirementsType();
 	}
 }
