@@ -10,7 +10,7 @@ import java.util.*
 
 public class DegreePlanReqDM {
 	ArrayList<DegreeRequirement> degree_Requirements;
-	
+
 	public ArrayList<DegreeRequirement> getDegree_Requirements() {
 		return degree_Requirements;
 	}
@@ -26,12 +26,12 @@ public class DegreePlanReqDM {
 			readFile(file);
 		}	
 	}
-	
+
 	private void readFile(CsvReader file){
 		try {
 			if (file.readHeaders()){
 				String headers[] = file.getHeaders();
-				
+
 				while (file.readRecord())
 				{
 					String degree_Code = file.get(headers[0]);
@@ -39,16 +39,16 @@ public class DegreePlanReqDM {
 					String hours = file.get(headers[2]);
 					String type = file.get(headers[3]);
 					String courses = file.get(headers[4]);
-					
+
 					// perform program logic here
 					/*System.out.println(degree_Code + " : " + degree_desc + " : " + hours + " : " + type + " : " + courses);*/
-					
+
 					// split the courses to get the course codes
 					if ( !courses.isEmpty()){
-						
+
 						// Make a list of courses by splitting the read courses 
 						ArrayList<String> coursecodes = new ArrayList<String>( Arrays.asList(courses.split(",")));
-						
+
 						// Create a temporary degree requirement object holder
 						DegreeRequirement tempDegreeRequirements = new DegreeRequirement(type, degree_desc, 
 								Integer.parseInt(hours), degree_Code, coursecodes);
@@ -75,12 +75,25 @@ public class DegreePlanReqDM {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public ArrayList<DegreeRequirement> getDegreeRequirementByDegreeName(String degree_name){
+		// add list to return
+		ArrayList<DegreeRequirement> degreeReqs = new ArrayList<DegreeRequirement>();
+
+		if (!degree_name.isEmpty() && !getDegree_Requirements().isEmpty()){
+			for (int i = 0; i < getDegree_Requirements().size(); i++ ){
+				if ( getDegree_Requirements().get(i).getDegreeCode().equals(degree_name)){
+					degreeReqs.add(getDegree_Requirements().get(i));
+				}
+			}
+		}
+		return degreeReqs;
+	}
 	public boolean loadCourses(CourseDM courses){
 		if ( courses != null){
 			for ( int i = 0; i < getDegree_Requirements().size(); i++){
 				for ( int j = 0; j < getDegree_Requirements().get(i).getCourseCodes().size(); j++){
-					
+
 					getDegree_Requirements().get(i).addCourse(courses.getCourseWithCode(getDegree_Requirements().get(i).getCourseCodes().get(j)));
 				}
 			}

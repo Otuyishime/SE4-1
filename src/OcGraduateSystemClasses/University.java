@@ -47,13 +47,14 @@ public class University
 	
 	private ArrayList<Student> students;
 	
-	private ArrayList<StudentCourse> studentcourses;
+	private static ArrayList<StudentCourse> studentcourses;
+	
 	
 	private ArrayList<Faculty> faculties;
 	
 	private ArrayList<Room> rooms;
 	
-	private ArrayList<DegreeRequirement> degreerequirements;
+	private static ArrayList<DegreeRequirement> degreerequirements;
 	
 	// -------------- Accessors ---------------
 	public String getName() {
@@ -108,6 +109,22 @@ public class University
 		this.courses.add(course);
 	}
 	
+	// Faculty
+	public ArrayList<Faculty> getFaculties() {
+		return faculties;
+	}
+	public void setFaculties(ArrayList<Faculty> faculties) {
+		this.faculties = faculties;
+	}
+	public void removeFaculty(Faculty faculty)
+	{
+		this.faculties.remove(faculty);
+	}
+	public void addFaculty(Faculty faculty)
+	{
+		this.faculties.add(faculty);
+	}
+	
 	public ArrayList<Degree> getDegrees() {
 		return degrees;
 	}
@@ -131,7 +148,7 @@ public class University
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
 	}
-
+	
 	public ArrayList<StudentCourse> getStudentcourses() {
 		return studentcourses;
 	}
@@ -139,15 +156,7 @@ public class University
 	public void setStudentcourses(ArrayList<StudentCourse> studentcourses) {
 		this.studentcourses = studentcourses;
 	}
-
-	public ArrayList<Faculty> getFaculties() {
-		return faculties;
-	}
-
-	public void setFaculties(ArrayList<Faculty> faculties) {
-		this.faculties = faculties;
-	}
-
+	
 	public ArrayList<Room> getRooms() {
 		return rooms;
 	}
@@ -183,6 +192,7 @@ public class University
 	 * @param name The name has to be a non-empty string
 	 * @param abbreviation the abbreviation has to be a non-empty string
 	 */
+
 	public University(String name, String abbreviation) {
 		if (!name.isEmpty() && !abbreviation.isEmpty()){
 			setName(name);

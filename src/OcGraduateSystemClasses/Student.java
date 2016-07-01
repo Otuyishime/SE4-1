@@ -92,8 +92,8 @@ public class Student
 					
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
-							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && !stdcourse.getGrade().equals("F")){
 
+							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && !stdcourse.getGrade().equals("F")){
 								requiredcoursestaken.add(reqcourse);
 							}
 						}
@@ -115,6 +115,7 @@ public class Student
 
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
+
 							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && !stdcourse.getGrade().equals("F")){
 								electivecoursestaken.add(reqcourse);
 							}

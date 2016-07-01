@@ -120,7 +120,4 @@ public class Section
 				+ semester.getName() + ", sectionCap=" + sectionCap
 				+ ", academicLevel=" + academicLevel + ", sectionStatus=" + sectionStatus + "]";
 	}
-	
-	
-
 }

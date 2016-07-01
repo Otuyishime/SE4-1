@@ -14,7 +14,10 @@ import OcGraduateSystemClasses.University;
 
 public class AddDegreePlanJPanel extends JPanel {
 	
+	private JTextField textField_code;
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Create the panel.
@@ -28,15 +31,15 @@ public class AddDegreePlanJPanel extends JPanel {
 		lblCreateAndAdd.setBounds(245, 56, 220, 30);
 		add(lblCreateAndAdd);
 		
-		JLabel lblName = new JLabel("Name:");
-		lblName.setBounds(172, 121, 61, 16);
+		JLabel lblName = new JLabel("Code:");
+		lblName.setBounds(100, 120, 85, 25);
 		add(lblName);
 		
-		textField = new JTextField();
-		textField.setToolTipText("");
-		textField.setBounds(245, 116, 200, 26);
-		add(textField);
-		textField.setColumns(10);
+		textField_code = new JTextField();
+		textField_code.setToolTipText("");
+		textField_code.setBounds(200, 120, 250, 25);
+		add(textField_code);
+		textField_code.setColumns(10);
 		
 		// Add button - it adds a new DegreePlan from the creation page
 		JButton btn_addNewDegreePlan = new JButton("Add");
@@ -70,8 +73,34 @@ public class AddDegreePlanJPanel extends JPanel {
 		});
 		btn_cancelNewDegreePlan.setBounds(306, 340, 100, 30);
 		add(btn_cancelNewDegreePlan);
+		
+		JLabel lblNewLabel = new JLabel("Grad School:");
+		lblNewLabel.setBounds(100, 150, 85, 25);
+		add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(200, 149, 250, 25);
+		add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblName_1 = new JLabel("Name:");
+		lblName_1.setBounds(100, 180, 85, 25);
+		add(lblName_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(200, 180, 250, 25);
+		add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblForecast = new JLabel("Forecast:");
+		lblForecast.setBounds(100, 210, 85, 25);
+		add(lblForecast);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(200, 210, 250, 25);
+		add(textField_2);
+		textField_2.setColumns(10);
 
 
 	}
-
 }

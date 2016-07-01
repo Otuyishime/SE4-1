@@ -19,6 +19,41 @@ public class Faculty
 	
 	private boolean teachingDays[];	// this are array will store the 5 working days
 	
+	/*
+	//***************************************
+	// making changes to the load thing
+	
+	private int fallload;
+	private int springload;
+	private int summerload;
+	
+	public int getFallload()
+	{
+		return this.fallload;
+	}
+	public void setFallload(int loadvalue)
+	{
+		this.fallload = loadvalue;
+	}
+	public int getSpringload()
+	{
+		return this.springload;
+	}
+	public void setSpringload(int loadvalue)
+	{
+		springload = loadvalue;
+	}
+	public int getSummerload()
+	{
+		return this.summerload;
+	}
+	public void setSummerload(int loadvalue)
+	{
+		this.summerload = loadvalue;
+	}
+	//***************************************
+	*/
+	
 	// -------------------- Lists -----------------------
 	private ArrayList<FacultyLoad> facultyLoads;
 	
@@ -158,6 +193,29 @@ public class Faculty
 		}
 	}
 	
+	/*
+	// overloaded constructor - we may wanna change this later
+	public Faculty(String firstname, String lastname, String gradschool, String degree, String title, 
+			String teachdays, int fall , int spring, int summer) {
+		if (!firstname.isEmpty() && !lastname.isEmpty() && !gradschool.isEmpty() && !degree.isEmpty() && 
+				!title.isEmpty() && !teachdays.isEmpty()){
+			setFirstName(firstname);
+			setLastName(lastname);
+			setGradSchool(gradschool);
+			setDegree(degree);
+			setTitle(title);
+			setTeachingDays(teachdays);
+			this.setFallload(fall);
+			this.setSpringload(spring);
+			this.setSummerload(summer);
+			// setFacultyLoads(arrayList);
+		}
+		else{
+			throw new UnsupportedOperationException();
+		}
+	}
+	*/
+	
 	public void addCourseCanTeach(Course course) {
 		if ( course != null){
 			getCourses().add(course);
@@ -239,7 +297,10 @@ public class Faculty
 		return 0;
 	}
 	
+//<<<<<<< HEAD
+//=======
 	// Add faculty loads setters
+//>>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
 	public void setFallLoad(int load){
 		if ( load >= 0){
 			getFacultyLoads().get(0).setHours(load);
