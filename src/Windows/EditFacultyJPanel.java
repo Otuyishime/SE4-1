@@ -7,15 +7,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import OcGraduateSystemClasses.Course;
 import OcGraduateSystemClasses.Faculty;
 import OcGraduateSystemClasses.University;
+
+import javax.swing.JList;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class EditFacultyJPanel extends JPanel {
 	
@@ -49,6 +56,11 @@ public class EditFacultyJPanel extends JPanel {
 	private JTextField textField_fallload;
 	private JTextField textField_springload;
 	private JTextField textField_summerload;
+	// private JList list_courses_1;
+	
+	JScrollPane scrollpane_courses;
+	DefaultListModel <Course> listModel_courses;
+	JList list_courses;
 
 	/**
 	 * Create the panel.
@@ -401,6 +413,27 @@ public class EditFacultyJPanel extends JPanel {
 		textField_summerload.setBounds(260, 399, 60, 25);
 		add(textField_summerload);
 		textField_summerload.setColumns(10);
+			
+		listModel_courses = new DefaultListModel<>();
+		for (Course course : university.getCourses())
+			listModel_courses.addElement(course);
+		list_courses = new JList(listModel_courses);
+		list_courses.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// allow view, edit and delete only when there is a selected item
+				if (list_courses.getSelectedValue() != null)
+				{
+					//btnAdd_course_to_degree_req.setEnabled(true);
+				}
+				else
+				{
+					//btnAdd_course_to_degree_req.setEnabled(false);
+				}
+			}
+		});
+		scrollpane_courses = new JScrollPane(list_courses);
+		scrollpane_courses.setBounds(500, 250, 200, 250);
+		add(scrollpane_courses);
 	}
-
 }

@@ -31,9 +31,11 @@ public class EditDegreePlanJPanel extends JPanel {
 	DefaultListModel <DegreeRequirement> listModel_degree_reqs;
 	JList list_degree_reqs;
 	
+	
 	JScrollPane scrollpane_courses;
 	DefaultListModel <Course> listModel_courses;
 	JList list_courses;
+	
 	
 	JScrollPane scrollpane_selected;
 	DefaultListModel <Course> listModel_selected;
