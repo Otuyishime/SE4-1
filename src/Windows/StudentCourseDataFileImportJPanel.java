@@ -16,6 +16,7 @@ import OcGraduateSystemClasses.University;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JTextField;
 
 public class StudentCourseDataFileImportJPanel extends JPanel {
@@ -32,6 +33,8 @@ public class StudentCourseDataFileImportJPanel extends JPanel {
 	public StudentCourseDataFileImportJPanel(JFrame currentFrame, University university) {
 		 
 		fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter( "CSV files (*csv)", "csv");
+		fileChooser.setFileFilter(filter);
 		
 		btnImportStudentCourseDataButton = new JButton("IMPORT");
 		
