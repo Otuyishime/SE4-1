@@ -7,35 +7,62 @@ public class Room
 {
 
 	private Section section;
-	/**
-	 * the building in which the room is located
-	 */
+	
 	private String roombuilding;
-	/**
-	 * the room number to help identify and differentiate rooms
-	 */
+	
 	private int roomNumber;
-	/**
-	 * maximum number of people that can use the room at the same time.
-	 */
-	private int capacity;
 	
 	private boolean available;
 
-	/**
-	 * 
-	 * @param number
-	 * @param building
-	 */
+	// ------------ Accessors ---------------
+	public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
+	}
+
+	public String getRoombuilding() {
+		return roombuilding;
+	}
+
+	public void setRoombuilding(String roombuilding) {
+		this.roombuilding = roombuilding;
+	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
+	// ------------------- Methods -----------------
 	public Room(int room_number, String building) {
-		// TODO - implement Room.Room
 		if ( room_number > 0 && !building.isEmpty()){
-			roomNumber = room_number;
-			roombuilding = building;
+			setRoomNumber( room_number);
+			setRoombuilding( building);
 		}
 		else{
 			throw new UnsupportedOperationException();
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Room [section=" + section + ", roombuilding=" + roombuilding + ", roomNumber=" + roomNumber + "]";
+	}
+	
+	
 
 }

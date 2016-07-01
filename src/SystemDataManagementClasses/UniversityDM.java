@@ -7,6 +7,17 @@ import com.csvreader.CsvReader;
 import java.util.*;
 
 public class UniversityDM {
+	// add all data management classes necessary
+	GradSchoolDM gradSchl;
+	SemesterDM semesters;
+	FacultyDM faculties;
+	CourseDM courses;
+	DegreePlanReqDM degreeReqs;
+	DegreeDM degrees;
+	StudentCourseDM studentcourses;
+	StudentDM students;
+	RoomDM rooms;
+	
 	University university;
 	
 	public University getUniversity() {
@@ -57,49 +68,81 @@ public class UniversityDM {
 			CsvReader file;
 			
 			file = new CsvReader("src/Data/TestDataGradSchools.csv");
-			GradSchoolDM gradSchl = new GradSchoolDM(file);
+			gradSchl = new GradSchoolDM(file);
 			university.setGradSchools(gradSchl.getGradSchools());
 			
 			file = new CsvReader("src/Data/TestDataSemesters.csv");
-			SemesterDM sem = new SemesterDM(file);
-			university.setSemesters(sem.getSemesterData());
+			semesters = new SemesterDM(file);
+			university.setSemesters(semesters.getSemesterData());
 			
 			file = new CsvReader("src/Data/TestDataFaculty.csv");
-			FacultyDM faculty = new FacultyDM(file);
-			university.setFaculties(faculty.getFaculties());
+			faculties = new FacultyDM(file);
+			university.setFaculties(faculties.getFaculties());
 			
 			file = new CsvReader("src/Data/TestDataCourses.csv");
-			CourseDM courses = new CourseDM(file);
-			courses.loadFaculty(faculty);
+			courses = new CourseDM(file);
+			courses.loadFaculty(faculties);
 			university.setCourses(courses.getCourses());
 			
 			file = new CsvReader("src/Data/TestDataDegreePlanReq.csv");
-			DegreePlanReqDM degreeReqs = new DegreePlanReqDM(file);
+			degreeReqs = new DegreePlanReqDM(file);
 			degreeReqs.loadCourses(courses);
 			university.setDegreerequirements(degreeReqs.getDegree_Requirements());
 
 			file = new CsvReader("src/Data/TestDataDegrees.csv");
-			DegreeDM degrees = new DegreeDM(file);
+			degrees = new DegreeDM(file);
 			degrees.loadDegreeRequirements(degreeReqs);
 			university.setDegrees(degrees.getDegreeData());
 			
-			file = new CsvReader("src/Data/STC.DUMP.csv");
-			StudentCourseDM studentcourses = new StudentCourseDM(file);
-			studentcourses.loadCourses(courses);
-			studentcourses.loadSemester(sem);
-			university.setStudentcourses(studentcourses.getStudentCourseData());
-			
-			file = new CsvReader("src/Data/STU.DUMP.csv");
-			StudentDM students = new StudentDM(file);
-			students.loadGraduationSemesters(sem);
-			students.loadStudentDegrees(degrees);
-			students.loadCourseTaken(studentcourses);
-			university.setStudents(students.getStudentData());
+			// add rooms
+			rooms = new RoomDM();
+			university.setRooms(rooms.getRooms());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean importStudents(String studentFileLocation){
+		if ( !studentFileLocation.isEmpty()){
+			try {
+				
+				CsvReader file = new CsvReader(studentFileLocation);
+				students = new StudentDM(file);
+				students.loadGraduationSemesters(semesters);
+				students.loadStudentDegrees(degrees);
+				students.loadCourseTaken(studentcourses);
+				university.setStudents(students.getStudentData());
+				
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean importStudentCourses(String studentCoursesFileLocation){
+		if ( !studentCoursesFileLocation.isEmpty()){
+			try {
+				
+				CsvReader file = new CsvReader(studentCoursesFileLocation);
+				studentcourses = new StudentCourseDM(file);
+				studentcourses.loadCourses(courses);
+				studentcourses.loadSemester(semesters);
+				university.setStudentcourses(studentcourses.getStudentCourseData());
+				
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
 	}
 }

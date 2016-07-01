@@ -213,6 +213,27 @@ public class Course
 		return false;
 	}
 	
+	// Is the course offered in a semester
+	public boolean isOfferedInSemester(Semester semester){
+		if ( semester != null ){
+			String semesterNameAbbreviation = semester.getName().substring(4);
+			
+			switch (semesterNameAbbreviation){
+			case "FA":
+				return isOfferedFall;
+				
+			case "SP":
+				return isOfferedSpring;
+				
+			case "SU":
+				return isOfferedSummer;
+			default:
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	// print course
 	public void print(){
 		// Print the course
@@ -245,6 +266,14 @@ public class Course
 		return result+= ">";
 	}
 	
+	public static boolean containsCourse(ArrayList<Course> list, Course course){
+		for ( Course listCourse: list){
+			if ( listCourse.getCourseCode().equals(course.getCourseCode())){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/*
 	 * override a toString method

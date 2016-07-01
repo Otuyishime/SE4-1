@@ -9,22 +9,53 @@ public class Schedule
 {
 
 	private Semester semester;
+	
 	private ArrayList<Section> sections;
-	/**
-	 * name used to identify a schedule
-	 */
+	
+	private Degree degree;
+	
 	private String title;
-	/**
-	 * list of all courses to be offered in a semester
-	 */
-	private List<Course> courses;
+	
+	public Semester getSemester() {
+		return semester;
+	}
+	
+	public void setSemester(Semester semester) {
+		this.semester = semester;
+	}
+	
+	public ArrayList<Section> getSections() {
+		return sections;
+	}
+	
+	public void setSections(ArrayList<Section> sections) {
+		this.sections = sections;
+	}
+	
+	public Degree getDegree() {
+		return degree;
+	}
 
-	/**
-	 * returns a schedule
-	 */
-	public Semester generateSchedule() {
-		// TODO - implement Schedule.generateSchedule
-		throw new UnsupportedOperationException();
+	public void setDegree(Degree degree) {
+		this.degree = degree;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+
+	public Schedule(String scheduletitle, ArrayList<Section> schedulesections, Degree scheduledegree, Semester schedulesemester){
+		if ( !scheduletitle.isEmpty() && schedulesections != null && scheduledegree != null){
+			this.setTitle(scheduletitle);
+			this.setSections(schedulesections);
+			this.setDegree(scheduledegree);
+			this.setSemester(schedulesemester);
+		}
 	}
 
 }

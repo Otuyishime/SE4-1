@@ -17,7 +17,7 @@ public class Faculty
 	
 	private String title;
 	
-	private String teachingDays;
+	private boolean teachingDays[];	// this are array will store the 5 working days
 	
 	// -------------------- Lists -----------------------
 	private ArrayList<FacultyLoad> facultyLoads;
@@ -65,20 +65,66 @@ public class Faculty
 		this.title = title;
 	}
 
+	public boolean[] getTeachingDays() {
+		return teachingDays;
+	}
+
+	public void setTeachingDays(String teachingdays) {
+		// Initialize the array
+		this.teachingDays = new boolean[teachingdays.length()];
+		
+		if ( !teachingdays.isEmpty()){
+			// create a temporary char array holder
+			String[] temp_chardays_array =  teachingdays.split("");
+			
+			for ( int i = 0; i < temp_chardays_array.length; i++ ){
+				switch(temp_chardays_array[i]){
+				case "M":
+					this.teachingDays[i] = true;
+					break;
+				case "T":
+					this.teachingDays[i] = true;
+					break;
+				case "W":
+					this.teachingDays[i] = true;
+					break;
+				case "R":
+					this.teachingDays[i] = true;
+					break;
+				case "F":
+					this.teachingDays[i] = true;
+					break;	
+				}
+			}
+		}
+	}
+	
+	public int getLoadForSemester(Semester semester){
+		if ( semester != null ){
+			String semesterNameAbbreviation = semester.getName().substring(4);
+			
+			switch (semesterNameAbbreviation){
+			case "FA":
+				return this.getFallLoad();
+				
+			case "SP":
+				return this.getSpringLoad();
+				
+			case "SU":
+				return this.getSummerLoad();
+			default:
+				return 0;
+			}
+		}
+		return 0;
+	}
+
 	private ArrayList<FacultyLoad> getFacultyLoads() {
 		return facultyLoads;
 	}
 
 	private void setFacultyLoads(ArrayList<FacultyLoad> facultyLoads) {
 		this.facultyLoads = facultyLoads;
-	}
-
-	public String getTeachingDays() {
-		return teachingDays;
-	}
-
-	public void setTeachingDays(String teachingDays) {
-		this.teachingDays = teachingDays;
 	}
 	
 	public ArrayList<Course> getCourses() {
@@ -151,6 +197,27 @@ public class Faculty
 		return false;
 	}
 	
+	public boolean canTeachInSemester(Semester semester){
+		if ( semester != null ){
+			String semesterNameAbbreviation = semester.getName().substring(4);
+			
+			switch (semesterNameAbbreviation){
+			case "FA":
+				return this.canTeachFall();
+				
+			case "SP":
+				return this.canTeachSpring();
+				
+			case "SU":
+				return this.canTeachSummer();
+			default:
+				return false;
+			}
+		}
+		
+		return false;
+	}
+	
 	public int getFallLoad(){
 		if ( getFacultyLoads().get(0).getHours() > 0){
 			return getFacultyLoads().get(0).getHours();
@@ -196,6 +263,11 @@ public class Faculty
 		System.out.println(firstName + " : " + lastName + " : " + gradSchool + " : " + degree + " : " + title + " : " + 
 		teachingDays + " : " + getFallLoad() + " : " + getSpringLoad() + " : " + getSummerLoad());
 	}
+
+	@Override
+	public String toString() {
+		return "Faculty [title=" + title + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
 	
 	/*
 	 * override a toString method
@@ -203,8 +275,5 @@ public class Faculty
 	 * instead of displaying this object's memory address
 	 */
 	
-	@Override
-	public String toString() {
-	    return this.lastName + " " + this.firstName;
-	}
+	
 }

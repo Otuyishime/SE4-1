@@ -6,6 +6,7 @@ import com.csvreader.CsvReader;
 
 import java.awt.EventQueue;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Main {	
 	
@@ -20,10 +21,17 @@ public class Main {
 			CsvReader file;
 			file = new CsvReader("src/Data/TestDataUniversityName.csv");
 			universityDM = new UniversityDM(file);
+			
+			// Import Students and student courses
+			String studentsfilelocation = "src/Data/STU.DUMP.csv";
+			String studentcoursesfilelocation = "src/Data/STC.DUMP.csv";
+			
+			universityDM.importStudentCourses(studentcoursesfilelocation);
+			universityDM.importStudents(studentsfilelocation);
+			
 			System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 			university = universityDM.getUniversity();
-			//university.printData();
-			System.out.println(university.getStudents().get(100).getStudentId());
+			
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -44,8 +52,32 @@ public class Main {
 					// create university
 					loadUniversitymain();
 					
-					//SystemJFrame frame = new SystemJFrame(university);
-					//frame.setVisible(true);
+//					for ( Course course : university.generateCoursesNeededByStudentsInDegree(university.getDegrees().get(0), university.getSemesters().get(1))){
+//						course.print();
+//						System.out.print("Number of Students who need the course: ");
+//						System.out.println(university.getNumberStudentsNeedingCourse(university.getStudentsInDegree(university.getDegrees().get(0).getDegreeCode()), course));
+//						System.out.println("professor load available: " + course.getFaculties().get(0).getSummerLoad());
+//						System.out.println("=============================================================================================================");
+//					}
+//					System.out.println();
+//					System.out.println("Total number of students to get the courses: " + university.getStudentsInDegree(university.getDegrees().get(0).getDegreeCode()).size());
+					
+					
+//					ArrayList<Section> sections = university.generateSectionsFromNeededCourses(university.getDegrees().get(0), university.getSemesters().get(1));
+//					System.out.println();
+//					System.out.println("========================================================== SCHEDULE ================================================================");
+//					for (Section section : sections){
+//						System.out.println(section);
+//					}
+					
+					Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(0), university.getSemesters().get(1), (float)(1));
+					ScheduleTester testschedule = new ScheduleTester(schedule, university);
+					testschedule.checkGraduateStudents();
+					
+					//System.out.println(university.generateSectionsFromNeededCourses(university.getDegrees().get(0), university.getSemesters().get(1), (float)(0.75)).size());
+					
+//					SystemJFrame frame = new SystemJFrame(university);
+//					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

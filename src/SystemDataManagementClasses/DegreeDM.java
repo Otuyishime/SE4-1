@@ -23,7 +23,6 @@ public class DegreeDM {
 	public DegreeDM(CsvReader fileName){
 		degreeData =  new ArrayList<Degree>();	
 		readFile(fileName);
-
 	}
 
 	public void readFile(CsvReader file)
@@ -64,23 +63,22 @@ public class DegreeDM {
 		for(Degree degree: degreeData){
 			if (degree.getDegreeCode().equals(degreeCode)){
 				Disereddegree = degree;
-
 			} 	
 		}
 		return Disereddegree;
 	}
 
 	// load the degrees with their respective degree requirements
-		public boolean loadDegreeRequirements(DegreePlanReqDM degreereqs){
+	public boolean loadDegreeRequirements(DegreePlanReqDM degreereqs){
 
-			for(Degree degree: getDegreeData()){
-				for(DegreeRequirement degreeReq: degreereqs.getDegree_Requirements()){
-					if ( degree.getDegreeCode().equals(degreeReq.getDegreeCode())){
-						degree.addDegreeRequirements(degreeReq);
-					}
+		for(Degree degree: getDegreeData()){
+			for(DegreeRequirement degreeReq: degreereqs.getDegree_Requirements()){
+				if ( degree.getDegreeCode().equals(degreeReq.getDegreeCode())){
+					degree.addDegreeRequirements(degreeReq);
 				}
 			}
-
-			return false;
 		}
+
+		return false;
+	}
 }

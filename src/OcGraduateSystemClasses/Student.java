@@ -92,8 +92,8 @@ public class Student
 					
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
-							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode())){
-								
+							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && !stdcourse.getGrade().equals("F")){
+
 								requiredcoursestaken.add(reqcourse);
 							}
 						}
@@ -115,8 +115,7 @@ public class Student
 
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
-							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode())){
-
+							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && !stdcourse.getGrade().equals("F")){
 								electivecoursestaken.add(reqcourse);
 							}
 						}
@@ -170,8 +169,11 @@ public class Student
 			if ( degreereqtomeet.getDegreeRequirementsType().equals("Required") && this.getRequiredHoursNeeded() > requiredHrsTaken){
 
 				for ( Course coursetotake: degreereqtomeet.getCourses()){
-					if ( !containsCourse(getRequiredCoursesTaken(), coursetotake)){
-						coursesrquiredneedtotake.add(coursetotake);
+					if ( !Course.containsCourse(getRequiredCoursesTaken(), coursetotake)){
+						
+						if ( !Course.containsCourse(coursesrquiredneedtotake, coursetotake)){
+							coursesrquiredneedtotake.add(coursetotake);
+						}
 					}
 				}
 			}
@@ -191,8 +193,11 @@ public class Student
 			if ( degreereqtomeet.getDegreeRequirementsType().equals("Elective") && degreereqtomeet.getHours() > electiveHrs){
 				
 				for ( Course coursetotake: degreereqtomeet.getCourses()){
-					if ( !containsCourse(getElectiveCoursesTaken(), coursetotake)){
-						courseselectiveneedtotake.add(coursetotake);
+					if ( !Course.containsCourse(getElectiveCoursesTaken(), coursetotake)){
+						
+						if ( !Course.containsCourse(courseselectiveneedtotake, coursetotake)){
+							courseselectiveneedtotake.add(coursetotake);
+						}
 					}
 				}
 			}
@@ -201,27 +206,38 @@ public class Student
 		return courseselectiveneedtotake;
 	}
 	
-	private boolean haspassedCourse(Course course){
-		for ( StudentCourse stdCourse : this.getStudentcoursesTaken()){
-			if ( stdCourse.getCourse().getCourseCode().equals(course.getCourseCode())){
-				if ( stdCourse.getGrade().equals("F") || stdCourse.getGrade().equals("I")){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-	
-	private ArrayList<Course> getCoursesNeedToRetake(){
+	public ArrayList<Course> getCoursesNeedToRetake(){
 		
 		ArrayList<Course> coursesToRetake = new ArrayList<Course>();
 		for ( StudentCourse stdCourse : this.getStudentcoursesTaken()){
-				if ( stdCourse.getGrade().equals("F") || stdCourse.getGrade().equals("I")){
+				if ( stdCourse.getGrade().equals("F")){
 					coursesToRetake.add(stdCourse.getCourse());
 				}
 		}
 		
 		return coursesToRetake;
+	}
+	
+	public ArrayList<Course> getCoursesNeedTotake(){
+
+		ArrayList<Course> coursesTotake = new ArrayList<Course>();
+
+		for ( Course stdCourse : this.getElectiveCoursesNeedToTake()){
+			coursesTotake.add(stdCourse);
+		}
+		
+		for ( Course stdCourse : this.getRequiredCoursesNeedToTake()){
+			coursesTotake.add(stdCourse);
+		}
+		
+		return coursesTotake;
+	}
+	
+	public boolean isGraduatingStudent(){
+		if ( (this.getRequiredCoursesNeedToTake().size() + this.getElectiveCoursesNeedToTake().size()) <= 4){
+			return true;
+		}
+		return false;
 	}
 	
 	public void print(){
@@ -241,19 +257,15 @@ public class Student
 		}
 	}
 	
-	public void printReqCoursesToTake(){
-		for ( Course course: getRequiredCoursesNeedToTake()){
+	public void printElectiveCoursesToTake(){
+		for ( Course course: getElectiveCoursesNeedToTake()){
 			course.print();
 		}
 	}
 	
-	// ------------ Helper method -------------
-	private boolean containsCourse(ArrayList<Course> list, Course course){
-		for ( Course listCourse: list){
-			if ( listCourse.getCourseCode().equals(course.getCourseCode())){
-				return true;
-			}
+	public void printReqCoursesToTake(){
+		for ( Course course: getRequiredCoursesNeedToTake()){
+			course.print();
 		}
-		return false;
 	}
 }
