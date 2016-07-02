@@ -9,6 +9,8 @@ import java.awt.EventQueue;
 import java.io.*;
 import java.util.ArrayList;
 
+import javax.swing.JDialog;
+
 public class Main {	
 	
 	// TODO - we need to import and read the university name inside the UniversityDM
@@ -31,7 +33,7 @@ public class Main {
 			universityDM.importStudentCourses(studentcoursesfilelocation);
 			universityDM.importStudents(studentsfilelocation);
 			
-			System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
+		//	System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -79,6 +81,12 @@ public class Main {
 					
 //					SystemJFrame frame = new SystemJFrame(university);
 //					frame.setVisible(true);
+				//	Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(0), university.getSemesters().get(1), (float)(1));
+				//ScheduleTester testschedule = new ScheduleTester(schedule, university);
+					
+				//System.out.println(university.generateSectionsFromNeededCourses(university.getDegrees().get(0), university.getSemesters().get(1), (float)(0.75)).size());
+				
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

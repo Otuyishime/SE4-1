@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 
 import OcGraduateSystemClasses.University;
@@ -47,15 +48,16 @@ public class SystemJFrame extends JFrame {
 		
 		JMenuItem mntmLogin = new JMenuItem("Login");
 		mnSystem.add(mntmLogin);
+		JMenuItem mntmUserAcount = new JMenuItem("Maintain User Account");
+		mnSystem.add(mntmUserAcount);
 		
 		JMenu mnImport = new JMenu("Import");
 		menuBar.add(mnImport);
 		
-		JMenuItem mntmStudentCourseData = new JMenuItem("Student Course Data");
-		mnImport.add(mntmStudentCourseData);
 		
-		JMenuItem mntmStudentData = new JMenuItem("Student Data");
-		mnImport.add(mntmStudentData);
+//		
+//		JMenuItem mntmStudentData = new JMenuItem("Student Data");
+//		mnImport.add(mntmStudentData);
 		
 		JMenu mnMaintain = new JMenu("Maintain");
 		menuBar.add(mnMaintain);
@@ -72,6 +74,33 @@ public class SystemJFrame extends JFrame {
 				getContentPane().revalidate();
 			}
 		});
+		
+		// create Import Student data menu and click listener
+		
+		JMenuItem mntmStudentData = new JMenuItem("Student Data");
+		mnImport.add(mntmStudentData);
+		mntmStudentData.addActionListener(new ActionListener(){
+			 public void actionPerformed(ActionEvent e) {
+					System.out.println("Importing student  data...");
+				getContentPane().removeAll();
+				getContentPane().add(new StudentDataFileImportJPanel(currentFrame, university));
+				getContentPane().revalidate();
+				}
+			
+		});
+		
+		// Create Import Menu and click listener
+		JMenuItem mntmStudentCourseData = new JMenuItem("Student Course Data");
+		 mnImport.add(mntmStudentCourseData);
+		 mntmStudentCourseData.addActionListener(new ActionListener ()
+		 {
+		 public void actionPerformed(ActionEvent e) {
+			System.out.println("Importing student course data...");
+		getContentPane().removeAll();
+		getContentPane().add(new StudentCourseDataFileImportJPanel(currentFrame, university));
+		getContentPane().revalidate();
+		}
+	 });
 		
 		// create University menu and click event listener
 		JMenuItem mntmUniversity = new JMenuItem("University");		
