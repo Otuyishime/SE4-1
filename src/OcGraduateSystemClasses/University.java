@@ -219,26 +219,40 @@ public class University
 		// Create a priority queue of schedule courses
 		PriorityQueue<ScheduleCourse> scheduleCourses = new PriorityQueue<ScheduleCourse>();
 		
+//		for ( Student student : getStudentsInDegree(degree.getDegreeCode())){
+//			
+//			// Add the required courses first
+//			for ( Course course : student.getRequiredCoursesNeedToTake()){
+//				
+//				// make a temporary schedule course
+//				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
+//				
+//				// add schedule course to the list if it is not already on list
+//				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
+//					scheduleCourses.add(schCourse);
+//				}
+//			}
+//			
+//			// Add the elective courses last
+//			for ( Course course : student.getElectiveCoursesNeedToTake()){
+//
+//				// make a temporary schedule course
+//				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
+//
+//				// add schedule course to the list if it is not already on list
+//				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
+//					scheduleCourses.add(schCourse);
+//				}
+//			}
+//		}
+		
 		for ( Student student : getStudentsInDegree(degree.getDegreeCode())){
-			
-			// Add the required courses first
-			for ( Course course : student.getRequiredCoursesNeedToTake()){
+			// get all the course needed by the student
+			for ( Course course : student.getCoursesNeedTotake()){
 				
 				// make a temporary schedule course
 				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
 				
-				// add schedule course to the list if it is not already on list
-				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
-					scheduleCourses.add(schCourse);
-				}
-			}
-			
-			// Add the elective courses last
-			for ( Course course : student.getElectiveCoursesNeedToTake()){
-
-				// make a temporary schedule course
-				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
-
 				// add schedule course to the list if it is not already on list
 				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
 					scheduleCourses.add(schCourse);

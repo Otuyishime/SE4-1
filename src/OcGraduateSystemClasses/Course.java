@@ -234,6 +234,30 @@ public class Course
 		return false;
 	}
 	
+	// print semesters in which the course is offered
+	public String isOfferedInSemesters_str(){
+		// create a string to return
+		String semestersInWhichCourseOffered = "";
+		if ( this.isOfferedFall){
+			semestersInWhichCourseOffered += "Fall";
+		}
+		
+		if ( semestersInWhichCourseOffered.length() > 1){
+			semestersInWhichCourseOffered += " and ";
+		}
+		
+		if ( this.isOfferedSpring){
+			semestersInWhichCourseOffered += "Spring";
+		}
+		
+		if ( this.isOfferedSummer){
+			semestersInWhichCourseOffered += " and ";
+			semestersInWhichCourseOffered += "Summer";
+		}
+
+		return semestersInWhichCourseOffered;
+	}
+	
 	// print course
 	public void print(){
 		// Print the course

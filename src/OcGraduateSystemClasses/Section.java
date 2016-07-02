@@ -105,7 +105,7 @@ public class Section
 		}
 	}
 	
-	public static boolean containsCourse(ArrayList<Section> listOfSections, Course course){
+	public static boolean sectionsContainCourse(ArrayList<Section> listOfSections, Course course){
 		for ( Section section: listOfSections){
 			if ( section.getCourse().getCourseCode().equals(course.getCourseCode())){
 				return true;
