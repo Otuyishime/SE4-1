@@ -116,7 +116,7 @@ public class Section
 
 	@Override
 	public String toString() {
-		return "Section [course= " + course.getCourseName() + " faculty=" + faculty.getLastName() + ", sectionNumber= 0" + sectionNumber + ", room=" + room.getRoomNumber() + ", semester="
+		return "Section [course= " + course.getCourseName() + " faculty=" + faculty.getFirstName() + ", sectionNumber= 0" + sectionNumber + ", room=" + room.getRoomNumber() + ", semester="
 				+ semester.getName() + ", sectionCap=" + sectionCap
 				+ ", academicLevel=" + academicLevel + ", sectionStatus=" + sectionStatus + "]";
 	}

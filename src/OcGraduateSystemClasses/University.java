@@ -306,12 +306,14 @@ public class University
 					// use a counter to count to know when to stop looping
 					int loopSectionsGenerationAndAssignment = 1;
 					int loopFaculties  = 1;
+					int limitFaculties = 1;
+					
 					while ( possibleNumberOfSections >= loopSectionsGenerationAndAssignment){
 						for ( Faculty coursefaculty : courseFaculties ){
-							if ( coursefaculty.canTeachInSemester(semester)){	// check if the faculty can teach for the semester
+							if ( coursefaculty.canTeachInSemester(semester) && possibleNumberOfSections >= loopSectionsGenerationAndAssignment ){	// check if the faculty can teach for the semester
 								
 								// Make sure the section assignment does not go over the faculty's semester load
-								if ( (coursefaculty.getLoadForSemester(semester) / loopSectionsGenerationAndAssignment) != neededcourse.getCreditHours()){
+								if ((coursefaculty.getLoadForSemester(semester) / loopFaculties) >= neededcourse.getCreditHours()){
 									
 									// Create a section and add it to the list
 									Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
@@ -320,8 +322,12 @@ public class University
 									sections.add(tempSection);
 								}
 							}
-//							// update the section counter
-//							loopSectionsGenerationAndAssignment++;
+							// update the section counter
+							if ( limitFaculties == courseFaculties.size()){
+								loopFaculties++;
+							}
+							limitFaculties++;
+							loopSectionsGenerationAndAssignment++;
 						}
 						
 						// update the section counter

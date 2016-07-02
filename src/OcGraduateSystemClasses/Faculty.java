@@ -244,10 +244,6 @@ public class Faculty
 		return 0;
 	}
 	
-//<<<<<<< HEAD
-//=======
-	// Add faculty loads setters
-//>>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
 	public void setFallLoad(int load){
 		if ( load >= 0){
 			getFacultyLoads().get(0).setHours(load);
