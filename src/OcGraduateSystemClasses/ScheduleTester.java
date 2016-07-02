@@ -63,7 +63,6 @@ public class ScheduleTester
 					}
 					
 					isMissingSomeCourses = true;
-					
 				}
 			}
 			
@@ -87,7 +86,14 @@ public class ScheduleTester
 			}
 		}
 	}
-
+	
+	// check the sections percentage full
+	public void checkSectionsPercentageFull(){
+		// Loop through all the sections
+		for ( Section section : this.getSchedule().getSections()){
+			System.out.println(section.getCourse().getCourseCode() + " " + section.getCourse().getCourseName() + ": " + section.percentageFull());
+		}
+	}
 	/**
 	 * returns all future students who will benefit from the schedule
 	 */

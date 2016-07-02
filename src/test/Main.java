@@ -95,9 +95,14 @@ public class Main {
 					
 //					SystemJFrame frame = new SystemJFrame(university);
 //					frame.setVisible(true);
-					Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(1), university.getSemesters().get(2), (float)(1));
+					Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(0), university.getSemesters().get(2), (float)(1));
 					ScheduleTester testschedule = new ScheduleTester(schedule, university);
+					System.out.println();
+					System.out.println("Graduating students:");
 					testschedule.checkGraduateStudents();
+					System.out.println();
+					System.out.println("Percentages: ");
+					testschedule.checkSectionsPercentageFull();
 				
 					
 				} catch (Exception e) {
