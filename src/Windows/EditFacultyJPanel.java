@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -58,14 +59,26 @@ public class EditFacultyJPanel extends JPanel {
 	private JTextField textField_summerload;
 	// private JList list_courses_1;
 	
+	
 	JScrollPane scrollpane_courses;
 	DefaultListModel <Course> listModel_courses;
 	JList list_courses;
+	
+	
+	JScrollPane scrollpane_selected;
+	DefaultListModel <Course> listModel_selected;
+	JList list_courses_selected;
+	private ArrayList<Course> selected_courses;
+	
+	JButton btnAdd_course_to_degree_req;
+	JButton btnRemove_course_from_degree_req;
 
 	/**
 	 * Create the panel.
 	 */
 	public EditFacultyJPanel(JFrame currentFrame, University university, Faculty currentFaculty) {
+		
+		selected_courses = new ArrayList<Course>();
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -274,6 +287,9 @@ public class EditFacultyJPanel extends JPanel {
 				currentFaculty.setSpringLoad(spring);
 				currentFaculty.setSummerLoad(summer);
 				
+				System.out.println(selected_courses.size());
+				currentFaculty.setCourses(selected_courses);
+				
 				currentFrame.getContentPane().removeAll();
 				currentFrame.getContentPane().add(new FacultyListJPanel(currentFrame, university));
 				currentFrame.revalidate();	
@@ -414,6 +430,34 @@ public class EditFacultyJPanel extends JPanel {
 		add(textField_summerload);
 		textField_summerload.setColumns(10);
 			
+		
+		listModel_selected = new DefaultListModel<>();
+		System.out.println("size***** " + currentFaculty.getCourses().size());
+		for (Course course : currentFaculty.getCourses())
+		{
+			listModel_selected.addElement(course);
+			selected_courses.add(course);
+		}
+		list_courses_selected = new JList(listModel_selected);
+		list_courses_selected.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// allow view, edit and delete only when there is a selected item
+				if (list_courses_selected.getSelectedValue() != null)
+				{
+					btnRemove_course_from_degree_req.setEnabled(true);
+				}
+				else
+				{
+					btnRemove_course_from_degree_req.setEnabled(false);
+				}
+			}
+		});
+		scrollpane_selected = new JScrollPane(list_courses_selected);
+		scrollpane_selected.setBounds(500, 120, 200, 105);
+		add(scrollpane_selected);
+		
+		
 		listModel_courses = new DefaultListModel<>();
 		for (Course course : university.getCourses())
 			listModel_courses.addElement(course);
@@ -424,16 +468,72 @@ public class EditFacultyJPanel extends JPanel {
 				// allow view, edit and delete only when there is a selected item
 				if (list_courses.getSelectedValue() != null)
 				{
-					//btnAdd_course_to_degree_req.setEnabled(true);
+					btnAdd_course_to_degree_req.setEnabled(true);
 				}
 				else
 				{
-					//btnAdd_course_to_degree_req.setEnabled(false);
+					btnAdd_course_to_degree_req.setEnabled(false);
 				}
 			}
 		});
 		scrollpane_courses = new JScrollPane(list_courses);
 		scrollpane_courses.setBounds(500, 250, 200, 250);
 		add(scrollpane_courses);
+		
+		// JButton btnAdd_course_to_degree_req;
+		btnAdd_course_to_degree_req = new JButton("Add");
+		btnAdd_course_to_degree_req.setEnabled(false);
+		btnAdd_course_to_degree_req.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// get the selected course and add it to the appropriate place
+				Course selectedCourse = (Course) list_courses.getSelectedValue();	
+				selected_courses.add(selectedCourse);
+				System.out.println("Added course -- " + selectedCourse.getCourseName() + " -- " + selected_courses.size() );
+				listModel_selected.addElement(selectedCourse);	
+				
+				/*
+				if (selected_courses.size() == 0)
+					courses_ok = false;
+				else
+					courses_ok = true;
+		
+				// enable the add button
+				if (description_ok & hours_ok & type_ok & courses_ok)
+					btn_update_degree_req.setEnabled(true);
+				else
+					btn_update_degree_req.setEnabled(false);
+					*/
+			}
+		});
+		btnAdd_course_to_degree_req.setBounds(703, 249, 50, 25);
+		add(btnAdd_course_to_degree_req);
+		
+		// JButton btnRemove_course_from_degree_req;
+		btnRemove_course_from_degree_req = new JButton("Remove");
+		btnRemove_course_from_degree_req.setEnabled(false);
+		btnRemove_course_from_degree_req.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Course selectedCourse = (Course) list_courses_selected.getSelectedValue();	
+				selected_courses.remove(selectedCourse);
+				System.out.println("Removed course -- " + selectedCourse.getCourseName() + " -- " + selected_courses.size() );
+				listModel_selected.removeElement(selectedCourse);
+				
+				/*
+				if (selected_courses.size() == 0)
+					courses_ok = false;
+				else
+					courses_ok = true;
+		
+				// enable the add button
+				if (description_ok & hours_ok & type_ok & courses_ok)
+					btn_update_degree_req.setEnabled(true);
+				else
+					btn_update_degree_req.setEnabled(false);
+					*/
+			}
+		});
+		btnRemove_course_from_degree_req.setBounds(704, 121, 80, 25);
+		add(btnRemove_course_from_degree_req);
 	}
 }

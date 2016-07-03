@@ -70,8 +70,8 @@ public class Main {
 //						System.out.println(section);
 //					}
 					
-					Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(0), university.getSemesters().get(1), (float)(1));
-					ScheduleTester testschedule = new ScheduleTester(schedule, university);
+					//Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(0), university.getSemesters().get(1), (float)(1));
+					//ScheduleTester testschedule = new ScheduleTester(schedule, university);
 					
 					//System.out.println(university.generateSectionsFromNeededCourses(university.getDegrees().get(0), university.getSemesters().get(1), (float)(0.75)).size());
 				

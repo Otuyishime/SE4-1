@@ -42,6 +42,7 @@ public class EditDegreePlanJPanel extends JPanel {
 	JList list_courses_selected;
 	private ArrayList<Course> selected_courses;
 	
+	
 	private ArrayList<DegreeRequirement> degreeRequirements;
 	
 	private JTextField textField_code;
@@ -470,11 +471,6 @@ public class EditDegreePlanJPanel extends JPanel {
 		
 		//currentDegreePlanReq
 		listModel_selected = new DefaultListModel<>();
-		//for (Course course : selected_courses)
-			//listModel_selected.addElement(course);
-		//System.out.println("******** - " + currentDegreePlanReq.getCourses().size());
-		//for (Course course : currentDegreePlanReq.getCourses())
-			//listModel_selected.addElement(course);
 		list_courses_selected = new JList(listModel_selected);
 		list_courses_selected.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
