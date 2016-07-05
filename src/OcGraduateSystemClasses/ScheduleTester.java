@@ -67,6 +67,12 @@ public class ScheduleTester
 			
 			if ( isMissingSomeCourses){
 				numberGraduatingStudentsWithoutAllNeededCourses ++;
+				System.out.println(gradStudent.getStudentId());
+//				gradStudent.printReqCoursesToTake();
+//				gradStudent.printElectiveCoursesToTake();
+//				System.out.println(gradStudent.getElectiveCoursesTaken().size() * 3);
+//				System.out.println();
+				//System.out.println(gradStudent.getRequiredHoursNeeded());
 			}
 		}
 		

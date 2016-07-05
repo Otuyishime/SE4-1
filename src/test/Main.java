@@ -54,7 +54,10 @@ public class Main {
 					// create university
 					loadUniversitymain();
 					
-//					for ( Course course : university.generateCoursesNeededByStudentsInDegree(university.getDegrees().get(3), university.getSemesters().get(2))){
+					// ---- testing semester ------
+					Semester sem = new Semester("2017SP"); 
+					
+//					for ( Course course : university.generateCoursesNeededByStudentsInDegree(university.getDegrees().get(3), sem)){
 //						course.print();
 //						System.out.print("Number of Students who need the course: ");
 //						System.out.println(university.getNumberStudentsNeedingCourse(university.getStudentsInDegree(university.getDegrees().get(3).getDegreeCode()), course));
@@ -93,16 +96,33 @@ public class Main {
 //					System.out.println(university.generateSectionsFromNeededCourses(university.getDegrees().get(0), university.getSemesters().get(1), (float)(0.75)).size());
 				
 					
-					SystemJFrame frame = new SystemJFrame(university);
-					frame.setVisible(true);
-					Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(0), university.getSemesters().get(2), (float)(1));
-					ScheduleTester testschedule = new ScheduleTester(schedule, university);
-					System.out.println();
-					System.out.println("Graduating students:");
-					testschedule.checkGraduateStudents();
-					System.out.println();
-					System.out.println("Percentages: ");
-					testschedule.checkSectionsPercentageFull();
+					//SystemJFrame frame = new SystemJFrame(university);
+					//frame.setVisible(true);
+					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", sem);
+					System.out.println("========================================================== SCHEDULE ================================================================");
+					for (Schedule schedule : schedules ){
+						ArrayList<Section> sections = schedule.getSections();
+						System.out.println();
+						System.out.println("================================================" +  schedule.getDegree().getDegreeName() + "================================================");
+						for (Section section : sections){
+							System.out.println(section);
+						}
+					}
+//					Schedule schedule = university.generateSchedule("First Schedule", university.getDegrees().get(0), sem);
+//					
+//					
+//					
+//					ScheduleTester testschedule = new ScheduleTester(schedule, university);
+//					System.out.println();
+//					System.out.println("Graduating students:");
+//					testschedule.checkGraduateStudents();
+//					
+//					System.out.println(university.getDegrees().get(0).getDegreeCode());
+//					System.out.println(university.getGraduatingStudentsInDegreeForSemester(university.getDegrees().get(0).getDegreeCode(), sem).size());
+					
+//					System.out.println();
+//					System.out.println("Percentages: ");
+//					testschedule.checkSectionsPercentageFull();
 				
 					
 				} catch (Exception e) {

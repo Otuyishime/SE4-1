@@ -247,42 +247,28 @@ public class University
 		
 		if ( degree != null && semester != null){
 			
-			System.out.println("in degree and sem ...!!!");
-			
 			// create a list of needed courses
 			ArrayList<Course> neededCourses = generateCoursesNeededByStudentsInDegree(degree, semester);
 			
 			// generate sections
 			for ( Course neededcourse : neededCourses){
 				
-				System.out.println("in needecourse ...!!!");
-				
 				// Loop through all the faculties who can teach
 				
 				ArrayList<Faculty> courseFaculties = neededcourse.getFaculties();	// get all the faculties for the course
 				if ( courseFaculties != null ){
 					
-					System.out.println("in course faculty ...!!!");
 					// Loop through all faculties
 					
 					// get the number of all students who need to take the course
 					// include also the number of forecast students
 					int numberOfStudentsNeedingTheCourses = getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()), neededcourse) + degree.getForecast();
 					
-					System.out.println("in numberOfStudentsNeedingTheCourses: " + numberOfStudentsNeedingTheCourses);
-					
-					System.out.println(neededcourse.getCourseName());
-					
 					// get the possible number of sections needed
 					// add 0.5 to round the numbers
 					
-					System.out.println("num section: " + (((float)numberOfStudentsNeedingTheCourses) / 
-							(int)(((float)neededcourse.getCourseCap()))));
-					
 					int possibleNumberOfSections = Math.round((((float)numberOfStudentsNeedingTheCourses) / 
 							(int)(((float)neededcourse.getCourseCap()))) + (float)(0.5));
-					
-					System.out.println("in possibleNumberOfSections: " + possibleNumberOfSections);
 					/*
 					 * Generate the sections using the possible number of sections
 					 * - Use the number of sections to loop through the faculties and determine who can teach each section
@@ -332,7 +318,6 @@ public class University
 						
 						// update the section counter
 						loopSectionsGenerationAndAssignment++;
-						System.out.println("in while!!!");
 					}
 				}
 				
@@ -342,11 +327,27 @@ public class University
 		return sections;
 	}
 	
-	public Schedule generateSchedule(String scheduletitle, Degree scheduledegree, Semester schedulesemester, float sectionThresholdPercentage){
+	// add a method to generate a schedule for a particular degree and semester 
+	public Schedule generateSchedule(String scheduletitle, Degree scheduledegree, Semester schedulesemester){
 		// create a temporary schedule to return
 		Schedule temp_schedule = new Schedule(scheduletitle, generateSectionsFromNeededCourses(scheduledegree, schedulesemester), scheduledegree, schedulesemester);
 		
 		return temp_schedule;
+	}
+	
+	// add a method to generate a schedule for all degrees in particular semester
+	public ArrayList<Schedule> generateScheduleForDegreesInSemester(String scheduletitle, Semester schedulesemester){
+
+		// Create the list to return
+		ArrayList<Schedule> temp_schedules = new ArrayList<Schedule>();
+
+		for ( Degree degree : this.getDegrees()){
+			// create a temporary schedule to return
+			Schedule temp_schedule = new Schedule(scheduletitle, generateSectionsFromNeededCourses(degree, schedulesemester), degree, schedulesemester);
+			temp_schedules.add(temp_schedule);
+		}
+
+		return temp_schedules;
 	}
 	
 	/*************************************************************************************/
