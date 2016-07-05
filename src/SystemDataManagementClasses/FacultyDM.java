@@ -1,5 +1,6 @@
 package SystemDataManagementClasses;
 
+import OcGraduateSystemClasses.Course;
 import OcGraduateSystemClasses.Faculty;
 import OcGraduateSystemClasses.FacultyLoad;
 import OcGraduateSystemClasses.Semester;
@@ -8,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.csvreader.CsvReader;
+
 import java.util.*;
 
 public class FacultyDM {
@@ -111,5 +113,19 @@ public class FacultyDM {
 			}
 		}
 		return null;
+	}
+	
+	public boolean loadCoursesForFaculties(CourseDM courses){
+		if ( courses != null ){
+			
+			// Loop through all faculties
+			for ( Course course : courses.getCourses()){
+				// Loop through all courses and their faculties
+				for ( Faculty faculty : course.getFaculties()){
+					faculty.getCoursesCanTeach().add(course);
+				}
+			}
+		}
+		return true;
 	}
 }

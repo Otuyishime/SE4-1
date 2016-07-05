@@ -83,6 +83,7 @@ public class UniversityDM {
 			courses = new CourseDM(file);
 			courses.loadFaculty(faculties);
 			university.setCourses(courses.getCourses());
+			faculties.loadCoursesForFaculties(courses);
 			
 			file = new CsvReader("src/Data/TestDataDegreePlanReq.csv");
 			degreeReqs = new DegreePlanReqDM(file);
