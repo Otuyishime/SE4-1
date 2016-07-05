@@ -365,12 +365,12 @@ public class University
 		return stdsInDegree;
 	}
 	
-	public ArrayList<Student> getGraduatingStudentsInDegree(String degreeCode){
+	public ArrayList<Student> getGraduatingStudentsInDegreeForSemester(String degreeCode, Semester semester){
 		// create a list of graduating students to return
 		ArrayList<Student> gradStdsInDegree = new ArrayList<Student>();
 		
 		for ( Student student : this.getStudentsInDegree(degreeCode)){
-			if ( student.isGraduatingStudent()){
+			if ( student.isGraduatingStudentInSemester(semester)){
 				gradStdsInDegree.add(student);
 			}
 		}

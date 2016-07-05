@@ -234,9 +234,11 @@ public class Student
 		return coursesTotake;
 	}
 	
-	public boolean isGraduatingStudent(){
-		if ( (this.getRequiredCoursesNeedToTake().size() + this.getElectiveCoursesNeedToTake().size()) <= 4){
-			return true;
+	public boolean isGraduatingStudentInSemester(Semester semester){
+		if ( semester != null ){
+			if (this.getGraduationsemesterName().equals(semester.getName())){
+				return true;
+			}
 		}
 		return false;
 	}

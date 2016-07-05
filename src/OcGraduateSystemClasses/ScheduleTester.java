@@ -42,8 +42,7 @@ public class ScheduleTester
 		int numberGraduatingStudentsWithoutAllNeededCourses = 0;
 		
 		// get all graduate students
-		ArrayList<Student> graduatingstudents = this.getUniversity().getGraduatingStudentsInDegree(this.getSchedule().getDegree().getDegreeCode());
-		
+		ArrayList<Student> graduatingstudents = this.getUniversity().getGraduatingStudentsInDegreeForSemester(this.getSchedule().getDegree().getDegreeCode(), this.getSchedule().getSemester());
 		// get all missing courses
 		ArrayList<Course> missingCoursesToGraduate = new ArrayList<Course>();
 		

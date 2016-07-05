@@ -251,7 +251,9 @@ public class Course
 		}
 		
 		if ( this.isOfferedSummer){
-			semestersInWhichCourseOffered += " and ";
+			if ( semestersInWhichCourseOffered.length() > 1){
+				semestersInWhichCourseOffered += " and ";
+			}
 			semestersInWhichCourseOffered += "Summer";
 		}
 
