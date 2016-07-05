@@ -17,7 +17,7 @@ public class Faculty
 	
 	private String title;
 	
-	private boolean teachingDays[];	
+	private boolean [] teachingDays;	
 	
 	// -------------------- Lists -----------------------
 	private ArrayList<FacultyLoad> facultyLoads;
@@ -76,7 +76,7 @@ public class Faculty
 
 	public void setTeachingDays(String teachingdays) {
 		// Initialize the array
-		this.teachingDays = new boolean[teachingdays.length()];
+		//this.teachingDays = new boolean[teachingdays.length()];
 		
 		if ( !teachingdays.isEmpty()){
 			// create a temporary char array holder
@@ -85,19 +85,19 @@ public class Faculty
 			for ( int i = 0; i < temp_chardays_array.length; i++ ){
 				switch(temp_chardays_array[i]){
 				case "M":
-					this.teachingDays[i] = true;
+					this.teachingDays[0] = true;
 					break;
 				case "T":
-					this.teachingDays[i] = true;
+					this.teachingDays[1] = true;
 					break;
 				case "W":
-					this.teachingDays[i] = true;
+					this.teachingDays[2] = true;
 					break;
 				case "R":
-					this.teachingDays[i] = true;
+					this.teachingDays[3] = true;
 					break;
 				case "F":
-					this.teachingDays[i] = true;
+					this.teachingDays[4] = true;
 					break;	
 				}
 			}
@@ -155,10 +155,16 @@ public class Faculty
 			setGradSchool(gradschool);
 			setDegree(degree);
 			setTitle(title);
-			setTeachingDays(teachdays);
+			
 			setFacultyLoads(arrayList);
 			
 			this.courses = new ArrayList<Course>();
+			
+			teachingDays = new boolean[5];
+			for (int i = 0; i < 5; i++)
+				teachingDays[i] = false;
+			
+			setTeachingDays(teachdays);
 		}
 		else{
 			throw new UnsupportedOperationException();

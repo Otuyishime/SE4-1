@@ -24,6 +24,8 @@ import OcGraduateSystemClasses.University;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class EditFacultyJPanel extends JPanel {
 	
@@ -72,6 +74,8 @@ public class EditFacultyJPanel extends JPanel {
 	
 	JButton btnAdd_course_to_degree_req;
 	JButton btnRemove_course_from_degree_req;
+	
+	String days;
 
 	/**
 	 * Create the panel.
@@ -79,6 +83,7 @@ public class EditFacultyJPanel extends JPanel {
 	public EditFacultyJPanel(JFrame currentFrame, University university, Faculty currentFaculty) {
 		
 		selected_courses = new ArrayList<Course>();
+		days = "";
 		
 		setBounds(new Rectangle(0, 0, 700, 650));
 		setLayout(null);
@@ -223,16 +228,30 @@ public class EditFacultyJPanel extends JPanel {
 		add(textField_title);
 		textField_title.setColumns(10);
 		
-		JCheckBox chckbxMonday = new JCheckBox("Monday");
-		chckbxMonday.setBounds(180, 270, 100, 25);
-		// TODO - work on this
-		chckbxMonday.setSelected(true);
-		add(chckbxMonday);
-		
 		JLabel lblDays = new JLabel("Days:");
 		lblDays.setBounds(100, 270, 80, 25);
 		add(lblDays);
 		
+		JCheckBox chckbxMonday = new JCheckBox("Monday");
+		chckbxMonday.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("days - " + days);
+				if (chckbxMonday.isSelected())
+				{
+					System.out.println("Selected");
+				}
+				else
+				{
+					System.out.println("Not Selected");
+				}
+			}
+		});
+		chckbxMonday.setBounds(180, 270, 100, 25);
+		// TODO - work on this
+		//chckbxMonday.setSelected(true);
+		add(chckbxMonday);
+		
+	
 		JCheckBox chckbxTuesday = new JCheckBox("Tuesday");
 		chckbxTuesday.setBounds(285, 270, 100, 25);
 		add(chckbxTuesday);
@@ -244,12 +263,46 @@ public class EditFacultyJPanel extends JPanel {
 		JCheckBox chckbxThursday = new JCheckBox("Thursday");
 		chckbxThursday.setBounds(180, 300, 100, 25);
 		// TODO - work on this
-		chckbxThursday.setSelected(true);
+		//chckbxThursday.setSelected(true);
 		add(chckbxThursday);
 		
 		JCheckBox chckbxFriday = new JCheckBox("Friday");
 		chckbxFriday.setBounds(285, 300, 100, 25);
 		add(chckbxFriday);
+		
+		for (int i = 0; i < 5; i++)
+		{
+			boolean cur_bool = currentFaculty.getTeachingDays()[i];
+			System.out.println("Day - " + (i+1) + " : " + cur_bool);
+			
+			if (i == 0 & cur_bool)
+			{
+				chckbxMonday.setSelected(true);
+				days+="M";
+			}
+			if (i == 1 & cur_bool)
+			{
+				chckbxTuesday.setSelected(true);
+				days+="T";
+			}
+			if (i == 2 & cur_bool)
+			{
+				chckbxWednsday.setSelected(true);
+				days+="W";
+			}
+			if (i == 3 & cur_bool)
+			{
+				chckbxThursday.setSelected(true);
+				days+="R";
+			}
+			if (i == 4 & cur_bool)
+			{
+				chckbxFriday.setSelected(true);
+				days+="F";
+			}
+			
+		}
+			
 		
 		// Add button - it adds a new faculty from the creation page
 		btn_updateFaculty = new JButton("Update");
