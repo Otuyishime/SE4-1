@@ -1,5 +1,6 @@
 package OcGraduateSystemClasses;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //import java.sql.Date;
@@ -28,6 +29,11 @@ public class Semester
 	public Date getStartDate() {
 		return startDate;
 	}
+	
+	public String getStartDate_str() {
+		SimpleDateFormat dateformat = new SimpleDateFormat("mm/dd/yyyy");
+		return dateformat.format(startDate);
+	}
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
@@ -35,6 +41,11 @@ public class Semester
 
 	public Date getEndDate() {
 		return endDate;
+	}
+	
+	public String getEndDate_str() {
+		SimpleDateFormat dateformat = new SimpleDateFormat("mm/dd/yyyy");
+		return dateformat.format(endDate);
 	}
 
 	public void setEndDate(Date endDate) {

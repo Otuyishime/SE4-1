@@ -98,12 +98,13 @@ public class Main {
 					
 					//SystemJFrame frame = new SystemJFrame(university);
 					//frame.setVisible(true);
-					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", sem);
-					System.out.println("========================================================== SCHEDULE ================================================================");
+					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(1));
+					System.out.println(" SCHEDULE ");
 					for (Schedule schedule : schedules ){
 						ArrayList<Section> sections = schedule.getSections();
 						System.out.println();
-						System.out.println("================================================" +  schedule.getDegree().getDegreeName() + "================================================");
+						System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
+						System.out.println("----------------------------------------------------------------------------------------");
 						for (Section section : sections){
 							System.out.println(section);
 						}

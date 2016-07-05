@@ -131,8 +131,17 @@ public class Section
 
 	@Override
 	public String toString() {
-		return "Section [course= " + course.getCourseName() + " faculty=" + faculty.getFirstName() + ", sectionNumber= 0" + sectionNumber + ", room=" + room.getRoomNumber() + ", semester="
-				+ semester.getName() + ", sectionCap=" + sectionCap
-				+ ", academicLevel=" + academicLevel + ", sectionStatus=" + sectionStatus + "]";
+		
+		return String.format("%6s : %-6s : %-9s-%-44s %2s : %-4s : %-10s - %-10s : %-10s %-10s : %-3s : %-9s", this.getSemester().getName(), this.getSectionStatus(), this.getCourse().getCourseCode(),
+				this.getCourse().getCourseName(), this.getSectionNumber(), this.getRoom().getRoomNumber(), this.getSemester().getStartDate_str(), this.getSemester().getEndDate_str(), 
+				this.getFaculty().getFirstName(), this.getFaculty().getLastName(), this.getCourse().getCourseCap(), this.getCourse().getCreditHours(), this.getAcademicLevel());
+		
+//		return this.getSemester().getName() + " : " + this.getSectionStatus() + " : " + this.getCourse().getCourseName() + " " + 
+//				this.getSectionNumber() + " : " + this.getRoom().getRoomNumber() + " : " + this.getSemester().getStartDate() + "-" + 
+//				this.getSemester().getEndDate() + " : " + this.getFaculty().getFirstName() + " " + this.getFaculty().getFirstName() + 
+//				" : " + this.getCourse().getCourseCap() + " : " + this.getCourse().getCreditHours() + " : " + this.getAcademicLevel();
+//		return "Section [course= " + course.getCourseName() + " faculty=" + faculty.getFirstName() + ", sectionNumber= 0" + sectionNumber + ", room=" + room.getRoomNumber() + ", semester="
+//				+ semester.getName() + ", sectionCap=" + sectionCap
+//				+ ", academicLevel=" + academicLevel + ", sectionStatus=" + sectionStatus + "]";
 	}
 }
