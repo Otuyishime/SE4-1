@@ -44,21 +44,56 @@ public class ScheduleTester
 		// get all graduate students
 		ArrayList<Student> graduatingstudents = this.getUniversity().getGraduatingStudentsInDegree(this.getSchedule().getDegree().getDegreeCode());
 		
+		// get all missing courses
+		ArrayList<Course> missingCoursesToGraduate = new ArrayList<Course>();
+		
+		// add a boolean to test if the graduating student has all the courses needed
+		boolean isMissingSomeCourses = false;
+		
 		// Loop through all graduating students and check if they have courses they need to graduate
 		for ( Student gradStudent : graduatingstudents){
 			
 			// check for needed courses
 			for( Course coursetotake : gradStudent.getCoursesNeedTotake()){
-				if (!Section.containsCourse(this.getSchedule().getSections(), coursetotake)){
-					numberGraduatingStudentsWithoutAllNeededCourses ++;
+				if (!Section.sectionsContainCourse(this.getSchedule().getSections(), coursetotake)){
+					
+					// add the course the graduating student is missing in the generated schedule
+					if ( !Course.containsCourse(missingCoursesToGraduate, coursetotake)){
+						missingCoursesToGraduate.add(coursetotake);
+					}
+					
+					isMissingSomeCourses = true;
 				}
+			}
+			
+			if ( isMissingSomeCourses){
+				numberGraduatingStudentsWithoutAllNeededCourses ++;
 			}
 		}
 		
-		// print test
+		//  ------------------------ print test ----------------------
 		System.out.println("Number of graduating students without all needed courses: " + numberGraduatingStudentsWithoutAllNeededCourses);
+		
+		// print missing courses
+		System.out.println("Graduating students are missing these courses: ");
+		
+		if ( missingCoursesToGraduate.isEmpty()){
+			System.out.println("0 Yaay!");
+		}else{
+			// Loop through the courses
+			for ( Course missingCourse : missingCoursesToGraduate){
+				System.out.println(missingCourse.getCourseCode() + " " + missingCourse.getCourseName() + " --> This course is offered in " + missingCourse.isOfferedInSemesters_str());
+			}
+		}
 	}
-
+	
+	// check the sections percentage full
+	public void checkSectionsPercentageFull(){
+		// Loop through all the sections
+		for ( Section section : this.getSchedule().getSections()){
+			System.out.println(section.getCourse().getCourseCode() + " " + section.getCourse().getCourseName() + ": " + section.percentageFull());
+		}
+	}
 	/**
 	 * returns all future students who will benefit from the schedule
 	 */

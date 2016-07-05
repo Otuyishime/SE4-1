@@ -220,25 +220,12 @@ public class University
 		PriorityQueue<ScheduleCourse> scheduleCourses = new PriorityQueue<ScheduleCourse>();
 		
 		for ( Student student : getStudentsInDegree(degree.getDegreeCode())){
-			
-			// Add the required courses first
-			for ( Course course : student.getRequiredCoursesNeedToTake()){
+			// get all the course needed by the student
+			for ( Course course : student.getCoursesNeedTotake()){
 				
 				// make a temporary schedule course
 				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
 				
-				// add schedule course to the list if it is not already on list
-				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
-					scheduleCourses.add(schCourse);
-				}
-			}
-			
-			// Add the elective courses last
-			for ( Course course : student.getElectiveCoursesNeedToTake()){
-
-				// make a temporary schedule course
-				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
-
 				// add schedule course to the list if it is not already on list
 				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
 					scheduleCourses.add(schCourse);
@@ -306,22 +293,41 @@ public class University
 					// use a counter to count to know when to stop looping
 					int loopSectionsGenerationAndAssignment = 1;
 					int loopFaculties  = 1;
+					int limitFaculties = 1;
+					
 					while ( possibleNumberOfSections >= loopSectionsGenerationAndAssignment){
 						for ( Faculty coursefaculty : courseFaculties ){
-							if ( coursefaculty.canTeachInSemester(semester)){	// check if the faculty can teach for the semester
+							if ( coursefaculty.canTeachInSemester(semester) && possibleNumberOfSections >= loopSectionsGenerationAndAssignment ){	// check if the faculty can teach for the semester
 								
 								// Make sure the section assignment does not go over the faculty's semester load
-								if ( (coursefaculty.getLoadForSemester(semester) / loopSectionsGenerationAndAssignment) != neededcourse.getCreditHours()){
+								if ((coursefaculty.getLoadForSemester(semester) / loopFaculties) >= neededcourse.getCreditHours()){
 									
-									// Create a section and add it to the list
-									Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
-																	   "graduate", semester, "open",
-																	   this.getRooms().get(0));
-									sections.add(tempSection);
+									// Make sure the section has the maximum temporary students in it
+									if ( (numberOfStudentsNeedingTheCourses - (neededcourse.getCourseCap() * loopSectionsGenerationAndAssignment)) >= 0){
+										// Create a section and add it to the list
+										Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
+																		   "graduate", semester, "open",neededcourse.getCourseCap(),
+																		   this.getRooms().get(0));
+										sections.add(tempSection);
+									}
+									else {
+										
+										int limitsection = loopSectionsGenerationAndAssignment - 1;	// needed to get the correct number of temporary students
+										// Create a section and add it to the list
+										Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
+																		   "graduate", semester, "open",
+																		   (numberOfStudentsNeedingTheCourses - (neededcourse.getCourseCap() * limitsection)),
+																		   this.getRooms().get(0));
+										sections.add(tempSection);
+									}
 								}
 							}
-//							// update the section counter
-//							loopSectionsGenerationAndAssignment++;
+							// update the section counter
+							if ( limitFaculties == courseFaculties.size()){
+								loopFaculties++;
+							}
+							limitFaculties++;
+							loopSectionsGenerationAndAssignment++;
 						}
 						
 						// update the section counter

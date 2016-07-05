@@ -23,6 +23,8 @@ public class Section
 	
 	private String sectionStatus;
 	
+	private int numberOfTemporaryStudents;
+	
 	// ---------------- Accessors -----------------
 	public Course getCourse() {
 		return course;
@@ -88,8 +90,16 @@ public class Section
 		this.sectionStatus = sectionStatus;
 	}
 
+	public int getNumberOfTemporaryStudents() {
+		return numberOfTemporaryStudents;
+	}
+
+	public void setNumberOfTemporaryStudents(int numberOfTemporaryStudents) {
+		this.numberOfTemporaryStudents = numberOfTemporaryStudents;
+	}
+
 	// -------------------- Methods --------------------
-	public Section(int sectionnumber, Course course, Faculty sectionFaculty, String academiclevel, Semester semester, String sectionstatus, Room sectionroom) {
+	public Section(int sectionnumber, Course course, Faculty sectionFaculty, String academiclevel, Semester semester, String sectionstatus, int numbertempstudents, Room sectionroom) {
 		
 		if (course != null && !academiclevel.isEmpty() && semester != null && !sectionstatus.isEmpty()){
 			this.setSectionNumber(sectionnumber);
@@ -100,12 +110,17 @@ public class Section
 			this.setSemester(semester);
 			
 			this.setSectionStatus(sectionstatus);
+			this.setNumberOfTemporaryStudents(numbertempstudents);
 			this.setRoom(sectionroom);
 			this.setSectionCap(course.getCourseCap());
 		}
 	}
 	
-	public static boolean containsCourse(ArrayList<Section> listOfSections, Course course){
+	public float percentageFull(){
+		return (float)(((float)this.getNumberOfTemporaryStudents() / this.getSectionCap()) * 100);
+	}
+	
+	public static boolean sectionsContainCourse(ArrayList<Section> listOfSections, Course course){
 		for ( Section section: listOfSections){
 			if ( section.getCourse().getCourseCode().equals(course.getCourseCode())){
 				return true;
@@ -116,7 +131,7 @@ public class Section
 
 	@Override
 	public String toString() {
-		return "Section [course= " + course.getCourseName() + " faculty=" + faculty.getLastName() + ", sectionNumber= 0" + sectionNumber + ", room=" + room.getRoomNumber() + ", semester="
+		return "Section [course= " + course.getCourseName() + " faculty=" + faculty.getFirstName() + ", sectionNumber= 0" + sectionNumber + ", room=" + room.getRoomNumber() + ", semester="
 				+ semester.getName() + ", sectionCap=" + sectionCap
 				+ ", academicLevel=" + academicLevel + ", sectionStatus=" + sectionStatus + "]";
 	}
