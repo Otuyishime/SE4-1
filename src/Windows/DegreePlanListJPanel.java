@@ -23,9 +23,11 @@ import javax.swing.event.ListSelectionEvent;
 
 public class DegreePlanListJPanel extends JPanel {
 
+	
 	JScrollPane scrollpane;
 	DefaultListModel <Degree> listModel;
 	JList list_degreePlans;
+	
 	
 	private JButton btn_createNewDegreePlan;
 	private JButton btn_editDegreePlanInfo;

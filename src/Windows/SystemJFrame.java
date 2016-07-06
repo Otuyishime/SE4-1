@@ -156,6 +156,14 @@ public class SystemJFrame extends JFrame {
 		menuBar.add(mnSchedule);
 		
 		JMenuItem mntmGenerate = new JMenuItem("Generate");
+		mntmGenerate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Generating a schedule...");
+				getContentPane().removeAll();
+				getContentPane().add(new GenerateSchedulePageJPanel(university));
+				getContentPane().revalidate();
+			}
+		});
 		mnSchedule.add(mntmGenerate);
 		
 		JMenuItem mntmTest = new JMenuItem("Test");

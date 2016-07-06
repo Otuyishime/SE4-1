@@ -62,15 +62,19 @@ public class Main {
 					// ---- testing semester ------
 					//Semester sem = new Semester("2017SP"); 
 				
-					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(16));
+					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(0));
 					System.out.println(" SCHEDULE ");
 					for (Schedule schedule : schedules ){
 						ArrayList<Section> sections = schedule.getSections();
 						System.out.println();
-						System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
-						System.out.println("----------------------------------------------------------------------------------------");
-						for (Section section : sections){
-							System.out.println(section);
+						
+						if ((schedule.getDegree().getDegreeCode()).compareTo("MSCS.SFTW.ENG") == 0)
+						{
+							System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
+							System.out.println("----------------------------------------------------------------------------------------");
+							for (Section section : sections){
+								System.out.println(section);
+							}
 						}
 					}
 		
@@ -82,8 +86,8 @@ public class Main {
 					System.out.println("GRADUATING STUDENTS:");
 					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
 					
-//					SystemJFrame frame = new SystemJFrame(university);
-//					frame.setVisible(true);
+					SystemJFrame frame = new SystemJFrame(university);
+					frame.setVisible(true);
 					
 //					for ( Degree degree : university.getDegrees()){
 //						System.out.println(degree);

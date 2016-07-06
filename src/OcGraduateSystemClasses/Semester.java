@@ -69,4 +69,9 @@ public class Semester
 		// Print the course
 		System.out.println(name + " : " + startDate + " : " + endDate);
 	}
+	
+	@Override
+	public String toString() {
+	    return this.name;
+	}
 }
