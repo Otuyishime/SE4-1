@@ -8,41 +8,14 @@ import java.util.ArrayList;
 public class ScheduleTester
 {
 
-	private Schedule schedule;
+	// ----------------- methods ------------------
 	
-	private University university;
-
-	public Schedule getSchedule() {
-		return schedule;
-	}
-
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
-
-	public University getUniversity() {
-		return university;
-	}
-
-	public void setUniversity(University university) {
-		this.university = university;
-	}
-
-	// ----------------- methods -------------------
-	public ScheduleTester(Schedule schedule, University university) {
-		if ( schedule != null && university != null ){
-			this.setSchedule(schedule);
-			this.setUniversity(university);
-		}
-	}
-
-	
-	public void checkGraduateStudents() {
+	public void checkGraduateStudents(Schedule schedule, University university) {
 		// create all needed variables	
 		int numberGraduatingStudentsWithoutAllNeededCourses = 0;
 		
 		// get all graduate students
-		ArrayList<Student> graduatingstudents = this.getUniversity().getGraduatingStudentsInDegreeForSemester(this.getSchedule().getDegree().getDegreeCode(), this.getSchedule().getSemester());
+		ArrayList<Student> graduatingstudents = university.getGraduatingStudentsInDegreeForSemester(schedule.getDegree().getDegreeCode(), schedule.getSemester());
 		// get all missing courses
 		ArrayList<Course> missingCoursesToGraduate = new ArrayList<Course>();
 		
@@ -54,7 +27,7 @@ public class ScheduleTester
 			
 			// check for needed courses
 			for( Course coursetotake : gradStudent.getCoursesNeedTotake()){
-				if (!Section.sectionsContainCourse(this.getSchedule().getSections(), coursetotake)){
+				if (!Section.sectionsContainCourse(schedule.getSections(), coursetotake)){
 					
 					// add the course the graduating student is missing in the generated schedule
 					if ( !Course.containsCourse(missingCoursesToGraduate, coursetotake)){
@@ -67,12 +40,6 @@ public class ScheduleTester
 			
 			if ( isMissingSomeCourses){
 				numberGraduatingStudentsWithoutAllNeededCourses ++;
-				System.out.println(gradStudent.getStudentId());
-//				gradStudent.printReqCoursesToTake();
-//				gradStudent.printElectiveCoursesToTake();
-//				System.out.println(gradStudent.getElectiveCoursesTaken().size() * 3);
-//				System.out.println();
-				//System.out.println(gradStudent.getRequiredHoursNeeded());
 			}
 		}
 		
@@ -87,16 +54,41 @@ public class ScheduleTester
 		}else{
 			// Loop through the courses
 			for ( Course missingCourse : missingCoursesToGraduate){
-				System.out.println(missingCourse.getCourseCode() + " " + missingCourse.getCourseName() + " --> This course is offered in " + missingCourse.isOfferedInSemesters_str());
+				System.out.printf("%-9s-%-46s : ",missingCourse.getCourseCode(),missingCourse.getCourseName()); 
+				System.out.printf("This course is offered in %1s %n",missingCourse.isOfferedInSemesters_str());
+			}
+		}
+	}
+	
+	// check graduate students for all degrees
+	public void checkGraduateStudentsForAllDegree(ArrayList<Schedule> schedules, University university){
+		if ( schedules != null && university != null){
+			for ( Schedule schedule : schedules){
+				System.out.println();
+				System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
+				System.out.println("--------------------------------------------------------------------------------");
+				checkGraduateStudents(schedule, university);
 			}
 		}
 	}
 	
 	// check the sections percentage full
-	public void checkSectionsPercentageFull(){
+	public void checkSectionsPercentageFull(Schedule scheduletocheck){
 		// Loop through all the sections
-		for ( Section section : this.getSchedule().getSections()){
-			System.out.println(section.getCourse().getCourseCode() + " " + section.getCourse().getCourseName() + ": " + section.percentageFull());
+		for ( Section section : scheduletocheck.getSections()){
+			System.out.printf("%-9s-%-46s%2s : %-4.0f%% %n",section.getCourse().getCourseCode(),section.getCourse().getCourseName(),
+					section.getSectionNumber(),section.percentageFull());
+		}
+	}
+	
+	public void checkSectionsPercentageFullForAllDegrees(ArrayList<Schedule> schedules){
+		if ( schedules != null){
+			for ( Schedule schedule : schedules){
+				System.out.println();
+				System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
+				System.out.println("--------------------------------------------------------------------------------");
+				checkSectionsPercentageFull(schedule);
+			}
 		}
 	}
 	/**

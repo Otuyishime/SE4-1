@@ -242,7 +242,7 @@ public class Course
 			semestersInWhichCourseOffered += "Fall";
 		}
 		
-		if ( semestersInWhichCourseOffered.length() > 1){
+		if ( semestersInWhichCourseOffered.length() > 4){
 			semestersInWhichCourseOffered += " and ";
 		}
 		
@@ -255,6 +255,10 @@ public class Course
 				semestersInWhichCourseOffered += " and ";
 			}
 			semestersInWhichCourseOffered += "Summer";
+		}
+		
+		if ( semestersInWhichCourseOffered.length() < 1){
+			semestersInWhichCourseOffered += "*No semester is available*";
 		}
 
 		return semestersInWhichCourseOffered;
