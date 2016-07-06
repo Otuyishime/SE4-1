@@ -89,20 +89,7 @@ public class Main {
 					System.out.println("GRADUATING STUDENTS:");
 					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
 
-					if(frame.getLoginDialog().isSucceeded()){
-						frame.setVisible(true);
-						frame.setVisible(true);
-
-						//					for ( Degree degree : university.getDegrees()){
-						//						System.out.println(degree);
-						//					}
-
-						System.out.println("U can start the main frame");
-
-					} else{
-						System.out.println("U can NOT start the main frame");
-
-					}
+				
 
 					//frame.setVisible(true);
 

@@ -33,7 +33,7 @@ public class LoginJDialog extends JDialog {
 	private JTextField jPassword;
 	static University university;
 	static //static SystemJFrame frame = new SystemJFrame(university);
-    private  boolean success = true;
+    private  boolean success = false;
 	
 
 
@@ -128,6 +128,7 @@ public class LoginJDialog extends JDialog {
 		                            JOptionPane.INFORMATION_MESSAGE);
 		                    System.out.println("The login is successfull");
 		                	success = true;
+		                	currentFrame.setVisible(true);
 		                    System.out.println(isSucceeded());
 
 		                    dispose();
