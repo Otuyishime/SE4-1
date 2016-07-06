@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 
 public class Main {	
-	
+
 	// TODO - we need to import and read the university name inside the UniversityDM
 	// that way, we won't need to have the loadUniversitymain(). 
 	// We will just create an instance of University and be done here. 
-	
+
 	static UniversityDM universityDM;
 	static University university;
 	public static void loadUniversitymain() {
@@ -25,49 +25,52 @@ public class Main {
 			file = new CsvReader("src/Data/TestDataUniversityName.csv");
 			universityDM = new UniversityDM(file);
 			university = universityDM.getUniversity();
-			
-			// Import Students and student courses
-			String studentsfilelocation = "src/Data/STU.DUMP.csv";
-			String studentcoursesfilelocation = "src/Data/STC.DUMP.csv";
-			
+
+			// Import Students and student courses 
+			String studentsfilelocation = "src/Data/STU.DUMP.csv";		
+			String studentcoursesfilelocation = "/Users/gustavemugabo/Downloads/TestData/STC.DUMP.CSV";
+
 			universityDM.importStudentCourses(studentcoursesfilelocation);
 			universityDM.importStudents(studentsfilelocation);
-			
-			// test print
-//			for( StudentCourse stdCrse : university.getStudentcourses()){
-//				System.out.println(stdCrse);
-//			}
-			
-		//	System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
-			
+
+			//	System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+
 					// create university
 					loadUniversitymain();
+
+
+
+					SystemJFrame frame = new SystemJFrame(university);
 					
+					// Create the login Screen				
+					System.out.println(frame.getLoginDialog().isSucceeded());
+
+
 					// ---- testing semester ------
-					//Semester sem = new Semester("2017SP"); 
-				
+					Semester sem = new Semester("2017SP"); 
+
 					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(0));
 					System.out.println(" SCHEDULE ");
 					for (Schedule schedule : schedules ){
 						ArrayList<Section> sections = schedule.getSections();
 						System.out.println();
-						
+
 						if ((schedule.getDegree().getDegreeCode()).compareTo("MSCS.SFTW.ENG") == 0)
 						{
 							System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
@@ -77,7 +80,7 @@ public class Main {
 							}
 						}
 					}
-		
+
 					ScheduleTester testschedule = new ScheduleTester();
 					System.out.println();
 					System.out.println(" PERCENTAGES ");
@@ -85,14 +88,26 @@ public class Main {
 					System.out.println();
 					System.out.println("GRADUATING STUDENTS:");
 					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
-					
-					SystemJFrame frame = new SystemJFrame(university);
-					frame.setVisible(true);
-					
-//					for ( Degree degree : university.getDegrees()){
-//						System.out.println(degree);
-//					}
-					
+
+					if(frame.getLoginDialog().isSucceeded()){
+						frame.setVisible(true);
+						frame.setVisible(true);
+
+						//					for ( Degree degree : university.getDegrees()){
+						//						System.out.println(degree);
+						//					}
+
+						System.out.println("U can start the main frame");
+
+					} else{
+						System.out.println("U can NOT start the main frame");
+
+					}
+
+					//frame.setVisible(true);
+
+
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
