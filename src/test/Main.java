@@ -56,23 +56,23 @@ public class Main {
 
 					
 
-//					SystemJFrame frame = new SystemJFrame(university);
+  				   SystemJFrame frame = new SystemJFrame(university);
 //
 //					// Create the login Screen
 //						
-//					  System.out.println(frame.getLoginDialog().isSucceeded());
-//					  
-//					   if(frame.getLoginDialog().isSucceeded()){
-//							frame.setVisible(true);
-//					
-//						   System.out.println("U can start the main frame");
-//			 
-//					} else{
-//						   System.out.println("U can NOT start the main frame");
-//
-//					}
-//						
-//						//frame.setVisible(true);
+					  System.out.println(frame.getLoginDialog().isSucceeded());
+					  
+					   if(frame.getLoginDialog().isSucceeded()){
+							frame.setVisible(true);
+					
+						   System.out.println("U can start the main frame");
+			 
+					} else{
+						   System.out.println("U can NOT start the main frame");
+
+					}
+						
+						//frame.setVisible(true);
 
 
 
