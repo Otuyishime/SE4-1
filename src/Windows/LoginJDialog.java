@@ -23,33 +23,32 @@ import javax.swing.JTextField;
 
 public class LoginJDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblImportStudentCourse;
 	private JTextField textFieldUsername;
 	private JTextField jPassword;
 	static University university;
 	static //static SystemJFrame frame = new SystemJFrame(university);
-	boolean succeeded = false;
+    private  boolean success = true;
+	
 
 
-    public  boolean isSucceeded() {
-        return succeeded;
-    }
+//    public  boolean isSucceeded() {
+//        return succeeded;
+//    }
 
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			LoginJDialog dialog = new LoginJDialog(frame,university );
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
+	public static boolean isSuccess() {
+		return success;
+	}
+	public static void setSuccess(boolean success) {
+		LoginJDialog.success = success;
+	}
 	/**
 	 * Create the dialog.
 	 * @param university 
@@ -122,12 +121,15 @@ public class LoginJDialog extends JDialog {
 
 					public void actionPerformed(ActionEvent e) {
 		                if (LoginJDialog.authenticate(getUsername(), getPassword())) {
+
 		                    JOptionPane.showMessageDialog(LoginJDialog.this,
 		                            "Hi " + getUsername() + "! You have successfully logged in.",
 		                            "Login",
 		                            JOptionPane.INFORMATION_MESSAGE);
-		                    succeeded  = true;
-		                    
+		                    System.out.println("The login is successfull");
+		                	success = true;
+		                    System.out.println(isSucceeded());
+
 		                    dispose();
 		                } else {
 		                    JOptionPane.showMessageDialog(LoginJDialog.this,
@@ -137,10 +139,13 @@ public class LoginJDialog extends JDialog {
 		                    // reset username and password
 		                    textFieldUsername.setText("");
 		                    jPassword.setText("");
-		                    succeeded = false;
+		                    success = false;
+
 
 		                }
 		            }
+
+					
 					
 					
 				});
@@ -149,6 +154,16 @@ public class LoginJDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
+				
+				cancelButton.addActionListener(new ActionListener()
+				{
+							
+				            public void actionPerformed(ActionEvent e) {
+				                dispose();
+				                System.exit(0);	
+				            }
+				            }
+						);
 			}
 		}
 	}
@@ -166,6 +181,12 @@ public class LoginJDialog extends JDialog {
     public String getPassword() {
         return new String(((JPasswordField) jPassword).getPassword());
     }
- 
+	
+  
+
+
+	public boolean isSucceeded() {
+		return success;
+	}
 	
 }

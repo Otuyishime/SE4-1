@@ -26,12 +26,12 @@ public class Main {
 			universityDM = new UniversityDM(file);
 			university = universityDM.getUniversity();
 
-			// Import Students and student courses
-			String studentsfilelocation = "src/Data/STU.DUMP.csv";
-			String studentcoursesfilelocation = "src/Data/STC.DUMP.csv";
+			// Import Students and student courses 
+			String studentsfilelocation = "src/Data/STU.DUMP.csv";		
+			String studentcoursesfilelocation = "/Users/gustavemugabo/Downloads/TestData/STC.DUMP.CSV";
 
 			universityDM.importStudentCourses(studentcoursesfilelocation);
-			universityDM.importStudents(studentsfilelocation);
+		universityDM.importStudents(studentsfilelocation);
 
 			//	System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 
@@ -56,19 +56,24 @@ public class Main {
 
 					
 
-					SystemJFrame frame = new SystemJFrame(university);
+//					SystemJFrame frame = new SystemJFrame(university);
+//
+//					// Create the login Screen
+//						
+//					  System.out.println(frame.getLoginDialog().isSucceeded());
+//					  
+//					   if(frame.getLoginDialog().isSucceeded()){
+//							frame.setVisible(true);
+//					
+//						   System.out.println("U can start the main frame");
+//			 
+//					} else{
+//						   System.out.println("U can NOT start the main frame");
+//
+//					}
+//						
+//						//frame.setVisible(true);
 
-					// Create the login Screen
-					LoginJDialog dialog = new LoginJDialog(frame,university );
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-					  
-					   if(dialog.isSucceeded()){
-						
-						   System.out.println("U can start the main frame");
-						frame.setVisible(true);
-				
-					}
 
 
 				} catch (Exception e) {

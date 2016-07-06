@@ -220,25 +220,12 @@ public class University
 		PriorityQueue<ScheduleCourse> scheduleCourses = new PriorityQueue<ScheduleCourse>();
 		
 		for ( Student student : getStudentsInDegree(degree.getDegreeCode())){
-			
-			// Add the required courses first
-			for ( Course course : student.getRequiredCoursesNeedToTake()){
+			// get all the course needed by the student
+			for ( Course course : student.getCoursesNeedTotake()){
 				
 				// make a temporary schedule course
 				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
 				
-				// add schedule course to the list if it is not already on list
-				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
-					scheduleCourses.add(schCourse);
-				}
-			}
-			
-			// Add the elective courses last
-			for ( Course course : student.getElectiveCoursesNeedToTake()){
-
-				// make a temporary schedule course
-				ScheduleCourse schCourse = new ScheduleCourse( getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()),course), course);
-
 				// add schedule course to the list if it is not already on list
 				if ( !containsCourseInScheduleCourses(new ArrayList(scheduleCourses), schCourse) && schCourse.course.isOfferedInSemester(semester)){
 					scheduleCourses.add(schCourse);
@@ -260,42 +247,28 @@ public class University
 		
 		if ( degree != null && semester != null){
 			
-			System.out.println("in degree and sem ...!!!");
-			
 			// create a list of needed courses
 			ArrayList<Course> neededCourses = generateCoursesNeededByStudentsInDegree(degree, semester);
 			
 			// generate sections
 			for ( Course neededcourse : neededCourses){
 				
-				System.out.println("in needecourse ...!!!");
-				
 				// Loop through all the faculties who can teach
 				
 				ArrayList<Faculty> courseFaculties = neededcourse.getFaculties();	// get all the faculties for the course
 				if ( courseFaculties != null ){
 					
-					System.out.println("in course faculty ...!!!");
 					// Loop through all faculties
 					
 					// get the number of all students who need to take the course
 					// include also the number of forecast students
 					int numberOfStudentsNeedingTheCourses = getNumberStudentsNeedingCourse(getStudentsInDegree(degree.getDegreeCode()), neededcourse) + degree.getForecast();
 					
-					System.out.println("in numberOfStudentsNeedingTheCourses: " + numberOfStudentsNeedingTheCourses);
-					
-					System.out.println(neededcourse.getCourseName());
-					
 					// get the possible number of sections needed
 					// add 0.5 to round the numbers
 					
-					System.out.println("num section: " + (((float)numberOfStudentsNeedingTheCourses) / 
-							(int)(((float)neededcourse.getCourseCap()))));
-					
 					int possibleNumberOfSections = Math.round((((float)numberOfStudentsNeedingTheCourses) / 
 							(int)(((float)neededcourse.getCourseCap()))) + (float)(0.5));
-					
-					System.out.println("in possibleNumberOfSections: " + possibleNumberOfSections);
 					/*
 					 * Generate the sections using the possible number of sections
 					 * - Use the number of sections to loop through the faculties and determine who can teach each section
@@ -306,27 +279,45 @@ public class University
 					// use a counter to count to know when to stop looping
 					int loopSectionsGenerationAndAssignment = 1;
 					int loopFaculties  = 1;
+					int limitFaculties = 1;
+					
 					while ( possibleNumberOfSections >= loopSectionsGenerationAndAssignment){
 						for ( Faculty coursefaculty : courseFaculties ){
-							if ( coursefaculty.canTeachInSemester(semester)){	// check if the faculty can teach for the semester
+							if ( coursefaculty.canTeachInSemester(semester) && possibleNumberOfSections >= loopSectionsGenerationAndAssignment ){	// check if the faculty can teach for the semester
 								
 								// Make sure the section assignment does not go over the faculty's semester load
-								if ( (coursefaculty.getLoadForSemester(semester) / loopSectionsGenerationAndAssignment) != neededcourse.getCreditHours()){
+								if ((coursefaculty.getLoadForSemester(semester) / loopFaculties) >= neededcourse.getCreditHours()){
 									
-									// Create a section and add it to the list
-									Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
-																	   "graduate", semester, "open",
-																	   this.getRooms().get(0));
-									sections.add(tempSection);
+									// Make sure the section has the maximum temporary students in it
+									if ( (numberOfStudentsNeedingTheCourses - (neededcourse.getCourseCap() * loopSectionsGenerationAndAssignment)) >= 0){
+										// Create a section and add it to the list
+										Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
+																		   "graduate", semester, "open",neededcourse.getCourseCap(),
+																		   this.getRooms().get(0));
+										sections.add(tempSection);
+									}
+									else {
+										
+										int limitsection = loopSectionsGenerationAndAssignment - 1;	// needed to get the correct number of temporary students
+										// Create a section and add it to the list
+										Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
+																		   "graduate", semester, "open",
+																		   (numberOfStudentsNeedingTheCourses - (neededcourse.getCourseCap() * limitsection)),
+																		   this.getRooms().get(0));
+										sections.add(tempSection);
+									}
 								}
 							}
-//							// update the section counter
-//							loopSectionsGenerationAndAssignment++;
+							// update the section counter
+							if ( limitFaculties == courseFaculties.size()){
+								loopFaculties++;
+							}
+							limitFaculties++;
+							loopSectionsGenerationAndAssignment++;
 						}
 						
 						// update the section counter
 						loopSectionsGenerationAndAssignment++;
-						System.out.println("in while!!!");
 					}
 				}
 				
@@ -336,11 +327,27 @@ public class University
 		return sections;
 	}
 	
-	public Schedule generateSchedule(String scheduletitle, Degree scheduledegree, Semester schedulesemester, float sectionThresholdPercentage){
+	// add a method to generate a schedule for a particular degree and semester 
+	public Schedule generateSchedule(String scheduletitle, Degree scheduledegree, Semester schedulesemester){
 		// create a temporary schedule to return
 		Schedule temp_schedule = new Schedule(scheduletitle, generateSectionsFromNeededCourses(scheduledegree, schedulesemester), scheduledegree, schedulesemester);
 		
 		return temp_schedule;
+	}
+	
+	// add a method to generate a schedule for all degrees in particular semester
+	public ArrayList<Schedule> generateScheduleForDegreesInSemester(String scheduletitle, Semester schedulesemester){
+
+		// Create the list to return
+		ArrayList<Schedule> temp_schedules = new ArrayList<Schedule>();
+
+		for ( Degree degree : this.getDegrees()){
+			// create a temporary schedule to return
+			Schedule temp_schedule = new Schedule(scheduletitle, generateSectionsFromNeededCourses(degree, schedulesemester), degree, schedulesemester);
+			temp_schedules.add(temp_schedule);
+		}
+
+		return temp_schedules;
 	}
 	
 	/*************************************************************************************/
@@ -359,12 +366,12 @@ public class University
 		return stdsInDegree;
 	}
 	
-	public ArrayList<Student> getGraduatingStudentsInDegree(String degreeCode){
+	public ArrayList<Student> getGraduatingStudentsInDegreeForSemester(String degreeCode, Semester semester){
 		// create a list of graduating students to return
 		ArrayList<Student> gradStdsInDegree = new ArrayList<Student>();
 		
 		for ( Student student : this.getStudentsInDegree(degreeCode)){
-			if ( student.isGraduatingStudent()){
+			if ( student.isGraduatingStudentInSemester(semester)){
 				gradStdsInDegree.add(student);
 			}
 		}

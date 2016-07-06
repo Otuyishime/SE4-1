@@ -83,6 +83,7 @@ public class UniversityDM {
 			courses = new CourseDM(file);
 			courses.loadFaculty(faculties);
 			university.setCourses(courses.getCourses());
+			faculties.loadCoursesForFaculties(courses);
 			
 			file = new CsvReader("src/Data/TestDataDegreePlanReq.csv");
 			degreeReqs = new DegreePlanReqDM(file);
@@ -113,8 +114,9 @@ public class UniversityDM {
 				students = new StudentDM(file);
 				students.loadGraduationSemesters(semesters);
 				students.loadStudentDegrees(degrees);
-				students.loadCourseTaken(studentcourses);
 				university.setStudents(students.getStudentData());
+				students.loadCourseTaken(studentcourses);
+
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -135,6 +137,7 @@ public class UniversityDM {
 				studentcourses.loadCourses(courses);
 				studentcourses.loadSemester(semesters);
 				university.setStudentcourses(studentcourses.getStudentCourseData());
+
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();

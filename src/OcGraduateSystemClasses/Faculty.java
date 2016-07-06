@@ -17,7 +17,7 @@ public class Faculty
 	
 	private String title;
 	
-	private boolean teachingDays[];	
+	private boolean [] teachingDays;	
 	
 	// -------------------- Lists -----------------------
 	private ArrayList<FacultyLoad> facultyLoads;
@@ -76,7 +76,7 @@ public class Faculty
 
 	public void setTeachingDays(String teachingdays) {
 		// Initialize the array
-		this.teachingDays = new boolean[teachingdays.length()];
+		//this.teachingDays = new boolean[teachingdays.length()];
 		
 		if ( !teachingdays.isEmpty()){
 			// create a temporary char array holder
@@ -85,19 +85,19 @@ public class Faculty
 			for ( int i = 0; i < temp_chardays_array.length; i++ ){
 				switch(temp_chardays_array[i]){
 				case "M":
-					this.teachingDays[i] = true;
+					this.teachingDays[0] = true;
 					break;
 				case "T":
-					this.teachingDays[i] = true;
+					this.teachingDays[1] = true;
 					break;
 				case "W":
-					this.teachingDays[i] = true;
+					this.teachingDays[2] = true;
 					break;
 				case "R":
-					this.teachingDays[i] = true;
+					this.teachingDays[3] = true;
 					break;
 				case "F":
-					this.teachingDays[i] = true;
+					this.teachingDays[4] = true;
 					break;	
 				}
 			}
@@ -155,8 +155,16 @@ public class Faculty
 			setGradSchool(gradschool);
 			setDegree(degree);
 			setTitle(title);
-			setTeachingDays(teachdays);
+			
 			setFacultyLoads(arrayList);
+			
+			this.courses = new ArrayList<Course>();
+			
+			teachingDays = new boolean[5];
+			for (int i = 0; i < 5; i++)
+				teachingDays[i] = false;
+			
+			setTeachingDays(teachdays);
 		}
 		else{
 			throw new UnsupportedOperationException();
@@ -244,10 +252,6 @@ public class Faculty
 		return 0;
 	}
 	
-//<<<<<<< HEAD
-//=======
-	// Add faculty loads setters
-//>>>>>>> dc7ff61e694e3bcf9699433e56c7785764b1b2ea
 	public void setFallLoad(int load){
 		if ( load >= 0){
 			getFacultyLoads().get(0).setHours(load);
@@ -275,5 +279,9 @@ public class Faculty
 	@Override
 	public String toString() {
 		return (firstName + " : " + lastName );
+	}
+	
+	public String getFacultyLoads_str() {
+		return String.format("%-10s %-10s : %-5s : %2s : %2s : %2s", this.getFirstName(), this.getLastName(), this.getGradSchool(), this.getFallLoad(), this.getSpringLoad(), this.getSummerLoad());
 	}
 }

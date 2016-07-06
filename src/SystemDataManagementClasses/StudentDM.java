@@ -40,8 +40,7 @@ public class StudentDM {
 					
 					// test print
 					//System.out.println(studentId + " : " + degreeCodeFetched + " : " + graduatiomSemester);
-					
-					if (degreeCodeFetched.equals("MSE.ENGMGT") || degreeCodeFetched.equals("MSE.ECE")){
+					if (degreeCodeFetched.contains("MSE.ENGMGT") || degreeCodeFetched.contains("MSE.ECE")){
 						// We omit these two degrees
 					}else{
 						// create a temporary student

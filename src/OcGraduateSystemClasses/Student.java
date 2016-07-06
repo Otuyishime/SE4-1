@@ -92,7 +92,8 @@ public class Student
 					
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
-
+							
+							// If the student failed the course, do not count it
 							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && !stdcourse.getGrade().equals("F")){
 								requiredcoursestaken.add(reqcourse);
 							}
@@ -115,7 +116,8 @@ public class Student
 
 					for ( Course reqcourse:degreeReq.getCourses()){
 						for ( StudentCourse stdcourse:getStudentcoursesTaken()){
-
+							
+							// If the student failed the course, do not count it
 							if ( reqcourse.getCourseCode().equals(stdcourse.getCourseCode()) && !stdcourse.getGrade().equals("F")){
 								electivecoursestaken.add(reqcourse);
 							}
@@ -133,9 +135,7 @@ public class Student
 		
 		for ( DegreeRequirement degreereqtomeet: this.getDegree().getDegreeRequirements()){
 			if ( degreereqtomeet.getDegreeRequirementsType().equals("Required") ){
-				for ( Course coursetotake: degreereqtomeet.getCourses()){
-					numReqHrs += coursetotake.getCreditHours();
-				}
+				numReqHrs += degreereqtomeet.getHours();
 			}
 		}
 		
@@ -147,9 +147,7 @@ public class Student
 		
 		for ( DegreeRequirement degreereqtomeet: this.getDegree().getDegreeRequirements()){
 			if ( degreereqtomeet.getDegreeRequirementsType().equals("Elective") ){
-				for ( Course coursetotake: degreereqtomeet.getCourses()){
-					numElectiveHrs += coursetotake.getCreditHours();
-				}
+				numElectiveHrs += degreereqtomeet.getHours();
 			}
 		}
 		
@@ -162,7 +160,7 @@ public class Student
 		int requiredHrsTaken = getRequiredCoursesTaken().size() * 3;
 	
 		if ( this.getDegree() == null){
-			System.out.println("null");
+			System.out.println("null in get required courses need to take");
 		}
 		for ( DegreeRequirement degreereqtomeet: this.getDegree().getDegreeRequirements()){
 			
@@ -234,9 +232,11 @@ public class Student
 		return coursesTotake;
 	}
 	
-	public boolean isGraduatingStudent(){
-		if ( (this.getRequiredCoursesNeedToTake().size() + this.getElectiveCoursesNeedToTake().size()) <= 4){
-			return true;
+	public boolean isGraduatingStudentInSemester(Semester semester){
+		if ( semester != null ){
+			if (this.getGraduationsemesterName().equals(semester.getName())){
+				return true;
+			}
 		}
 		return false;
 	}
@@ -248,6 +248,7 @@ public class Student
 	
 	public void printCoursesTaken(){
 		for ( StudentCourse studentcourse: getStudentcoursesTaken()){
+			
 			studentcourse.getCourse().print();
 		}
 	}
@@ -268,5 +269,16 @@ public class Student
 		for ( Course course: getRequiredCoursesNeedToTake()){
 			course.print();
 		}
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%-7s : %-14s : %-7s ", this.getStudentId(), this.getDegreeCode(), this.getGraduationsemesterName());
+	}
+	public void printReport(){
+		
+		
+		
+		
 	}
 }
