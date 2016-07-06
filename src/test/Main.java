@@ -30,8 +30,9 @@ public class Main {
 			String studentsfilelocation = "src/Data/STU.DUMP.csv";
 			String studentcoursesfilelocation = "src/Data/STC.DUMP.csv";
 			
-			universityDM.importStudentCourses(studentcoursesfilelocation);
 			universityDM.importStudents(studentsfilelocation);
+			universityDM.importStudentCourses(studentcoursesfilelocation);
+			
 			
 			// test print
 //			for( StudentCourse stdCrse : university.getStudentcourses()){
@@ -62,7 +63,7 @@ public class Main {
 					// ---- testing semester ------
 					//Semester sem = new Semester("2017SP"); 
 				
-					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(0));
+					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(15));
 					System.out.println(" SCHEDULE ");
 					for (Schedule schedule : schedules ){
 						ArrayList<Section> sections = schedule.getSections();
@@ -77,17 +78,17 @@ public class Main {
 							}
 						}
 					}
-		
-					ScheduleTester testschedule = new ScheduleTester();
-					System.out.println();
-					System.out.println(" PERCENTAGES ");
-					testschedule.checkSectionsPercentageFullForAllDegrees(schedules);
-					System.out.println();
-					System.out.println("GRADUATING STUDENTS:");
-					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
+//		
+//					ScheduleTester testschedule = new ScheduleTester();
+//					System.out.println();
+//					System.out.println(" PERCENTAGES ");
+//					testschedule.checkSectionsPercentageFullForAllDegrees(schedules);
+//					System.out.println();
+//					System.out.println("GRADUATING STUDENTS:");
+//					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
 					
-					SystemJFrame frame = new SystemJFrame(university);
-					frame.setVisible(true);
+//					SystemJFrame frame = new SystemJFrame(university);
+//					frame.setVisible(true);
 					
 //					for ( Degree degree : university.getDegrees()){
 //						System.out.println(degree);

@@ -242,11 +242,10 @@ public class Course
 			semestersInWhichCourseOffered += "Fall";
 		}
 		
-		if ( semestersInWhichCourseOffered.length() > 4){
-			semestersInWhichCourseOffered += " and ";
-		}
-		
 		if ( this.isOfferedSpring){
+			if ( semestersInWhichCourseOffered.length() > 3){
+				semestersInWhichCourseOffered += " and ";
+			}
 			semestersInWhichCourseOffered += "Spring";
 		}
 		

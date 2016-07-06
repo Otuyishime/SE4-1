@@ -1,4 +1,4 @@
-package OcGraduateSystemClasses;
+	package OcGraduateSystemClasses;
 
 import java.util.*;
 
@@ -280,6 +280,7 @@ public class University
 					int loopSectionsGenerationAndAssignment = 1;
 					int loopFaculties  = 1;
 					int limitFaculties = 1;
+					int sectionNumber = 1;
 					
 					while ( possibleNumberOfSections >= loopSectionsGenerationAndAssignment){
 						for ( Faculty coursefaculty : courseFaculties ){
@@ -291,20 +292,22 @@ public class University
 									// Make sure the section has the maximum temporary students in it
 									if ( (numberOfStudentsNeedingTheCourses - (neededcourse.getCourseCap() * loopSectionsGenerationAndAssignment)) >= 0){
 										// Create a section and add it to the list
-										Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
+										Section tempSection = new Section( sectionNumber, neededcourse, coursefaculty, 
 																		   "graduate", semester, "open",neededcourse.getCourseCap(),
 																		   this.getRooms().get(0));
 										sections.add(tempSection);
+										sectionNumber++;
 									}
 									else {
 										
 										int limitsection = loopSectionsGenerationAndAssignment - 1;	// needed to get the correct number of temporary students
 										// Create a section and add it to the list
-										Section tempSection = new Section( loopSectionsGenerationAndAssignment, neededcourse, coursefaculty, 
+										Section tempSection = new Section( sectionNumber, neededcourse, coursefaculty, 
 																		   "graduate", semester, "open",
 																		   (numberOfStudentsNeedingTheCourses - (neededcourse.getCourseCap() * limitsection)),
 																		   this.getRooms().get(0));
 										sections.add(tempSection);
+										sectionNumber++;
 									}
 								}
 							}

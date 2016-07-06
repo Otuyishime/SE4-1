@@ -77,6 +77,4 @@ public class Degree {
 	public String toString() {
 	    return String.format("%-14s : %-5s : %-64s : %3s", this.DegreeCode, this.getGradSchool(), this.getDegreeName(), this.getForecast());
 	}
-	
-	
 }
