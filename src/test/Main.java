@@ -28,12 +28,12 @@ public class Main {
 
 			// Import Students and student courses 
 			String studentsfilelocation = "src/Data/STU.DUMP.csv";		
-			String studentcoursesfilelocation = "/Users/gustavemugabo/Downloads/TestData/STC.DUMP.CSV";
+			String studentcoursesfilelocation = "src/Data/STC.DUMP.CSV";
 
 			universityDM.importStudentCourses(studentcoursesfilelocation);
 			universityDM.importStudents(studentsfilelocation);
 
-			//	System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
+			// System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -53,16 +53,13 @@ public class Main {
 
 					// create university
 					loadUniversitymain();
-
-
-
 					SystemJFrame frame = new SystemJFrame(university);
+					
 					
 					// Create the login Screen				
 					System.out.println(frame.getLoginDialog().isSucceeded());
-
-
-					// ---- testing semester ------
+					
+					/*
 					Semester sem = new Semester("2017SP"); 
 
 					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(0));
@@ -88,25 +85,19 @@ public class Main {
 					System.out.println();
 					System.out.println("GRADUATING STUDENTS:");
 					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
+					*/
 
 					if(frame.getLoginDialog().isSucceeded()){
 						frame.setVisible(true);
 						frame.setVisible(true);
-
-						//					for ( Degree degree : university.getDegrees()){
-						//						System.out.println(degree);
-						//					}
-
 						System.out.println("U can start the main frame");
 
 					} else{
 						System.out.println("U can NOT start the main frame");
 
 					}
-
-					//frame.setVisible(true);
-
-
+					
+					
 
 				} catch (Exception e) {
 					e.printStackTrace();

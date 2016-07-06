@@ -166,6 +166,16 @@ public class SystemJFrame extends JFrame {
 				getContentPane().revalidate();
 			}
 		});
+		
+		JMenuItem mntmSemester = new JMenuItem("Semester");
+		mntmSemester.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().removeAll();
+				getContentPane().add(new SemesterJPanel(currentFrame, university));
+				getContentPane().revalidate();
+			}
+		});
+		mnMaintain.add(mntmSemester);
 		mnMaintain.add(mntmRoom);
 		
 		JMenu mnSchedule = new JMenu("Schedule");

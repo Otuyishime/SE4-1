@@ -12,6 +12,7 @@ import javax.swing.event.ListSelectionListener;
 
 import OcGraduateSystemClasses.Degree;
 import OcGraduateSystemClasses.Schedule;
+import OcGraduateSystemClasses.ScheduleTester;
 import OcGraduateSystemClasses.Section;
 import OcGraduateSystemClasses.Semester;
 import OcGraduateSystemClasses.University;
@@ -66,7 +67,7 @@ public class GenerateSchedulePageJPanel extends JPanel {
 		jlist_semesters.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				Semester current_semester = (Semester) jlist_semesters.getSelectedValue();
-				System.out.println(current_semester);
+				// System.out.println(current_semester);
 				if (current_semester != null)
 					sem_ok = true;
 				else
@@ -91,7 +92,7 @@ public class GenerateSchedulePageJPanel extends JPanel {
 		jlist_degrees.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				Degree current_degree = (Degree) jlist_degrees.getSelectedValue();
-				System.out.println(current_degree);
+				// System.out.println(current_degree);
 				if (current_degree != null)
 					degree_ok = true;
 				else
@@ -118,9 +119,7 @@ public class GenerateSchedulePageJPanel extends JPanel {
 				Degree current_degree = (Degree) jlist_degrees.getSelectedValue();
 				
 				ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", current_semester);
-				//ArrayList<Section> sections = schedule.getSections();
-				//System.out.println();
-				
+
 				for (Schedule schedule : schedules ){
 					ArrayList<Section> sections = schedule.getSections();
 					System.out.println();
@@ -134,9 +133,18 @@ public class GenerateSchedulePageJPanel extends JPanel {
 							listModel_sections.addElement(section);
 							System.out.println(section);
 						}
+						
+						ScheduleTester testschedule = new ScheduleTester();
+						
+						System.out.println();
+						System.out.println("*******************************");
+						System.out.println("Test Results");
+						System.out.println("------------");
+						testschedule.checkSectionsPercentageFull(schedule);
+						System.out.println("*******************************");
+						System.out.println();
 					}
 				}
-			
 				
 				jlist_semesters.clearSelection();
 				jlist_degrees.clearSelection();
@@ -161,8 +169,6 @@ public class GenerateSchedulePageJPanel extends JPanel {
 		jlist_sections.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				Section selected_section = (Section) jlist_sections.getSelectedValue();
-				System.out.println(selected_section);
-				
 				
 				if (selected_section != null)
 				{
@@ -198,6 +204,7 @@ public class GenerateSchedulePageJPanel extends JPanel {
 		btnTestCurrentSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 			}
 		});
 		btnTestCurrentSchedule.setBounds(180, 601, 180, 30);
@@ -217,7 +224,7 @@ public class GenerateSchedulePageJPanel extends JPanel {
 		btnAddSection.setEnabled(false);
 		btnAddSection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				// TODO - next sprint
 			}
 		});
 		btnAddSection.setBounds(513, 602, 117, 29);
