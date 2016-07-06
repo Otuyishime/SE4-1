@@ -82,8 +82,12 @@ public class Main {
 //					System.out.println("GRADUATING STUDENTS:");
 //					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
 					
-					//SystemJFrame frame = new SystemJFrame(university);
-					//frame.setVisible(true);
+//					SystemJFrame frame = new SystemJFrame(university);
+//					frame.setVisible(true);
+					
+					for ( Degree degree : university.getDegrees()){
+						System.out.println(degree);
+					}
 					
 				} catch (Exception e) {
 					e.printStackTrace();

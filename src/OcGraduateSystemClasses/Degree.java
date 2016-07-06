@@ -75,7 +75,7 @@ public class Degree {
 	
 	@Override
 	public String toString() {
-	    return this.getDegreeName();
+	    return String.format("%-14s : %-5s : %-64s : %3s", this.DegreeCode, this.getGradSchool(), this.getDegreeName(), this.getForecast());
 	}
 	
 	
