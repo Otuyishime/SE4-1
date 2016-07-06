@@ -3,6 +3,7 @@ package Windows;
 import java.awt.Rectangle;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -40,6 +41,7 @@ public class GenerateSchedulePageJPanel extends JPanel {
 	JList jlist_sections;
 	
 	JButton btn_generate;
+	JButton btnDeleteSection;
 	
 	boolean sem_ok;
 	boolean degree_ok;
@@ -49,7 +51,7 @@ public class GenerateSchedulePageJPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GenerateSchedulePageJPanel(University university) {
+	public GenerateSchedulePageJPanel(JFrame currentFrame,University university) {
 		
 		sem_ok = degree_ok = false;
 		
@@ -161,17 +163,15 @@ public class GenerateSchedulePageJPanel extends JPanel {
 				Section selected_section = (Section) jlist_sections.getSelectedValue();
 				System.out.println(selected_section);
 				
-				/*
-				if (selected_section != null)
-					sem_ok = true;
-				else
-					sem_ok = false;
 				
-				if (sem_ok & degree_ok)
-					btn_generate.setEnabled(true);
+				if (selected_section != null)
+				{
+					btnDeleteSection.setEnabled(true);
+				}
 				else
-					btn_generate.setEnabled(false);
-				*/	
+				{
+					btnDeleteSection.setEnabled(false);
+				}
 			}
 		});
 		scrollpane_sections = new JScrollPane(jlist_sections);
@@ -183,18 +183,43 @@ public class GenerateSchedulePageJPanel extends JPanel {
 		add(lblSchedule);
 		
 		JButton button = new JButton("< Back");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentFrame.getContentPane().removeAll();
+				currentFrame.getContentPane().add(new MainJPanel(university));
+				currentFrame.revalidate();	
+			}
+		});
 		button.setBounds(50, 601, 117, 30);
 		add(button);
 		
+		// button to test the schedule
 		JButton btnTestCurrentSchedule = new JButton("Test Current Schedule");
+		btnTestCurrentSchedule.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnTestCurrentSchedule.setBounds(180, 601, 180, 30);
 		add(btnTestCurrentSchedule);
 		
-		JButton btnDeleteSection = new JButton("Delete Section");
+		btnDeleteSection = new JButton("Delete Section");
+		btnDeleteSection.setEnabled(false);
+		btnDeleteSection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnDeleteSection.setBounds(384, 601, 117, 30);
 		add(btnDeleteSection);
 		
 		JButton btnAddSection = new JButton("Add Section");
+		btnAddSection.setEnabled(false);
+		btnAddSection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnAddSection.setBounds(513, 602, 117, 29);
 		add(btnAddSection);
 		

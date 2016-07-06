@@ -71,7 +71,6 @@ public class SystemJFrame extends JFrame {
 		JMenu mnImport = new JMenu("Import");
 		menuBar.add(mnImport);
 		
-		
 //		
 //		JMenuItem mntmStudentData = new JMenuItem("Student Data");
 //		mnImport.add(mntmStudentData);
@@ -177,7 +176,7 @@ public class SystemJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Generating a schedule...");
 				getContentPane().removeAll();
-				getContentPane().add(new GenerateSchedulePageJPanel(university));
+				getContentPane().add(new GenerateSchedulePageJPanel(currentFrame, university));
 				getContentPane().revalidate();
 			}
 		});
