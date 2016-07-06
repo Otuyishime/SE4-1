@@ -87,6 +87,7 @@ public class Main {
 					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
 					*/
 
+<<<<<<< HEAD
 					if(frame.getLoginDialog().isSucceeded()){
 						frame.setVisible(true);
 						frame.setVisible(true);
@@ -98,6 +99,13 @@ public class Main {
 					}
 					
 					
+=======
+				
+
+					//frame.setVisible(true);
+
+
+>>>>>>> ec46592b3010d2aa22e57599fd16a237254436a1
 
 				} catch (Exception e) {
 					e.printStackTrace();
