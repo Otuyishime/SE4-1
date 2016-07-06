@@ -91,6 +91,6 @@ public class StudentCourse
 
 	@Override
 	public String toString() {
-		return String.format("%-8s : %-10s : %-46s : %-6s : %-4s", this.getStudentID(), this.getCourseCode(), this.getCourseName(),this.getSemester().getName(), this.getGrade());
+		return String.format("%-8s : %-10s : %-55s : %-6s : %-4s", this.getStudentID(), this.getCourseCode(), this.getCourseName(),this.getSemester().getName(), this.getGrade());
 	}
 }

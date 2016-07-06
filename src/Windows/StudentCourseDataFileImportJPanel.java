@@ -2,6 +2,7 @@ package Windows;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -12,14 +13,31 @@ import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
+import OcGraduateSystemClasses.Student;
+import OcGraduateSystemClasses.StudentCourse;
 import OcGraduateSystemClasses.University;
+import SystemDataManagementClasses.UniversityDM;
+
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.csvreader.CsvReader;
+
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
 
 public class StudentCourseDataFileImportJPanel extends JPanel {
+	static UniversityDM universityDM;
+	//static University universitydata;
+
+	private DefaultListModel <StudentCourse> listModel_student;
+	private JList<StudentCourse> list_student;
+	private JScrollPane studentLoadScrollPane;
+
 	private JButton btnImportStudentCourseDataButton;
 	private JFileChooser fileChooser;
 	private File file; // file url directory
@@ -46,16 +64,40 @@ public class StudentCourseDataFileImportJPanel extends JPanel {
 				  if(returnVal == JFileChooser.APPROVE_OPTION){
 					  
 					  file =fileChooser.getSelectedFile();
+					  
+					 
 					  System.out.println(file.toString());
 					  //Read the uploaded file!
 					  
 					  try{
+						  if (file != null){
+							  JOptionPane.showMessageDialog(StudentCourseDataFileImportJPanel.this,
+			                          " ! You have successfully uploaded Students Course Data csv file.",
+			                            "Upload file",
+			                            JOptionPane.INFORMATION_MESSAGE);
+							  
+							   
+							   
+							   // String studentsfilelocation = file.toString();
+							    //universityDM.importStudentCourses(file.toString());
+							    
+								listModel_student = new DefaultListModel<>();
+								for (Student student : university.getStudents())
+									for ( StudentCourse studentCourse: student.getStudentcoursesTaken())
+
+							    listModel_student.addElement(studentCourse);
+								list_student = new JList<StudentCourse >(listModel_student);
+								studentLoadScrollPane.setViewportView(list_student);
+							  
+							  
+						  }
 						  
+					  }catch (NullPointerException err){
 						  
-						  
+						  System.out.println("There is some null pointer");
+						  err.printStackTrace();
 					  }catch (Exception error){
 						  error.printStackTrace();
-						  
 					  }
 					  
 				  }
@@ -67,10 +109,10 @@ public class StudentCourseDataFileImportJPanel extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("IMPORT STUDENT COURSE DATA CSV FILE");
 		
-		JProgressBar progressBar = new JProgressBar();
+		 studentLoadScrollPane = new JScrollPane();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -80,9 +122,9 @@ public class StudentCourseDataFileImportJPanel extends JPanel {
 							.addGap(173)
 							.addComponent(btnImportStudentCourseDataButton))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(153)
-							.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(82, Short.MAX_VALUE))
+							.addGap(107)
+							.addComponent(studentLoadScrollPane, GroupLayout.PREFERRED_SIZE, 616, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(114, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -91,10 +133,11 @@ public class StudentCourseDataFileImportJPanel extends JPanel {
 					.addComponent(lblNewLabel)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnImportStudentCourseDataButton)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(266, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(studentLoadScrollPane, GroupLayout.PREFERRED_SIZE, 421, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(72, Short.MAX_VALUE))
 		);
+	
 		setLayout(groupLayout);
 
 	}

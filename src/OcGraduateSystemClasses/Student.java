@@ -275,4 +275,10 @@ public class Student
 	public String toString() {
 		return String.format("%-7s : %-14s : %-7s ", this.getStudentId(), this.getDegreeCode(), this.getGraduationsemesterName());
 	}
+	public void printReport(){
+		
+		
+		
+		
+	}
 }

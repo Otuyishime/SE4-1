@@ -292,6 +292,8 @@ public class Faculty
 		teachingDays + " : " + getFallLoad() + " : " + getSpringLoad() + " : " + getSummerLoad());
 	}
 
+	
+	
 	public String getFacultyLoads_str() {
 		return String.format("%-10s %-10s : %-5s : %2s : %2s : %2s", this.getFirstName(), this.getLastName(), this.getGradSchool(), this.getFallLoad(), this.getSpringLoad(), this.getSummerLoad());
 	}

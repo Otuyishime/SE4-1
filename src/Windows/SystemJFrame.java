@@ -25,6 +25,21 @@ import OcGraduateSystemClasses.University;
 public class SystemJFrame extends JFrame {
 	
 	private JFrame currentFrame;
+    private LoginJDialog loginDialog;
+    
+
+
+	public LoginJDialog getLoginDialog() {
+		return loginDialog;
+	}
+
+
+
+	public void setLoginDialog(LoginJDialog loginDialog) {
+		this.loginDialog = loginDialog;
+	}
+
+
 
 	/**
 	 * Create the frame.
@@ -32,6 +47,8 @@ public class SystemJFrame extends JFrame {
 	public SystemJFrame(University university) {
 		
 		currentFrame = this;
+		loginDialog = new LoginJDialog (this, university);
+		loginDialog.setVisible(true);
 		
 		setTitle("Course Scheduling System");
 		setResizable(false);
@@ -53,7 +70,6 @@ public class SystemJFrame extends JFrame {
 		
 		JMenu mnImport = new JMenu("Import");
 		menuBar.add(mnImport);
-		
 		
 //		
 //		JMenuItem mntmStudentData = new JMenuItem("Student Data");
@@ -160,7 +176,7 @@ public class SystemJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Generating a schedule...");
 				getContentPane().removeAll();
-				getContentPane().add(new GenerateSchedulePageJPanel(university));
+				getContentPane().add(new GenerateSchedulePageJPanel(currentFrame, university));
 				getContentPane().revalidate();
 			}
 		});
@@ -175,18 +191,61 @@ public class SystemJFrame extends JFrame {
 		JMenuItem mntmScheduleOfCourses = new JMenuItem("Schedule of Courses");
 		mnReport.add(mntmScheduleOfCourses);
 		
+		
+		
+		
+		
 		JMenuItem mntmFacultyLoad = new JMenuItem("Faculty Load");
 		mnReport.add(mntmFacultyLoad);
+		mntmFacultyLoad.addActionListener(new ActionListener(){
+		
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().removeAll();
+				getContentPane().add(new FacultyLoadReportJPanel(currentFrame, university));
+				getContentPane().revalidate();
+				
+			}
+			
+		}
+
+				);
+	
+			
 		
 		JMenuItem mntmDegreePlans = new JMenuItem("Degree Plans");
 		mnReport.add(mntmDegreePlans);
+		mntmDegreePlans.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().removeAll();
+				getContentPane().add(new DegreePlanJPanelReport(currentFrame, university ));
+				getContentPane().revalidate();
+			}
+				
+		});
 		
 		JMenuItem mntmStudentsCompletedCourses = new JMenuItem("Student's Completed Courses");
 		mnReport.add(mntmStudentsCompletedCourses);
+		mntmStudentsCompletedCourses.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 getContentPane().removeAll();
+				 getContentPane().add(new StudentCompletedCourseReportJPanel(currentFrame, university));
+				 getContentPane().revalidate();
+			}
+			
+			
+		});
+		
 		
 		getContentPane().removeAll();
 		MainJPanel mainJPanel = new MainJPanel(university);
 		getContentPane().add(mainJPanel);
 		getContentPane().revalidate();
+		
 	}
 }
