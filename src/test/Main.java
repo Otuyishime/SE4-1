@@ -60,34 +60,34 @@ public class Main {
 					loadUniversitymain();
 					
 					// ---- testing semester ------
-					Semester sem = new Semester("2017SP"); 
+					//Semester sem = new Semester("2017SP"); 
 				
-					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", sem);
-//					System.out.println(" SCHEDULE ");
-//					for (Schedule schedule : schedules ){
-//						ArrayList<Section> sections = schedule.getSections();
-//						System.out.println();
-//						System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
-//						System.out.println("----------------------------------------------------------------------------------------");
-//						for (Section section : sections){
-//							System.out.println(section);
-//						}
-//					}
+					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(16));
+					System.out.println(" SCHEDULE ");
+					for (Schedule schedule : schedules ){
+						ArrayList<Section> sections = schedule.getSections();
+						System.out.println();
+						System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
+						System.out.println("----------------------------------------------------------------------------------------");
+						for (Section section : sections){
+							System.out.println(section);
+						}
+					}
 		
-//					ScheduleTester testschedule = new ScheduleTester();
-//					System.out.println();
-//					System.out.println(" PERCENTAGES ");
-//					testschedule.checkSectionsPercentageFullForAllDegrees(schedules);
-//					System.out.println();
-//					System.out.println("GRADUATING STUDENTS:");
-//					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
+					ScheduleTester testschedule = new ScheduleTester();
+					System.out.println();
+					System.out.println(" PERCENTAGES ");
+					testschedule.checkSectionsPercentageFullForAllDegrees(schedules);
+					System.out.println();
+					System.out.println("GRADUATING STUDENTS:");
+					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
 					
 //					SystemJFrame frame = new SystemJFrame(university);
 //					frame.setVisible(true);
 					
-					for ( Degree degree : university.getDegrees()){
-						System.out.println(degree);
-					}
+//					for ( Degree degree : university.getDegrees()){
+//						System.out.println(degree);
+//					}
 					
 				} catch (Exception e) {
 					e.printStackTrace();
