@@ -69,9 +69,25 @@ public class Faculty
 		return teachingDays;
 	}
 	
-	public String getTeachingDaysStr() {
+	public String getTeachingDays_str() {
+		String days = "";
+		if ( this.teachingDays[0]){
+			days +="M";
+		}
+		if ( this.teachingDays[1]){
+			days +="T";
+		}
+		if ( this.teachingDays[2]){
+			days +="W";
+		}
+		if ( this.teachingDays[3]){
+			days +="R";
+		}
+		if ( this.teachingDays[4]){
+			days +="F";
+		}
 		
-		return "days";
+		return days;
 	}
 
 	public void setTeachingDays(String teachingdays) {
@@ -276,9 +292,9 @@ public class Faculty
 		teachingDays + " : " + getFallLoad() + " : " + getSpringLoad() + " : " + getSummerLoad());
 	}
 
-	@Override
-	public String toString() {
-		return (firstName + " : " + lastName );
+	public String getFacultyLoads_str() {
+		
+		return String.format("%-10s %-10s : %-5s : %2s : %2s : %2s", this.getFirstName(), this.getLastName(), this.getGradSchool(), this.getFallLoad(), this.getSpringLoad(), this.getSummerLoad());
 	}
 	
 	public String getFacultyLoads_str() {

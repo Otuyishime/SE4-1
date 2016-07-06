@@ -352,6 +352,13 @@ public class University
 	
 	/*************************************************************************************/
 	
+	/************************************ REPORT CODES ***********************************/
+	public void getFacultyLoadsReport(){
+		for ( Faculty faculty : this.getFaculties()){
+			
+		}
+	}
+	
 	// ------------ Helper methods --------------
 	public ArrayList<Student> getStudentsInDegree(String degreeCode){
 		// create a list of students to return

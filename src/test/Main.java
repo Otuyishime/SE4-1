@@ -31,7 +31,7 @@ public class Main {
 			String studentcoursesfilelocation = "/Users/gustavemugabo/Downloads/TestData/STC.DUMP.CSV";
 
 			universityDM.importStudentCourses(studentcoursesfilelocation);
-		universityDM.importStudents(studentsfilelocation);
+			universityDM.importStudents(studentsfilelocation);
 
 			//	System.out.println("++++++++++++++++++++++++ PRINT FROM ALL OBJECTS ++++++++++++++++++++++++");
 
@@ -54,25 +54,57 @@ public class Main {
 					// create university
 					loadUniversitymain();
 
-					
 
-  				   SystemJFrame frame = new SystemJFrame(university);
-//
-//					// Create the login Screen
-//						
-					  System.out.println(frame.getLoginDialog().isSucceeded());
-					  
-					   if(frame.getLoginDialog().isSucceeded()){
-							frame.setVisible(true);
+
+					SystemJFrame frame = new SystemJFrame(university);
 					
-						   System.out.println("U can start the main frame");
-			 
+					// Create the login Screen				
+					System.out.println(frame.getLoginDialog().isSucceeded());
+
+
+					// ---- testing semester ------
+					Semester sem = new Semester("2017SP"); 
+
+					ArrayList<Schedule> schedules = university.generateScheduleForDegreesInSemester("Schedules", university.getSemesters().get(0));
+					System.out.println(" SCHEDULE ");
+					for (Schedule schedule : schedules ){
+						ArrayList<Section> sections = schedule.getSections();
+						System.out.println();
+
+						if ((schedule.getDegree().getDegreeCode()).compareTo("MSCS.SFTW.ENG") == 0)
+						{
+							System.out.println(" " +  schedule.getDegree().getDegreeCode() + " - " + schedule.getDegree().getDegreeName());
+							System.out.println("----------------------------------------------------------------------------------------");
+							for (Section section : sections){
+								System.out.println(section);
+							}
+						}
+					}
+
+					ScheduleTester testschedule = new ScheduleTester();
+					System.out.println();
+					System.out.println(" PERCENTAGES ");
+					testschedule.checkSectionsPercentageFullForAllDegrees(schedules);
+					System.out.println();
+					System.out.println("GRADUATING STUDENTS:");
+					testschedule.checkGraduateStudentsForAllDegree(schedules, university);
+
+					if(frame.getLoginDialog().isSucceeded()){
+						frame.setVisible(true);
+						frame.setVisible(true);
+
+						//					for ( Degree degree : university.getDegrees()){
+						//						System.out.println(degree);
+						//					}
+
+						System.out.println("U can start the main frame");
+
 					} else{
-						   System.out.println("U can NOT start the main frame");
+						System.out.println("U can NOT start the main frame");
 
 					}
-						
-						//frame.setVisible(true);
+
+					//frame.setVisible(true);
 
 
 
