@@ -133,6 +133,6 @@ public class Section
 	public String toString() {
 		return String.format("%6s : %-6s : %-9s-%-46s%2s : %-4s : %-10s - %-10s : %-10s %-10s : %-3s : %-9s", this.getSemester().getName(), this.getSectionStatus(), this.getCourse().getCourseCode(),
 				this.getCourse().getCourseName(), this.getSectionNumber(), this.getRoom().getRoomNumber(), this.getSemester().getStartDate_str(), this.getSemester().getEndDate_str(), 
-				this.getFaculty().getFirstName(), this.getFaculty().getLastName(), this.getCourse().getCourseCap(), this.getCourse().getCreditHours(), this.getAcademicLevel());
+				this.getFaculty().getLastName(), this.getFaculty().getFirstName(), this.getCourse().getCourseCap(), this.getCourse().getCreditHours(), this.getAcademicLevel());
 	}
 }

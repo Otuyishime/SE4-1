@@ -137,8 +137,7 @@ public class UniversityDM {
 				studentcourses.loadCourses(courses);
 				studentcourses.loadSemester(semesters);
 				university.setStudentcourses(studentcourses.getStudentCourseData());
-
-				
+				students.loadCourseTaken(studentcourses);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
